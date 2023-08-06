@@ -166,6 +166,18 @@ hr.small {
 
 /* Header */
 
+.canvas {
+    width: 100vw;
+    height: 100vh;
+    display: table;
+    position: relative;
+    /* background: url(../img/bg.jpg) no-repeat center center scroll; */
+    /* -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover; */
+}
+
 .header {
     display: table;
     position: relative;

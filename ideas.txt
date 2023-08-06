@@ -1,2 +1,6 @@
-live object recognition?
 orbiting image around cursor
+
+
+TODO-
+Medium
+Notion - what are you going to share?
