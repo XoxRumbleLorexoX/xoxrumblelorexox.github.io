@@ -2,5 +2,7 @@ orbiting image around cursor
 
 
 TODO-
-Medium
 Notion - what are you going to share?
+Photos album scaling up from the smallest images to large of all faves - animation
+Better landing animation - 
+
