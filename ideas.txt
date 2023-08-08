@@ -1,8 +1,10 @@
-orbiting image around cursor
-
-
 TODO-
 Notion - what are you going to share?
 Photos album scaling up from the smallest images to large of all faves - animation
 Better landing animation - 
+Make the images mroe hi res through AI
+more responsive? - how?
+Make sure all of the links work....
+Orbiting image around cursor
+
 
