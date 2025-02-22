@@ -1,342 +1,520 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
+    <head>
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content>
+        <meta name="author" content>
 
-    <title>X0xRumbleLorex0X's Portfolio</title>
+        <title>X0xRumbleLorex0X's Portfolio</title>
 
-    <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+        <!-- Bootstrap Core CSS -->
+        <link href="css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Custom CSS -->
-    <link href="css/stylish-portfolio.css" rel="stylesheet">
+        <!-- Custom CSS -->
+        <link href="css/stylish-portfolio.css" rel="stylesheet">
 
-    <!-- Custom Fonts -->
-    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+        <!-- Custom Fonts -->
+        <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet"
+            type="text/css">
+        <link
+            href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic"
+            rel="stylesheet" type="text/css">
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-</head>
+    </head>
 
-<body>
+    <body>
+        <!-- LiveReload Script -->
+        <script src="http://localhost:35729/livereload.js"></script>
+        <!-- Navigation -->
+        <a id="menu-toggle" href="#" class="btn btn-dark btn-lg toggle"><i
+                class="fa fa-bars"></i></a>
+        <nav id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <a id="menu-close" href="#"
+                    class="btn btn-light btn-lg pull-right toggle"><i
+                        class="fa fa-times"></i></a>
 
-    <!-- Navigation -->
-    <a id="menu-toggle" href="#" class="btn btn-dark btn-lg toggle"><i class="fa fa-bars"></i></a>
-    <nav id="sidebar-wrapper">
-        <ul class="sidebar-nav">
-            <a id="menu-close" href="#" class="btn btn-light btn-lg pull-right toggle"><i class="fa fa-times"></i></a>
-    
-            <li>
-                <a href="#top">Home</a>
-            </li>
-            <li>
-                <a href="#about">About</a>
-            </li>
-            <li>
-                <a href="#services">Services</a>
-            </li>
-            <li>
-                <a href="#contact">Contact</a>
-            </li>
-        </ul>
-    </nav>
-    
+                <li>
+                    <a href="#top">Home</a>
+                </li>
+                <li>
+                    <a href="#about">About</a>
+                </li>
+                <li>
+                    <a href="#services">Services</a>
+                </li>
+                <li>
+                    <a href="#contact">Contact</a>
+                </li>
+            </ul>
+        </nav>
 
-    <head>
-        <style>
+        <head>
+            <style>
         .center-text {
           text-align: center;
         }
         </style>
-    </head>
+        </head>
 
-    <canvas class="canvas"></canvas>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" integrity="sha512-16esztaSRplJROstbIIdwX3N97V1+pZvV33ABoG1H2OyTttBxEGkTsoIVsiP1iaTtM8b3+hu2kB6pQ4Clr5yug==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" integrity="sha512-Ic9xkERjyZ1xgJ5svx3y0u3xrvfT/uPkV99LBwe68xjy/mGtO+4eURHZBW2xW4SZbFrF1Tf090XqB+EVgXnVjw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="./app.js"></script>
-    <h1 class="center-text">I Like Your Landing!</h1>
-    
+        <canvas class="canvas"></canvas>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"
+            integrity="sha512-16esztaSRplJROstbIIdwX3N97V1+pZvV33ABoG1H2OyTttBxEGkTsoIVsiP1iaTtM8b3+hu2kB6pQ4Clr5yug=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"
+            integrity="sha512-Ic9xkERjyZ1xgJ5svx3y0u3xrvfT/uPkV99LBwe68xjy/mGtO+4eURHZBW2xW4SZbFrF1Tf090XqB+EVgXnVjw=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="./app.js"></script>
+        <h1 class="center-text">I Like Your Landing!</h1>
 
-    <!-- Header -->
-    <header id="top" class="header">
-        <div class="text-vertical-center">
-            
-            <h1 class="shaded-text">Shivadharshan Lingeswaran</h1>
-            <h2 class="shaded-text">My Sobriquet - Shan</h2>
-            <h3 class="shaded-text">🐅தமிழ்💯Vegan🌹Developer👾Musician🎶Entrepreneur📈Scientist🔬Artist🎨Activist🏆Researcher🧪Founder✒️Physicist👨‍🔬</h3>
+        <!-- Header -->
+        <header id="top" class="header">
+            <div class="text-vertical-center">
+
+                <h1 class="shaded-text">Shivadharshan Lingeswaran</h1>
+                <h2 class="shaded-text">My Sobriquet - Shan</h2>
+                <h3
+                    class="shaded-text">💯Vegan🌹Developer👾Musician🎶Entrepreneur📈Scientist🔬Artist🎨Activist🏆Researcher🧪Founder✒️Physicist👨‍🔬
+                    Software Engineer🛠 Hardware Engineer🔧</h3>
+                <h3 class="shaded-text"> 🌍 :
+                    🇬🇧 English | 🇱🇰 தமிழ் | 🇺🇦 Українська | 🇮🇳 हिन्दी |
+                    🇸🇪 Svenska | 🇨🇳 中文 :🌍 </h3>
                 <i class="shaded-text">‘An action is innumerable words.’</i>
                 <br>
-            <br>
-            <a href="#about" class="btn btn-dark btn-lg">Find Out More</a>
-        </div>
-    </header>
-
-    <section id="about" class="about" style="width: 100vw; max-width: 100%; height: 100vh; background-image: url('/img/1unsplash.jpg');background-size: cover; background-position: center;">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 text-center">
-                <h1 class="shaded-text">Showcasing some of my best work!</h1> 
-                <h3 class="shaded-text">Right from the heart of passionate intellectual curiosity; beginnings.</h3>
-                <p class="shaded-text">I am an easy-going friendly person; I believe I
-have good interpersonal and effective
-communication skills; these are essential to a
-clever work ethos. Organising my time well
-enables me to excel in my studies and take part
-in activities outside of academic commitments.
-Spending my spare time to improve my
-knowledge in my field is rewarding. Enjoy
-tinkering with tech, writing, and reading and
-am an avid surfer in my spare time. Retaining
-good research skills allows me to find good
-knowledge sources, which I share with my
-friends, and family through group chats.
-Presently, in the process of self-educating
-myself in business, research and life skills.
-Compare myself to a gateway of a variety of
-fields and subjects thereby being network keen
-and hope to commune to achieve a greater
-resonance. My zestful spiritedness for the Truth drives me
-towards realisation, revelation & reality. The
-immortality of Truth attracts me towards the
-technical field & the Art of science. My natural
-flair for cracking, craftsmanship & code
-compels me to solve problems.
-
-<br>
-<br>
-
-
-‘If something is truly unique it remains
-ineffable.’</p>
-
-                <!-- <p class="lead">This theme features some wonderful photography courtesy of <a target="_blank" href="http://join.deathtothestockphoto.com/">Death to the Stock Photo</a>.</p> -->
+                <br>
+                <a href="#about" class="btn btn-dark btn-lg">Find Out More</a>
             </div>
-        </div>
-        <!-- /.row -->
-    </div>
-    <!-- /.container -->
-    </section>
+        </header>
 
-    
-    
-    <section>
-        <iframe src="https://gamma.app/embed/vzega0bzgpxx8ik" style="width: 100vw; max-width: 100%; height: 100vh; overflow: auto;" allow="fullscreen" title="AR Functionality - Object Tags"></iframe>
-    </section>
+        <section id="about" class="about"
+            style="width: 100vw; max-width: 100%; height: 100vh; background-image: url('/img/1unsplash.jpg');background-size: cover; background-position: center;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <h1 class="shaded-text">Showcasing some of my best
+                            work!</h1>
+                        <h3 class="shaded-text">Right from the heart of
+                            passionate intellectual curiosity; beginnings.</h3>
+                        <p class="shaded-text">I am an easy-going friendly
+                            person; I believe I
+                            have good interpersonal and effective
+                            communication skills; these are essential to a
+                            clever work ethos. Organising my time well
+                            enables me to excel in my studies and take part
+                            in activities outside of academic commitments.
+                            Spending my spare time to improve my
+                            knowledge in my field is rewarding. Enjoy
+                            tinkering with tech, writing, and reading and
+                            am an avid surfer in my spare time. Retaining
+                            good research skills allows me to find good
+                            knowledge sources, which I share with my
+                            friends, and family through group chats.
+                            Presently, in the process of self-educating
+                            myself in business, research and life skills.
+                            Compare myself to a gateway of a variety of
+                            fields and subjects thereby being network keen
+                            and hope to commune to achieve a greater
+                            resonance. My zestful spiritedness for the Truth
+                            drives me
+                            towards realisation, revelation & reality. The
+                            immortality of Truth attracts me towards the
+                            technical field & the Art of science. My natural
+                            flair for cracking, craftsmanship & code
+                            compels me to solve problems.
 
-    
-    <section id="about" class="about" style="width: 100vw; max-width: 100%; height: 100vh; background-image: url('/img/2unsplash.jpg');background-size: cover; background-position: center;">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 text-center">
-                    <h1 class="shaded-text">Inventing the Future: Storing Ideas in a Think Tank for Tomorrow's World</h1>
-                    <p class="shaded-text">As an experienced tech professional, I've been building a digital think tank amidst today's rapid technological changes. This reservoir holds carefully crafted ideas, from code skeletons showcasing new algorithms to comprehensive plans for innovative Mixed Reality Applications like those for Microsoft's HoloLens 2. These concepts are tagged, organized, and documented, awaiting the right collaboration and investment. This think tank reflects a shift towards long-term technology planning, emphasizing the importance of preserving and nurturing ideas for future breakthroughs. By attracting like-minded investors, these ideas can evolve into real-world solutions, shaping a promising future driven by innovation.</p>
-                <!-- <p class="lead">This theme features some wonderful photography courtesy of <a target="_blank" href="http://join.deathtothestockphoto.com/">Death to the Stock Photo</a>.</p> -->
-            </div>
-        </div>
-        <!-- /.row -->
-    </div>
-    <!-- /.container -->
-    </section>
+                            <br>
+                            <br>
 
-    
-    <section>
-        <iframe src="https://gamma.app/embed/4zbevxh3pfjdx7h" style="width: 100vw; max-width: 100%; height: 100vh" allow="fullscreen" title="Revolutionizing Road Building with Sunlight and Plastics"></iframe>
-    </section>
+                            ‘If something is truly unique it remains
+                            ineffable.’</p>
 
-    <section id="about" class="about" style="width: 100vw; max-width: 100%; height: 100vh; background-image: url('/img/3unsplash.jpg'); background-size: cover; background-position: center;">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 text-center">
-                <h2 class="shaded-text">Harnessing Artificial Intelligence to Simulate Creativity and Innovation in Computer-Aided Design (CAD) Environments: Bridging Stable Diffusion and Real-World Physics.</h2> 
-                <p class="shaded-text">The idea aims to integrate Artificial Intelligence (AI) into the realm of Computer-Aided Design (CAD) to allow machines to "dream," or autonomously generate, design solutions with a particular focus. This is somewhat akin to stable diffusion—a concept where ideas spread within a system but within a controlled, balanced framework. The concept of an "AI CAD Dream with a Focus" sits at the intersection of design, computational physics, and machine learning, aiming to create a harmonious system that leverages the strengths of each domain. With your technical background and interests, developing or even leading a project like this could be an exciting challenge.</p>
-                <!-- <p class="lead">This theme features some wonderful photography courtesy of <a target="_blank" href="http://join.deathtothestockphoto.com/">Death to the Stock Photo</a>.</p> -->
-            </div>
-        </div>
-        <!-- /.row -->
-    </div>
-    <!-- /.container -->
-    </section>
-
-
-    <iframe src="https://gamma.app/embed/tu0y3nwwwx9j9jc" style="width: 100vw; max-width: 100%; height: 100vh" allow="fullscreen" title="Vertical Farming for a Sustainable Future"></iframe>
-    <section id="about" class="about" style="width: 100vw; max-width: 100%; height: 100vh; background-image: url('/img/4unsplash.jpg'); background-size: cover; background-position: center;">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 text-center">
-                <h2 class="shaded-text">Colllaboration Through LLMs</h2> 
-                <p class="shaded-text">In my envisioned platform, I aim to create a highly dynamic and interactive environment. The platform would synergize individuals with overlapping interests and skills in different fields or "quests." A central feature is the use of Large Language Models (LLMs), which would intelligently match users with projects, thereby fostering meaningful and effective collaboration.
-
-                    I also plan to integrate the platform with existing project management tools like JIRA. This would offer users a seamless experience in terms of task assignment and tracking. Financially, the platform distinguishes itself by embracing Web 3.0 technologies, such as blockchain and stable cryptocurrencies. This approach would streamline payments for remote work by offering transparent, secure, and quick transactions.
-                    
-                    In addition to these features, I'm contemplating an interesting twist: integrating the platform with social media. Many of these platforms already offer native features resembling ticketing systems like JIRA, which could serve as the initial framework for my project management component. This would allow me to tap into a broader user base and leverage people's familiarity with social media interfaces. However, I'm fully aware of the challenges that come with such integration, including data privacy concerns, ownership issues, and the risk of depending on a third-party platform's policies.
-                    
-                    To give my platform a competitive edge, I intend to incorporate industry standards like GDPR for data privacy, ISO certifications for quality management, and Agile methodologies for project management. These standards can add a layer of operational excellence and make the platform more attractive to corporate users.
-                    
-                    At the core of my platform is the mission to make freelance and remote work more structured and rewarding. I plan to enable users to break down tasks into manageable parts, complete with their own timelines and deadlines. The platform will also incorporate multi-dimensional filters for quests, dynamic timetables, and integrated collaborative tools like chat and video conferencing.
-                    
-                    Given my extensive technical skill set, I believe I am well-equipped to tackle the complex challenges involved in building such a comprehensive system. This platform has the potential to revolutionize the way we approach work in the digital age by making it more collaborative, structured, and financially rewarding. The incorporation of cutting-edge technologies like LLMs for intelligent matching and Web 3.0 for financial transactions further positions it as a forward-thinking solution designed for the future of work.</p>
-                <!-- <p class="lead">This theme features some wonderful photography courtesy of <a target="_blank" href="http://join.deathtothestockphoto.com/">Death to the Stock Photo</a>.</p> -->
-            </div>
-        </div>
-        <!-- /.row -->
-    </div>
-    <!-- /.container -->
-    </section>
-
-
-    <iframe src="https://gamma.app/embed/53i90y6kjp64r33" style="width: 100vw; max-width: 100%; height: 100vh" allow="fullscreen" title="The Future is Here: Interactive Holograms"></iframe>
-    <!-- Services -->
-    <!-- The circle icons use Font Awesome's stacked icon classes. For more information, visit http://fontawesome.io/examples/ -->
-    <section id="services" class="services bg-primary">
-        <div class="container">
-            <div class="row text-center">
-                <div class="col-lg-10 col-lg-offset-1">
-                    <h3 class="shaded-text">What Is Capable Lies Within The Scape Of Capabilities</h3>
-                    <hr class="small">
-                    <div class="row">
-                        <div class="col-md-3 col-sm-6">
-                            <div class="service-item">
-                                <span class="fa-stack fa-4x">
-                                    <img src="./img/linktree.png" class="linktreelogo" alt="your logo"/>
-                            </span>
-                                <h4>
-                                    <strong class="shaded-text">Linktree</strong>
-                                </h4>
-                                <p class="shaded-text">Showcasing My Professional Work</p>
-                                <a href="https://linktr.ee/shivadharshanlingeswaran" class="btn btn-light" target="_blank">Learn More</a>
-                            </div>
-                        </div>
-                        <div class="col-md-3 col-sm-6">
-                            <div class="service-item">
-                                <span class="fa-stack fa-4x">
-                                    <img src="./img/insta.png" class="linktreelogo" alt="your logo"/>
-                            </span>
-                                <h4>
-                                    <strong class="shaded-text">Instagram</strong>
-                                </h4>
-                                <p class="shaded-text">My Life written in media.</p>
-                                <a href="https://www.instagram.com/brightideasflythroughthewall/?hl=en" class="btn btn-light" target="_blank">Learn More</a>
-                            </div>
-                        </div>
-                        <div class="col-md-3 col-sm-6">
-                            <div class="service-item">
-                                <span class="fa-stack fa-4x">
-                                    <img src="./img/Spotify_icon.svg (1).png" class="linktreelogo" alt="your logo"/>
-                            </span>
-                                <h4>
-                                    <strong class="shaded-text">Spotify</strong>
-                                </h4>
-                                <p class="shaded-text">Where I bring originality and my own spin; a place where I do soul searching.</p>
-                                <a href="https://open.spotify.com/artist/4mleG7ybH4yx5YHnAIsUeu" class="btn btn-light" target="_blank">Learn More</a>
-                            </div>
-                        </div>
-                        <div class="col-md-3 col-sm-6">
-                            <div class="service-item">
-                                <span class="fa-stack fa-4x">
-                                    <img src="./img/medium.png" class="linktreelogo" alt="your logo"/>
-                            </span>
-                                <h4>
-                                    <strong class="shaded-text">Medium</strong>
-                                </h4>
-                                <p class="shaded-text">My Original Thinking. Seances with the Word.</p>
-                                <a href="https://medium.com/@X0xRumbleLorex0X" class="btn btn-light" target="_blank" >Learn More</a>
-                            </div>
-                        </div>
+                        <!-- <p class="lead">This theme features some wonderful photography courtesy of <a target="_blank" href="http://join.deathtothestockphoto.com/">Death to the Stock Photo</a>.</p> -->
                     </div>
-                    <!-- /.row (nested) -->
                 </div>
-                <!-- /.col-lg-10 -->
+                <!-- /.row -->
             </div>
-            <!-- /.row -->
-        </div>
-        <!-- /.container -->
+            <!-- /.container -->
+        </section>
 
-    </section>
+        <section>
+            <iframe src="https://gamma.app/embed/vzega0bzgpxx8ik"
+                style="width: 100vw; max-width: 100%; height: 100vh; overflow: auto;"
+                allow="fullscreen"
+                title="AR Functionality - Object Tags"></iframe>
+        </section>
 
+        <section id="about" class="about"
+            style="width: 100vw; max-width: 100%; height: 100vh; background-image: url('/img/2unsplash.jpg');background-size: cover; background-position: center;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <h1 class="shaded-text">Inventing the Future: Storing
+                            Ideas in a Think Tank for Tomorrow's World</h1>
+                        <p class="shaded-text">As an experienced tech
+                            professional, I've been building a digital think
+                            tank amidst today's rapid technological changes.
+                            This reservoir holds carefully crafted ideas, from
+                            code skeletons showcasing new algorithms to
+                            comprehensive plans for innovative Mixed Reality
+                            Applications like those for Microsoft's HoloLens 2.
+                            These concepts are tagged, organized, and
+                            documented, awaiting the right collaboration and
+                            investment. This think tank reflects a shift towards
+                            long-term technology planning, emphasizing the
+                            importance of preserving and nurturing ideas for
+                            future breakthroughs. By attracting like-minded
+                            investors, these ideas can evolve into real-world
+                            solutions, shaping a promising future driven by
+                            innovation.</p>
+                        <!-- <p class="lead">This theme features some wonderful photography courtesy of <a target="_blank" href="http://join.deathtothestockphoto.com/">Death to the Stock Photo</a>.</p> -->
+                    </div>
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.container -->
+        </section>
 
-   
+        <iframe src="https://gamma.app/embed/4zbevxh3pfjdx7h"
+            style="width: 100vw; max-width: 100%; height: 100vh; overflow: auto;"
+            allow="fullscreen"
+            title="Revolutionizing Road Building with Sunlight and Plastics"></iframe>
 
-   
-    <!-- Footer -->
-    <footer>
-        <div id="contact" class="footer">
-            <div class="row">
-                <div class="col-lg-10 col-lg-offset-1 text-center">
-                    <h4><strong>By Shivadharshan (Shan) Lingeswaran</strong></h4>
-                    <h4><strong>By Shivadharshan (Shan) Lingeswaran</strong></h4>
-                    <h4><strong>By Shivadharshan (Shan) Lingeswaran</strong></h4>
-                    <h4><strong>By Shivadharshan (Shan) Lingeswaran</strong></h4>
-                    <h4><strong>By Shivadharshan (Shan) Lingeswaran</strong></h4>
-                    <h4><strong>By Shivadharshan (Shan) Lingeswaran</strong></h4>
-                    <h4><strong>By Shivadharshan (Shan) Lingeswaran</strong></h4>
-                    <h4><strong>By Shivadharshan (Shan) Lingeswaran</strong></h4>
-                    <h4><strong>By Shivadharshan (Shan) Lingeswaran</strong></h4>
-                    <h4><strong>By Shivadharshan (Shan) Lingeswaran</strong></h4>
-                    <h4><strong>By Shivadharshan (Shan) Lingeswaran</strong></h4>
-                    <h4><strong>By Shivadharshan (Shan) Lingeswaran</strong></h4>
-                    <h4><strong>By Shivadharshan (Shan) Lingeswaran</strong></h4>
-                    <h4><strong>By Shivadharshan (Shan) Lingeswaran</strong></h4>
-                    <h4><strong>By Shivadharshan (Shan) Lingeswaran</strong></h4>
-                    <h4><strong>By Shivadharshan (Shan) Lingeswaran</strong></h4>
-                    <h4><strong>By Shivadharshan (Shan) Lingeswaran</strong></h4>
-                    <h4><strong>By Shivadharshan (Shan) Lingeswaran</strong></h4>
-                    <h4><strong>By Shivadharshan (Shan) Lingeswaran</strong></h4>
-                    <h4><strong>By Shivadharshan (Shan) Lingeswaran</strong></h4>
-                    <h4><strong>By Shivadharshan (Shan) Lingeswaran</strong></h4>
-                    <h4><strong>By Shivadharshan (Shan) Lingeswaran</strong></h4>
-                    <h4><strong>By Shivadharshan (Shan) Lingeswaran</strong></h4>
-                    <h4><strong>By Shivadharshan (Shan) Lingeswaran</strong></h4>
-                    <h4><strong>By Shivadharshan (Shan) Lingeswaran</strong></h4>
-                    <h4><strong>By Shivadharshan (Shan) Lingeswaran</strong></h4>
-                    <h4><strong>By Shivadharshan (Shan) Lingeswaran</strong></h4>
-                    <h4><strong>By Shivadharshan (Shan) Lingeswaran</strong></h4>
-                    <h4><strong>By Shivadharshan (Shan) Lingeswaran</strong></h4>
-                    <h4><strong>By Shivadharshan (Shan) Lingeswaran</strong></h4>
-                    <h4><strong>By Shivadharshan (Shan) Lingeswaran</strong></h4>
-                    <h4><strong>By Shivadharshan (Shan) Lingeswaran</strong></h4>
-                    <h4><strong>By Shivadharshan (Shan) Lingeswaran</strong></h4>
-                    <h4><strong>By Shivadharshan (Shan) Lingeswaran</strong></h4>
-                    <h4><strong>By Shivadharshan (Shan) Lingeswaran</strong></h4>
-                    <h4><strong>By Shivadharshan (Shan) Lingeswaran</strong></h4>
-                    <h4><strong>By Shivadharshan (Shan) Lingeswaran</strong></h4>
-                    <h4><strong>By Shivadharshan (Shan) Lingeswaran</strong></h4>
-                    <h4><strong>By Shivadharshan (Shan) Lingeswaran</strong></h4>
-                    <h4><strong>By Shivadharshan (Shan) Lingeswaran</strong></h4>
-                    <h4><strong>By Shivadharshan (Shan) Lingeswaran</strong></h4>
-                    <h4><strong>By Shivadharshan (Shan) Lingeswaran</strong></h4>
+        <section id="about" class="about"
+            style="width: 100vw; max-width: 100%; height: 100vh; background-image: url('/img/3unsplash.jpg'); background-size: cover; background-position: center;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <h2 class="shaded-text">Harnessing Artificial
+                            Intelligence to Simulate Creativity and Innovation
+                            in Computer-Aided Design (CAD) Environments:
+                            Bridging Stable Diffusion and Real-World
+                            Physics.</h2>
+                        <p class="shaded-text">The idea aims to integrate
+                            Artificial Intelligence (AI) into the realm of
+                            Computer-Aided Design (CAD) to allow machines to
+                            "dream," or autonomously generate, design solutions
+                            with a particular focus. This is somewhat akin to
+                            stable diffusion—a concept where ideas spread within
+                            a system but within a controlled, balanced
+                            framework. The concept of an
+                            "AI CAD Dream with a Focus" sits at the intersection
+                            of design, computational physics, and machine
+                            learning, aiming to create a harmonious system that
+                            leverages the strengths of each domain. With your
+                            technical background and interests, developing or
+                            even leading a project like this could be an
+                            exciting challenge.</p>
+                        <!-- <p class="lead">This theme features some wonderful photography courtesy of <a target="_blank" href="http://join.deathtothestockphoto.com/">Death to the Stock Photo</a>.</p> -->
+                    </div>
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.container -->
+        </section>
 
-                    <ul class="list-unstyled">
-                        <li><i class="fa fa-envelope-o fa-fw"></i>  <a href="mailto:shan.lingeswaran@outlook.com">shan.lingeswaran@outlook.com</a>
-                        </li>
-                    </ul>
-                    <br>
-                    <hr class="small">
-                    <p class="text-muted">Copyright &copy;2023</p>
+        <iframe src="https://gamma.app/embed/tu0y3nwwwx9j9jc"
+            style="width: 100vw; max-width: 100%; height: 100vh"
+            allow="fullscreen"
+            title="Vertical Farming for a Sustainable Future"></iframe>
+        <section id="about" class="about"
+            style="width: 100vw; max-width: 100%; height: 100vh; background-image: url('/img/4unsplash.jpg'); background-size: cover; background-position: center;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <h2 class="shaded-text">Colllaboration Through LLMs</h2>
+                        <p class="shaded-text">In my envisioned platform, I aim
+                            to create a highly dynamic and interactive
+                            environment. The platform would synergize
+                            individuals with overlapping interests and skills in
+                            different fields or "quests." A central feature is
+                            the use of Large Language Models (LLMs), which would
+                            intelligently match users with projects, thereby
+                            fostering meaningful and effective collaboration.
+
+                            I also plan to integrate the platform with existing
+                            project management tools like JIRA. This would offer
+                            users a seamless experience in terms of task
+                            assignment and tracking. Financially, the platform
+                            distinguishes itself by embracing Web 3.0
+                            technologies, such as blockchain and stable
+                            cryptocurrencies. This approach would streamline
+                            payments for remote work by offering transparent,
+                            secure, and quick transactions.
+
+                            In addition to these features, I'm contemplating an
+                            interesting twist: integrating the platform with
+                            social media. Many of these platforms already offer
+                            native features resembling ticketing systems like
+                            JIRA, which could serve as the initial framework for
+                            my project management component. This would allow me
+                            to tap into a broader user base and leverage
+                            people's familiarity with social media interfaces.
+                            However, I'm fully aware of the challenges that come
+                            with such integration, including data privacy
+                            concerns, ownership issues, and the risk of
+                            depending on a third-party platform's policies.
+
+                            To give my platform a competitive edge, I intend to
+                            incorporate industry standards like GDPR for data
+                            privacy, ISO certifications for quality management,
+                            and Agile methodologies for project management.
+                            These standards can add a layer of operational
+                            excellence and make the platform more attractive to
+                            corporate users.
+
+                            At the core of my platform is the mission to make
+                            freelance and remote work more structured and
+                            rewarding. I plan to enable users to break down
+                            tasks into manageable parts, complete with their own
+                            timelines and deadlines. The platform will also
+                            incorporate multi-dimensional filters for quests,
+                            dynamic timetables, and integrated collaborative
+                            tools like chat and video conferencing.
+
+                            Given my extensive technical skill set, I believe I
+                            am well-equipped to tackle the complex challenges
+                            involved in building such a comprehensive system.
+                            This platform has the potential to revolutionize the
+                            way we approach work in the digital age by making it
+                            more collaborative, structured, and financially
+                            rewarding. The incorporation of cutting-edge
+                            technologies like LLMs for intelligent matching and
+                            Web 3.0 for financial transactions further positions
+                            it as a forward-thinking solution designed for the
+                            future of work.</p>
+                        <!-- <p class="lead">This theme features some wonderful photography courtesy of <a target="_blank" href="http://join.deathtothestockphoto.com/">Death to the Stock Photo</a>.</p> -->
+                    </div>
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.container -->
+        </section>
+
+        <iframe src="https://gamma.app/embed/53i90y6kjp64r33"
+            style="width: 100vw; max-width: 100%; height: 100vh"
+            allow="fullscreen"
+            title="The Future is Here: Interactive Holograms"></iframe>
+        <!-- Services -->
+        <!-- The circle icons use Font Awesome's stacked icon classes. For more information, visit http://fontawesome.io/examples/ -->
+        <section id="services" class="services bg-primary">
+            <div class="container">
+                <div class="row text-center">
+                    <div class="col-lg-10 col-lg-offset-1">
+                        <h3 class="shaded-text">What Is Capable Lies Within The
+                            Scape Of Capabilities</h3>
+                        <hr class="small">
+                        <div class="row">
+                            <div class="col-md-3 col-sm-6">
+                                <div class="service-item">
+                                    <span class="fa-stack fa-4x">
+                                        <img src="./img/linktree.png"
+                                            class="linktreelogo"
+                                            alt="your logo" />
+                                    </span>
+                                    <h4>
+                                        <strong
+                                            class="shaded-text">Linktree</strong>
+                                    </h4>
+                                    <p class="shaded-text">Showcasing My
+                                        Professional Work</p>
+                                    <a
+                                        href="https://linktr.ee/shivadharshanlingeswaran"
+                                        class="btn btn-light"
+                                        target="_blank">Learn More</a>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-6">
+                                <div class="service-item">
+                                    <span class="fa-stack fa-4x">
+                                        <img src="./img/insta.png"
+                                            class="linktreelogo"
+                                            alt="your logo" />
+                                    </span>
+                                    <h4>
+                                        <strong
+                                            class="shaded-text">Instagram</strong>
+                                    </h4>
+                                    <p class="shaded-text">My Life written in
+                                        media.</p>
+                                    <a
+                                        href="https://www.instagram.com/brightideasflythroughthewall/?hl=en"
+                                        class="btn btn-light"
+                                        target="_blank">Learn More</a>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-6">
+                                <div class="service-item">
+                                    <span class="fa-stack fa-4x">
+                                        <img
+                                            src="./img/Spotify_icon.svg (1).png"
+                                            class="linktreelogo"
+                                            alt="your logo" />
+                                    </span>
+                                    <h4>
+                                        <strong
+                                            class="shaded-text">Spotify</strong>
+                                    </h4>
+                                    <p class="shaded-text">Where I bring
+                                        originality and my own spin; a place
+                                        where I do soul searching.</p>
+                                    <a
+                                        href="https://open.spotify.com/artist/4mleG7ybH4yx5YHnAIsUeu"
+                                        class="btn btn-light"
+                                        target="_blank">Learn More</a>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-6">
+                                <div class="service-item">
+                                    <span class="fa-stack fa-4x">
+                                        <img src="./img/medium.png"
+                                            class="linktreelogo"
+                                            alt="your logo" />
+                                    </span>
+                                    <h4>
+                                        <strong
+                                            class="shaded-text">Medium</strong>
+                                    </h4>
+                                    <p class="shaded-text">My Original Thinking.
+                                        Seances with the Word.</p>
+                                    <a
+                                        href="https://medium.com/@X0xRumbleLorex0X"
+                                        class="btn btn-light"
+                                        target="_blank">Learn More</a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.row (nested) -->
+                    </div>
+                    <!-- /.col-lg-10 -->
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.container -->
+
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <div id="contact" class="footer">
+                <div class="row">
+                    <div class="col-lg-10 col-lg-offset-1 text-center">
+                        <h4><strong>By Shivadharshan (Shan)
+                                Lingeswaran</strong></h4>
+                        <h4><strong>By Shivadharshan (Shan)
+                                Lingeswaran</strong></h4>
+                        <h4><strong>By Shivadharshan (Shan)
+                                Lingeswaran</strong></h4>
+                        <h4><strong>By Shivadharshan (Shan)
+                                Lingeswaran</strong></h4>
+                        <h4><strong>By Shivadharshan (Shan)
+                                Lingeswaran</strong></h4>
+                        <h4><strong>By Shivadharshan (Shan)
+                                Lingeswaran</strong></h4>
+                        <h4><strong>By Shivadharshan (Shan)
+                                Lingeswaran</strong></h4>
+                        <h4><strong>By Shivadharshan (Shan)
+                                Lingeswaran</strong></h4>
+                        <h4><strong>By Shivadharshan (Shan)
+                                Lingeswaran</strong></h4>
+                        <h4><strong>By Shivadharshan (Shan)
+                                Lingeswaran</strong></h4>
+                        <h4><strong>By Shivadharshan (Shan)
+                                Lingeswaran</strong></h4>
+                        <h4><strong>By Shivadharshan (Shan)
+                                Lingeswaran</strong></h4>
+                        <h4><strong>By Shivadharshan (Shan)
+                                Lingeswaran</strong></h4>
+                        <h4><strong>By Shivadharshan (Shan)
+                                Lingeswaran</strong></h4>
+                        <h4><strong>By Shivadharshan (Shan)
+                                Lingeswaran</strong></h4>
+                        <h4><strong>By Shivadharshan (Shan)
+                                Lingeswaran</strong></h4>
+                        <h4><strong>By Shivadharshan (Shan)
+                                Lingeswaran</strong></h4>
+                        <h4><strong>By Shivadharshan (Shan)
+                                Lingeswaran</strong></h4>
+                        <h4><strong>By Shivadharshan (Shan)
+                                Lingeswaran</strong></h4>
+                        <h4><strong>By Shivadharshan (Shan)
+                                Lingeswaran</strong></h4>
+                        <h4><strong>By Shivadharshan (Shan)
+                                Lingeswaran</strong></h4>
+                        <h4><strong>By Shivadharshan (Shan)
+                                Lingeswaran</strong></h4>
+                        <h4><strong>By Shivadharshan (Shan)
+                                Lingeswaran</strong></h4>
+                        <h4><strong>By Shivadharshan (Shan)
+                                Lingeswaran</strong></h4>
+                        <h4><strong>By Shivadharshan (Shan)
+                                Lingeswaran</strong></h4>
+                        <h4><strong>By Shivadharshan (Shan)
+                                Lingeswaran</strong></h4>
+                        <h4><strong>By Shivadharshan (Shan)
+                                Lingeswaran</strong></h4>
+                        <h4><strong>By Shivadharshan (Shan)
+                                Lingeswaran</strong></h4>
+                        <h4><strong>By Shivadharshan (Shan)
+                                Lingeswaran</strong></h4>
+                        <h4><strong>By Shivadharshan (Shan)
+                                Lingeswaran</strong></h4>
+                        <h4><strong>By Shivadharshan (Shan)
+                                Lingeswaran</strong></h4>
+                        <h4><strong>By Shivadharshan (Shan)
+                                Lingeswaran</strong></h4>
+                        <h4><strong>By Shivadharshan (Shan)
+                                Lingeswaran</strong></h4>
+                        <h4><strong>By Shivadharshan (Shan)
+                                Lingeswaran</strong></h4>
+                        <h4><strong>By Shivadharshan (Shan)
+                                Lingeswaran</strong></h4>
+                        <h4><strong>By Shivadharshan (Shan)
+                                Lingeswaran</strong></h4>
+                        <h4><strong>By Shivadharshan (Shan)
+                                Lingeswaran</strong></h4>
+                        <h4><strong>By Shivadharshan (Shan)
+                                Lingeswaran</strong></h4>
+                        <h4><strong>By Shivadharshan (Shan)
+                                Lingeswaran</strong></h4>
+                        <h4><strong>By Shivadharshan (Shan)
+                                Lingeswaran</strong></h4>
+                        <h4><strong>By Shivadharshan (Shan)
+                                Lingeswaran</strong></h4>
+
+                        <ul class="list-unstyled">
+                            <li><i class="fa fa-envelope-o fa-fw"></i> <a
+                                    href="mailto:shan.lingeswaran@outlook.com">shan.lingeswaran@outlook.com</a>
+                            </li>
+                        </ul>
+                        <br>
+                        <hr class="small">
+                        <p class="text-muted">Copyright &copy;2023</p>
+                    </div>
                 </div>
             </div>
-        </div>
-    </footer>
+        </footer>
 
-    <!-- jQuery -->
-    <script src="js/jquery.js"></script>
+        <!-- jQuery -->
+        <script src="js/jquery.js"></script>
 
-    <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
+        <!-- Bootstrap Core JavaScript -->
+        <script src="js/bootstrap.min.js"></script>
 
-    <!-- Custom Theme JavaScript -->
-    <script>
+        <!-- Custom Theme JavaScript -->
+        <script>
     // Closes the sidebar menu
     $("#menu-close").click(function(e) {
         e.preventDefault();
@@ -367,6 +545,6 @@ ineffable.’</p>
     });
     </script>
 
-</body>
+    </body>
 
 </html>
