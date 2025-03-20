@@ -33,3 +33,4 @@ function render(){
     context.drawImage(images[ball.frame],0,0, canvas.width,canvas.height);
 
 }
+

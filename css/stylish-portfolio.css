@@ -162,6 +162,19 @@ hr.small {
     right: 0;
 }
 
+/* Default menu state - hidden off screen */
+#sidebar-wrapper {
+    position: fixed;
+    top: 0;
+    right: -250px; /* Moves off-screen */
+    width: 250px;
+    height: 100vh;
+    background-color: #111;
+    transition: right 0.3s ease-in-out; /* Smooth animation */
+    z-index: 1000;
+}
+
+
 #sidebar-wrapper.active {
     right: 250px;
     width: 250px;
