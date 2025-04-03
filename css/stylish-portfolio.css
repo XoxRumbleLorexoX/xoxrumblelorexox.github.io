@@ -3,8 +3,161 @@
  * Code licensed under the Apache License v2.0.
  * For details, see http://www.apache.org/licenses/LICENSE-2.0.
  */
+/* --- Particle Visualizer (Negative Effect) --- */
+/* --- REMOVE THESE OLD ORBITER STYLES --- */
+/*
+.cursor-electron-orbit { ... }
+.electron { ... }
+*/
+/* ======================================== */
+/* Canvas / Z-index / Blend Mode Styles     */
+/* ======================================== */
 
-/* Global Styles */
+/* --- Orbiter Canvas (TOPMOST) --- */
+#cursor-orbiter-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9999; /* Highest */
+}
+
+/* --- Particle Canvas (MIDDLE - Blends with content below) --- */
+#particle-visualizer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 5; /* Above content, below orbiter */
+    pointer-events: none;
+    mix-blend-mode: difference; /* Key for negative effect */
+}
+
+/* --- GSAP Canvas (Decide Z-index based on placement) --- */
+.canvas { /* Changed selector to match HTML */
+    width: 100vw;
+    height: 100vh;
+    /* position: fixed; */ /* Uncomment if it should always be fixed */
+    /* top: 0; */
+    /* left: 0; */
+    /* z-index: ???; */ /* e.g., 0 or 1 if behind text, higher if needed */
+    display: block; /* Good practice for canvas */
+}
+
+
+/* --- Content Sections (BOTTOM) --- */
+header, section, footer .footer /* Target the inner div for footer BG */ {
+    position: relative; /* Establish stacking context */
+    z-index: 1;     /* Base level for content */
+}
+
+/* --- Text Elements (Above immediate backgrounds) --- */
+.shaded-text, .text-vertical-center h1, .text-vertical-center h2, .text-vertical-center h3, .text-vertical-center i, /* Be specific */
+.content-box h1, .content-box strong, .content-box span, /* Skills box text */
+.service-item h4, .service-item p /* Services text */
+/* Add other text elements that might be obscured */
+ {
+    position: relative; /* Needed to apply z-index */
+    z-index: 2;     /* Above z-index 1 backgrounds/images */
+    color: white;   /* Ensure color is set */
+}
+.shaded-text {
+     background-color: rgba(0, 0, 0, 0.5);
+     padding: 5px 10px; /* Adjusted padding */
+     display: inline-block; /* Allows background only on text */
+     border-radius: 3px;
+}
+/* Ensure specific elements like buttons are clickable */
+.btn {
+    position: relative;
+    z-index: 3; /* Above text background, below particles */
+}
+#menu-toggle {
+    z-index: 1001; /* Above sidebar */
+}
+#sidebar-wrapper {
+    z-index: 1000; /* Below toggle button */
+}
+
+
+/* ======================================== */
+/* Rest of your stylish-portfolio.css styles */
+/* ======================================== */
+
+html, body {
+    width: 100%;
+    height: 100%;
+    font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+/* Footer background styling */
+.footer { /* This targets the inner div with the ID 'contact' and class 'footer' */
+    display: table; /* Helps with vertical alignment if needed */
+    position: relative;
+    width: 100%;
+    /* Consider setting a min-height instead of fixed height if content varies */
+    /* height: 100%; */
+    padding: 100px 0; /* Use padding from outer footer */
+    background: url(../img/ProfessionalPicture.jpg) no-repeat center center scroll;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+    color: white; /* Set default text color for footer content */
+}
+/* Outer footer tag styling */
+footer {
+    padding: 0; /* Remove padding if inner div handles it */
+    position: relative; /* Stacking context */
+    z-index: 1; /* Same level as header/section */
+}
+
+
+/* ... other styles like .linktreelogo, .text-vertical-center, .btn, hr.small, .sidebar-nav etc. ... */
+/* ... Ensure you remove duplicate rules ... */
+
+/* Ensure text is still readable (adjust if needed) */
+.shaded-text {
+     /* background-color: rgba(0, 0, 0, 0.5); /* Keep this */
+     color: white; /* Keep this */
+     /* text-shadow: 1px 1px 2px black; /* May not be needed with blend mode */
+     position: relative; /* Needed for z-index stacking context */
+     z-index: 2; /* Ensure text is above immediate background but below particles */
+}
+
+/* Add styles for your GSAP canvas if you keep it */
+/* .canvas-gsap { */
+    /* position: fixed; */
+    /* width: 100vw; */
+    /* height: 100vh; */
+    /* z-index: ???; /* Decide where this fits */
+/* } */
+
+/* --- Other existing styles --- */
+/* ... rest of your stylish-portfolio.css ... */
+
+/* Keyframes for gradient animation if used */
+/* @keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+} */
+
+/* Ensure your main content sections have a higher z-index or background */
+header, section {
+    position: relative; /* Needed for z-index to work properly */
+    z-index: 1;
+    /* You might need background colors on sections if the canvas shows through */
+}
+
+/* Adjust text visibility if needed */
+.shaded-text {
+     /* Ensure text remains readable over the visualizer */
+     /* text-shadow: 1px 1px 2px black; /* Example shadow */
+}
 
 html,
 body {

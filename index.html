@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <head>
 
+
+
+    <head>
+        
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -31,10 +34,13 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-    </head>
 
     <body>
-                <!-- jQuery (Place before other scripts to ensure it's loaded) -->
+
+        <canvas id="cursor-orbiter-canvas"></canvas>
+
+        <canvas id="particle-visualizer"></canvas>
+    
         <script src="js/jquery.js"></script>
         <script src="js/bootstrap.min.js"></script>
 
@@ -44,7 +50,10 @@
             <div class="text-vertical-center">
 
                 <h1 class="shaded-text">Shivadharshan Lingeswaran</h1>
+                <h2></h2>
+
                 <h2 class="shaded-text">My Sobriquet - Shan</h2>
+                <h2></h2>
                 <h3
                     class="shaded-text">💯Vegan🌹Developer👾Musician🎶Entrepreneur📈Scientist🔬Artist🎨Activist🏆Researcher🧪Founder✒️Physicist👨‍🔬
                     Software Engineer🛠 Hardware Engineer🔧</h3>
@@ -59,6 +68,7 @@
                 <a href="#about" class="btn btn-dark btn-lg">Find Out More</a>
             </div>
         </header>
+
 
         <section id="about" class="about"
             style="width: 100vw; max-width: 100%; height: 100vh; background-image: url('/img/1unsplash.jpg');background-size: cover; background-position: center;">
@@ -469,7 +479,7 @@
         <!-- Footer -->
         <footer>
             <!-- LiveReload Script -->
-            <script src="http://localhost:35729/livereload.js"></script>
+            <!-- <script src="http://localhost:35729/livereload.js"></script> -->
             <!-- Navigation -->
             <a id="menu-toggle" href="#" class="btn btn-dark btn-lg toggle"><i
                     class="fa fa-bars"></i></a>
@@ -651,6 +661,11 @@
             });
             
         </script>
+
+        <footer>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" ...></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" ...></script>
+        </footer>
 
         <script src="js/stylish-portfolio.js"></script>
         <script src="js/particles.js"></script>
