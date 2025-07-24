@@ -8,8 +8,9 @@ document.addEventListener('DOMContentLoaded', function () {
         { type: 'video', src: 'img/LatestFlyingCar/IMG_0537.MOV' },
         { type: 'video', src: 'img/LatestFlyingCar/IMG_2673.MOV' },
         { type: 'video', src: 'img/LatestFlyingCar/RPReplay_Final1733776361.mov' },
+
+        
         // Local images
-        { type: 'image', src: 'img/LatestFlyingCar/IMG_1692.jpg' },
         { type: 'image', src: 'img/LatestFlyingCar/IMG_2669.PNG' },
         { type: 'image', src: 'img/LatestFlyingCar/IMG_2670.PNG' },
         { type: 'image', src: 'img/LatestFlyingCar/IMG_2671.PNG' },
@@ -22,9 +23,7 @@ document.addEventListener('DOMContentLoaded', function () {
         { type: 'image', src: 'img/LatestFlyingCar/Screenshot%202025-07-24%20at%2017.33.28.png' },
         { type: 'image', src: 'img/LatestFlyingCar/Screenshot%202025-07-24%20at%2017.33.34.png' },
         // YouTube examples
-        { type: 'youtube', src: 'https://www.youtube.com/embed/dQw4w9WgXcQ' },
-        { type: 'youtube', src: 'https://www.youtube.com/embed/oHg5SJYRHA0' },
-        { type: 'youtube', src: 'https://www.youtube.com/embed/tVj0ZTS4WF4' }
+
     ];
 
     var container = document.getElementById('flying-car-gallery');
