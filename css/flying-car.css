@@ -1,0 +1,13 @@
+.flying-car-section {
+    background: #f0f0f0;
+    padding: 60px 0;
+}
+.flying-car-section iframe,
+.flying-car-section video {
+    width: 100%;
+    height: 240px;
+    border-radius: 8px;
+}
+.flying-car-section .tech-stack {
+    margin-bottom: 20px;
+}
