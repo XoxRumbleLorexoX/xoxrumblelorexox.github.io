@@ -86,11 +86,11 @@
                 </div>
 
                 <div class="hero-cta">
-                    <a href="#skills" class="btn btn-light">View Skills</a>
-                    <a href="#services" class="btn btn-dark">Explore Links</a>
+                    <a href="#skills" id="skills-overlay-toggle" class="btn btn-light">View Skills</a>
+                    <a href="#contact" class="btn btn-dark">Explore Links</a>
                 </div>
 
-                <div class="hero-quote">“An action is innumerable words.”</div>
+                <div class="hero-quote" id="hero-quote"></div>
             </div>
         </header>
 
@@ -144,6 +144,13 @@
             </div>
             <!-- /.container -->
         </section>
+
+        <!-- Skills Overlay -->
+        <div id="skills-overlay" aria-hidden="true">
+            <canvas id="skills-canvas"></canvas>
+            <button id="skills-close" aria-label="Close skills overlay">&times;</button>
+            <div id="skills-tooltip" role="tooltip"></div>
+        </div>
 
 
         <section>
@@ -315,26 +322,7 @@
                     <div class="col-lg-12 text-center">
                         <h1 class="shaded-text">Writing on Medium</h1>
                         <p class="shaded-text">Preloaded from a local cache for speed. Click to read on Medium.</p>
-                        <script id="medium-cache" type="application/json">[
-  {
-    "title": "Sample: Building a Minimal Sorting Visualizer",
-    "link": "https://medium.com/@X0xRumbleLorex0X",
-    "pubDate": "2025-01-01T00:00:00Z",
-    "description": "A quick walkthrough of building a sorting visualizer in JS with canvas, focusing on UX and performance."
-  },
-  {
-    "title": "Sample: Rendering OBJ in Three.js",
-    "link": "https://medium.com/@X0xRumbleLorex0X",
-    "pubDate": "2025-01-02T00:00:00Z",
-    "description": "Loading and normalizing OBJ models, adding OrbitControls, lighting, and wireframe toggles."
-  },
-  {
-    "title": "Sample: Subtle Cursor Effects without Distraction",
-    "link": "https://medium.com/@X0xRumbleLorex0X",
-    "pubDate": "2025-01-03T00:00:00Z",
-    "description": "Designing tiny, tasteful cursor trails using Lissajous paths to stay elegant and performant."
-  }
-]</script>
+                        
                         <div id="medium-status" class="shaded-text" style="margin:10px auto; max-width:720px;"></div>
                         <div id="medium-posts" class="row" style="display:flex; gap:16px; justify-content:center; flex-wrap:wrap;"></div>
                     </div>
@@ -514,7 +502,7 @@
 
         <section id="flying-car" class="flying-car-section about">
             <div class="container">
-                <h2 class="text-center">🚗🛩️ Flying Car Prototype</h2>
+                <h2 class="text-center"><i class="fa fa-rocket"></i> Flying Car Prototype</h2>
                 <p class="text-center">An experimental build combining a drone frame, 3D-printed wheels, custom-mounted motors and an ESP32 microcontroller. Wiring is completely custom and independent.</p>
                 <ul class="tech-stack list-inline text-center">
                     <li class="list-inline-item">Drone frame</li>
@@ -616,8 +604,6 @@
                 </ul>
             </nav>
 
-            <canvas class="canvas"></canvas>
-
             <!-- Landing Event Section -->
             <section id="landing-event" class="about" style="width: 100vw; max-width: 100%;">
                 <canvas id="landing-canvas"></canvas>
@@ -630,40 +616,71 @@
                     </div>
                 </div>
             </section>
-            <script
-                src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"
-                integrity="sha512-16esztaSRplJROstbIIdwX3N97V1+pZvV33ABoG1H2OyTttBxEGkTsoIVsiP1iaTtM8b3+hu2kB6pQ4Clr5yug=="
-                crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-            <script
-                src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"
-                integrity="sha512-Ic9xkERjyZ1xgJ5svx3y0u3xrvfT/uPkV99LBwe68xjy/mGtO+4eURHZBW2xW4SZbFrF1Tf090XqB+EVgXnVjw=="
-                crossorigin="anonymous" referrerpolicy="no-referrer"></script>
             <script src="./app.js"></script>
-            <h1 class="center-text">I Like Your Landing!</h1>
 
             <div id="contact" class="footer">
-                <div class="row">
-                    <div class="col-lg-10 col-lg-offset-1 text-center">
-                        <h3 class="shaded-text"><strong>Shivadharshan (Shan) Lingeswaran</strong></h3>
-
-
-
-
-
-
-
-
-
-
-
-
-                        <ul class="list-unstyled">
-                            <li><i class="fa fa-envelope-o fa-fw"></i> <a
-                                    href="mailto:shan.lingeswaran@outlook.com">shan.lingeswaran@outlook.com</a>
-                            </li>
-                        </ul>
-                        <hr class="small">
-                        <p class="text-muted">&copy; 2023–2025 All rights reserved.</p>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-10 col-lg-offset-1 text-center">
+                            <h3 class="shaded-text"><strong>Shivadharshan (Shan) Lingeswaran</strong></h3>
+                            <p><i class="fa fa-envelope-o fa-fw"></i> <a href="mailto:shan.lingeswaran@outlook.com">shan.lingeswaran@outlook.com</a></p>
+                            <div class="footer-social">
+                                <a href="https://github.com/X0xRumbleLorex0X" target="_blank" rel="noopener" aria-label="GitHub"><i class="fa fa-github"></i></a>
+                                <a href="https://www.linkedin.com/in/shivadharshan-lingeswaran" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fa fa-linkedin"></i></a>
+                            </div>
+                            <div class="footer-grid cols-4">
+                                <div class="fg-card">
+                                    <div class="fg-title">Focus</div>
+                                    <div class="fg-list">
+                                        <span>AI Systems</span>
+                                        <span>Mixed Reality</span>
+                                        <span>Robotics</span>
+                                        <span>Systems Engineering</span>
+                                        <span>Automation</span>
+                                    </div>
+                                </div>
+                                <div class="fg-card">
+                                    <div class="fg-title">Languages</div>
+                                    <div class="fg-list">
+                                        <span>Python</span>
+                                        <span>C</span>
+                                        <span>C++</span>
+                                        <span>C#</span>
+                                        <span>Java</span>
+                                        <span>JavaScript</span>
+                                        <span>TypeScript</span>
+                                        <span>SQL</span>
+                                        <span>MATLAB</span>
+                                        <span>Rust</span>
+                                        <span>Go</span>
+                                        <span>Swift</span>
+                                        <span>DAX</span>
+                                        <span>Bash</span>
+                                        <span>HTML</span>
+                                        <span>CSS</span>
+                                    </div>
+                                </div>
+                                <div class="fg-card">
+                                    <div class="fg-title">Frameworks</div>
+                                    <div class="fg-list">
+                                        <span>WebGL/Three</span>
+                                        <span>Bootstrap</span>
+                                        <span>GSAP</span>
+                                    </div>
+                                </div>
+                                <div class="fg-card">
+                                    <div class="fg-title">Platforms</div>
+                                    <div class="fg-list">
+                                        <span>ESP32</span>
+                                        <span>AWS</span>
+                                        <span>Raspberry&nbsp;Pi</span>
+                                        <span>HoloLens&nbsp;2</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="small">
+                            <p class="text-muted">&copy; 2023–2025 All rights reserved.</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -723,7 +740,30 @@
         <script src="js/model-viewer.js"></script>
         <script src="js/pdf-deck.js"></script>
         <script src="js/medium.js"></script>
+        <script src="js/skills-overlay.js"></script>
         <script src="js/landing-event.js"></script>
         <script src="js/app.js"></script>
+        <script src="js/quotes.js"></script>
+
+        <!-- TinnyLlama (CV Assistant) -->
+        <link rel="preload" href="data/cv.txt" as="fetch" crossorigin>
+        <div id="tinnyllama">
+            <button id="tl-toggle" aria-label="Open CV assistant">🐪 Ask my CV</button>
+            <div id="tl-panel" aria-live="polite" aria-hidden="true">
+                <div class="tl-header">
+                    <strong>TinnyLlama</strong>
+                    <span class="tl-sub">Answers grounded in my CV</span>
+                    <button id="tl-close" aria-label="Close">×</button>
+                </div>
+                <div id="tl-messages" class="tl-messages" role="log"></div>
+                <div class="tl-input">
+                    <input id="tl-q" type="text" placeholder="Ask about my experience, skills, projects…"/>
+                    <button id="tl-send">Send</button>
+                </div>
+            </div>
+        </div>
+        <!-- Optional PDF.js for loading cv.pdf if present -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js" crossorigin="anonymous"></script>
+        <script src="js/tinnyllama.js"></script>
         </body>
         </html>

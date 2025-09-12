@@ -39,20 +39,33 @@
     try { return new Date(d).toLocaleDateString(); } catch { return d; }
   }
 
-  // 1) Inline JSON fallback (works with file://)
-  try {
-    const inline = document.getElementById('medium-cache');
-    if (inline && inline.textContent.trim()) {
-      const json = JSON.parse(inline.textContent);
-      if (Array.isArray(json) && json.length) {
-        render(json);
-      }
-    }
-  } catch {}
-
-  // 2) Try local file via fetch (works when served over HTTP)
-  fetch('data/medium.json', { cache: 'no-store' })
-    .then(r => (r && r.ok ? r.json() : []))
-    .then(data => { if (Array.isArray(data) && data.length) render(data); })
-    .catch(() => {});
+  // Try live Medium RSS via rss2json first (real posts)
+  const rssUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent('https://medium.com/feed/@' + username)}`;
+  fetch(rssUrl)
+    .then(r => r.ok ? r.json() : Promise.reject())
+    .then(json => {
+      const posts = (json.items || []).map(item => ({
+        title: item.title,
+        link: item.link,
+        pubDate: item.pubDate,
+        description: (item.description || '').replace(/<[^>]*>/g, '').trim()
+      }));
+      if (posts.length) render(posts);
+      else throw new Error('No posts');
+    })
+    .catch(() => {
+      // 1) Inline JSON fallback (works locally)
+      try {
+        const inline = document.getElementById('medium-cache');
+        if (inline && inline.textContent.trim()) {
+          const json = JSON.parse(inline.textContent);
+          if (Array.isArray(json) && json.length) render(json);
+        }
+      } catch {}
+      // 2) Local file cache
+      fetch('data/medium.json', { cache: 'no-store' })
+        .then(r => (r && r.ok ? r.json() : []))
+        .then(data => { if (Array.isArray(data) && data.length) render(data); else statusEl.textContent = 'No Medium posts found.'; })
+        .catch(() => { statusEl.textContent = 'No Medium posts found.'; });
+    });
 })();

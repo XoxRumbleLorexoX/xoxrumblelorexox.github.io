@@ -47,30 +47,8 @@
   let root = new THREE.Group();
   scene.add(root);
 
-  function message(text, kind = 'info') {
-    let el = container.querySelector('.mv-msg');
-    if (!el) {
-      el = document.createElement('div');
-      el.className = 'mv-msg';
-      el.style.position = 'absolute';
-      el.style.left = '12px';
-      el.style.bottom = '12px';
-      el.style.padding = '8px 12px';
-      el.style.background = 'rgba(20,24,28,0.7)';
-      el.style.border = '1px solid rgba(255,255,255,0.08)';
-      el.style.borderRadius = '10px';
-      el.style.color = '#e6e9ef';
-      el.style.pointerEvents = 'none';
-      el.style.fontSize = '12px';
-      el.style.zIndex = '2';
-      container.style.position = 'relative';
-      container.appendChild(el);
-    }
-    el.textContent = text;
-    el.style.opacity = '1';
-    clearTimeout(el._t);
-    el._t = setTimeout(() => el && (el.style.opacity = '0'), 2500);
-  }
+  // silent status (no UI toasts)
+  function message() {}
 
   function clearRoot() {
     while (root.children.length) root.remove(root.children[0]);
@@ -107,12 +85,17 @@
     // Apply a default, neutral material if none present
     object.traverse((child) => {
       if (child.isMesh) {
+        if (child.geometry && child.geometry.isBufferGeometry && !child.geometry.attributes.normal) {
+          child.geometry.computeVertexNormals();
+        }
         if (!child.material) {
-          child.material = new THREE.MeshStandardMaterial({ color: 0xb0c4de, metalness: 0.15, roughness: 0.6 });
+          child.material = new THREE.MeshStandardMaterial({ color: 0xb0c4de, metalness: 0.15, roughness: 0.6, side: THREE.DoubleSide });
         } else if (child.material && child.material.isMaterial) {
           // Keep existing but ensure it responds to lights
           if (!child.material.isMeshStandardMaterial && !child.material.isMeshPhysicalMaterial) {
-            child.material = new THREE.MeshStandardMaterial({ color: 0xb0c4de, metalness: 0.15, roughness: 0.6 });
+            child.material = new THREE.MeshStandardMaterial({ color: 0xb0c4de, metalness: 0.15, roughness: 0.6, side: THREE.DoubleSide });
+          } else {
+            child.material.side = THREE.DoubleSide;
           }
         }
       }
@@ -127,12 +110,12 @@
         applyBasicMaterial(obj);
         centerAndScale(obj);
         root.add(obj);
-        message('Loaded model: ' + path.split('/').pop());
+        // loaded
       },
       undefined,
       (err) => {
         console.error('Failed to load', path, err);
-        message('Could not load OBJ. Falling back to procedural.');
+        // load fallback procedural
         loadProcedural('icosahedron');
       }
     );
@@ -160,7 +143,7 @@
     const mesh = new THREE.Mesh(geo, mat);
     root.add(mesh);
     controls.target.set(0, 0, 0);
-    message('Procedural: ' + kind);
+    // procedural fallback
   }
 
   // initial load (procedural safe by default)
@@ -231,19 +214,49 @@
   resize();
   window.addEventListener('resize', resize);
 
-  // Icosahedron vertices (unit radius approx)
-  const t = (1 + Math.sqrt(5)) / 2;
-  let verts = [
-    [-1,  t,  0], [ 1,  t,  0], [-1, -t,  0], [ 1, -t,  0],
-    [ 0, -1,  t], [ 0,  1,  t], [ 0, -1, -t], [ 0,  1, -t],
-    [ t,  0, -1], [ t,  0,  1], [-t,  0, -1], [-t,  0,  1],
-  ];
-  const edges = [
-    [0,11],[0,5],[0,1],[0,7],[0,10], [1,5],[1,7],[1,9],[1,8], [2,3],[2,4],[2,10],[2,11],[2,6], [3,4],[3,6],[3,8],[3,9], [4,5],[4,11],[4,3],[5,9],[5,0], [6,7],[6,10],[6,3], [7,8],[7,0], [8,9],[8,1], [9,1],[9,4], [10,11],[10,2],[10,6], [11,0],[11,2],[11,4]
-  ];
+  let verts = [], edges = [];
 
-  // Normalize to radius 1.0
-  verts = verts.map(v => { const l = Math.hypot(v[0],v[1],v[2]); return [v[0]/l, v[1]/l, v[2]/l]; });
+  function setGeometry(kind) {
+    if (kind === 'tetrahedron') {
+      verts = [
+        [1, 1, 1], [-1, -1, 1], [-1, 1, -1], [1, -1, -1]
+      ];
+      edges = [[0,1],[0,2],[0,3],[1,2],[1,3],[2,3]];
+    } else if (kind === 'octahedron') {
+      verts = [
+        [1,0,0],[-1,0,0],[0,1,0],[0,-1,0],[0,0,1],[0,0,-1]
+      ];
+      edges = [[0,2],[2,1],[1,3],[3,0],[0,4],[2,4],[1,4],[3,4],[0,5],[2,5],[1,5],[3,5]];
+    } else if (kind === 'torusKnot') {
+      // Parametric torus knot polyline
+      const p = 2, q = 3; const R = 1.0, r = 0.35; const N = 220; verts = []; edges = [];
+      for (let i=0;i<N;i++){
+        const t = (i/N) * Math.PI*2;
+        const ct = Math.cos(q*t), st = Math.sin(q*t);
+        const x = (R + r*Math.cos(p*t)) * Math.cos(q*t);
+        const y = (R + r*Math.cos(p*t)) * Math.sin(q*t);
+        const z = r*Math.sin(p*t);
+        verts.push([x,y,z]);
+        if (i>0) edges.push([i-1,i]);
+      }
+      edges.push([N-1,0]);
+    } else { // icosahedron default
+      const phi = (1 + Math.sqrt(5)) / 2;
+      verts = [
+        [-1,  phi,  0], [ 1,  phi,  0], [-1, -phi,  0], [ 1, -phi,  0],
+        [ 0, -1,  phi], [ 0,  1,  phi], [ 0, -1, -phi], [ 0,  1, -phi],
+        [ phi,  0, -1], [ phi,  0,  1], [-phi,  0, -1], [-phi,  0,  1],
+      ];
+      edges = [
+        [0,11],[0,5],[0,1],[0,7],[0,10], [1,5],[1,7],[1,9],[1,8], [2,3],[2,4],[2,10],[2,11],[2,6], [3,4],[3,6],[3,8],[3,9], [4,5],[4,11],[4,3],[5,9],[5,0], [6,7],[6,10],[6,3], [7,8],[7,0], [8,9],[8,1], [9,1],[9,4], [10,11],[10,2],[10,6], [11,0],[11,2],[11,4]
+      ];
+    }
+    // Normalize
+    verts = verts.map(v => { const l = Math.hypot(v[0],v[1],v[2]) || 1; return [v[0]/l, v[1]/l, v[2]/l]; });
+  }
+
+  // initial geometry
+  setGeometry('icosahedron');
 
   let rotX = 0.7, rotY = -0.6, dist = 3.0;
   let dragging = false, lastX = 0, lastY = 0;
@@ -289,4 +302,73 @@
     }
   }
   render();
+
+  // Hook up dropdown to switch procedural models in fallback
+  const select = document.getElementById('model-select');
+  if (select) {
+    select.addEventListener('change', () => {
+      const v = select.value || '';
+      if (v.startsWith('proc:')) {
+        setGeometry(v.split(':')[1]);
+      } else {
+        // Try to load Three.js dynamically and upgrade to WebGL viewer
+        ensureThree().then(() => upgradeToThree(v)).catch(() => {
+          // keep procedural preview silently
+          setGeometry('icosahedron');
+        });
+      }
+    });
+  }
+
+  // Dynamically load Three.js and its extras if missing
+  function ensureThree(){
+    if (window.THREE && THREE.OBJLoader && THREE.OrbitControls) return Promise.resolve();
+    function load(src){ return new Promise((res,rej)=>{ const s=document.createElement('script'); s.src=src; s.onload=res; s.onerror=rej; document.head.appendChild(s); }); }
+    const base = 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r155';
+    const tasks = [];
+    if (!window.THREE) tasks.push(load(base + '/three.min.js'));
+    return Promise.all(tasks).then(()=>{
+      const more=[];
+      if (!THREE.OrbitControls) more.push(load(base + '/examples/js/controls/OrbitControls.min.js'));
+      if (!THREE.OBJLoader) more.push(load(base + '/examples/js/loaders/OBJLoader.min.js'));
+      return Promise.all(more);
+    });
+  }
+
+  // Upgrade current viewer to Three.js and load the requested asset
+  function upgradeToThree(value){
+    // Clear fallback canvas and instantiate a minimal Three viewer
+    container.innerHTML = '';
+    const renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: 'high-performance' });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    renderer.setSize(container.clientWidth, container.clientHeight);
+    container.appendChild(renderer.domElement);
+
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x0e131a);
+    const camera = new THREE.PerspectiveCamera(50, container.clientWidth/container.clientHeight, 0.1, 1000);
+    camera.position.set(1.8, 1.4, 2.2);
+    const controls = new THREE.OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true; controls.dampingFactor = 0.06; controls.enablePan = false; controls.minDistance = 0.5; controls.maxDistance = 8;
+    scene.add(new THREE.AmbientLight(0xffffff, 0.6)); const dir = new THREE.DirectionalLight(0xffffff, 0.9); dir.position.set(2.5,3,2); scene.add(dir);
+    const root = new THREE.Group(); scene.add(root);
+
+    function centerAndScale(object){
+      const box = new THREE.Box3().setFromObject(object); const size = new THREE.Vector3(); box.getSize(size); const center = new THREE.Vector3(); box.getCenter(center);
+      const maxDim = Math.max(size.x,size.y,size.z) || 1; const scale = 1.0/maxDim; object.position.sub(center); object.scale.setScalar(scale*1.6);
+    }
+    function applyBasicMaterial(object){
+      object.traverse((child)=>{ if (child.isMesh){ if (child.geometry && child.geometry.isBufferGeometry && !child.geometry.attributes.normal){ child.geometry.computeVertexNormals(); }
+        if (!child.material || !child.material.isMeshStandardMaterial){ child.material = new THREE.MeshStandardMaterial({ color: 0xb0c4de, metalness: 0.15, roughness: 0.6, side: THREE.DoubleSide }); } else { child.material.side = THREE.DoubleSide; } } });
+    }
+    function setWireframe(enabled){ root.traverse((c)=>{ if (c.isMesh && c.material){ if (Array.isArray(c.material)) c.material.forEach(m=>m.wireframe=enabled); else c.material.wireframe=enabled; } }); }
+
+    function render(){ controls.update(); renderer.render(scene,camera); requestAnimationFrame(render); }
+    render();
+
+    function loadOBJ(path){ root.clear(); const loader = new THREE.OBJLoader(); loader.load(path, (obj)=>{ applyBasicMaterial(obj); centerAndScale(obj); root.add(obj); }, undefined, ()=>{} ); }
+    function loadProcedural(kind){ root.clear(); let geo; if (kind==='octahedron') geo = new THREE.OctahedronGeometry(0.85,0); else if (kind==='tetrahedron') geo = new THREE.TetrahedronGeometry(0.95,0); else if (kind==='torusKnot') geo = new THREE.TorusKnotGeometry(0.6, 0.22, 220, 20, 2, 3); else geo = new THREE.IcosahedronGeometry(0.8,0); const mat = new THREE.MeshStandardMaterial({ color:0xb0c4de, metalness:0.3, roughness:0.45 }); root.add(new THREE.Mesh(geo,mat)); controls.target.set(0,0,0); }
+
+    if (value && !value.startsWith('proc:')) loadOBJ(value); else loadProcedural('icosahedron');
+  }
 })();

@@ -22,6 +22,33 @@
     pagesWrap.className = 'pdf-pages';
     el.appendChild(pagesWrap);
 
+    // Add CTA buttons under the deck that open pre-filled emails
+    const parentSection = el.closest('section');
+    const deckTitle = (parentSection && parentSection.querySelector('h1')) ? parentSection.querySelector('h1').textContent.trim() : 'Proposal';
+    const email = 'shan.lingeswaran@outlook.com';
+    function mailto(label) {
+      const subject = encodeURIComponent(`${label} – ${deckTitle}`);
+      const lines = [
+        'Hi Shan,',
+        '',
+        `I'd like to discuss: ${deckTitle}.`,
+        '',
+        `Reference: ${location.href}`,
+        `Attachment/Deck: ${src}`,
+        '',
+        'Thanks!',
+      ];
+      const body = encodeURIComponent(lines.join('\n'));
+      return `mailto:${email}?subject=${subject}&body=${body}`;
+    }
+    const cta = document.createElement('div');
+    cta.className = 'pdf-cta';
+    cta.innerHTML = `
+      <a class="btn btn-light pdf-btn" href="${mailto('Collaborate')}" target="_blank" rel="noopener">Collaborate</a>
+      <a class="btn btn-dark pdf-btn" href="${mailto('Invest Now')}" target="_blank" rel="noopener">Invest Now</a>
+    `;
+    el.appendChild(cta);
+
     ensurePdfJs().then((pdfjsLib) => {
       // worker from CDN
       pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';

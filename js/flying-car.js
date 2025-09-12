@@ -3,11 +3,11 @@
 
 document.addEventListener('DOMContentLoaded', function () {
     var items = [
-        // Local video clips converted to lightweight GIFs (see tools/convert-to-gif.sh)
-        { type: 'image', src: 'img/LatestFlyingCar/IMG_0536.gif' },
-        { type: 'image', src: 'img/LatestFlyingCar/IMG_0537.gif' },
-        { type: 'image', src: 'img/LatestFlyingCar/IMG_2673.gif' },
-        { type: 'image', src: 'img/LatestFlyingCar/RPReplay_Final1733776361.gif' },
+        // Autoplaying loops (MP4/WebM with MOV fallback). Behaves like GIF but higher quality.
+        { type: 'clip', base: 'img/LatestFlyingCar/IMG_0536' },
+        { type: 'clip', base: 'img/LatestFlyingCar/IMG_0537' },
+        { type: 'clip', base: 'img/LatestFlyingCar/IMG_2673' },
+        { type: 'clip', base: 'img/LatestFlyingCar/RPReplay_Final1733776361' },
 
         
         // Local images
@@ -39,16 +39,44 @@ document.addEventListener('DOMContentLoaded', function () {
             iframe.allowFullscreen = true;
             iframe.style.border = '0';
             col.appendChild(iframe);
-        } else if (item.type === 'video') {
+        } else if (item.type === 'clip') {
+            // Create an autoplaying, looping, muted video with multiple sources
             var video = document.createElement('video');
-            video.src = item.src;
-            video.controls = true;
+            video.autoplay = true;
+            video.loop = true;
+            video.muted = true;
+            video.playsInline = true;
+            video.setAttribute('playsinline', '');
+            video.setAttribute('muted', '');
+            video.className = 'clip-video';
+
+            // Build sources: MP4 -> WebM -> MOV (original) -> GIF fallback
+            var mp4 = document.createElement('source'); mp4.src = item.base + '.mp4'; mp4.type = 'video/mp4';
+            var webm = document.createElement('source'); webm.src = item.base + '.webm'; webm.type = 'video/webm';
+            var mov = document.createElement('source'); mov.src = item.base + '.MOV'; mov.type = 'video/quicktime';
+            video.appendChild(mp4); video.appendChild(webm); video.appendChild(mov);
+
+            // If all fail, swap to .gif image if present, otherwise hide the tile
+            // Remove tile if nothing loads within a grace period
+            let loaded = false;
+            video.addEventListener('loadeddata', function(){ loaded = true; }, { once: true });
+            setTimeout(function(){ if (!loaded) col.remove(); }, 4000);
+            video.addEventListener('error', function () {
+                var img = document.createElement('img');
+                img.src = item.base + '.gif';
+                img.alt = 'Flying car media';
+                img.className = 'img-fluid';
+                col.innerHTML = '';
+                col.appendChild(img);
+            }, { once: true });
+
             col.appendChild(video);
         } else if (item.type === 'image') {
             var img = document.createElement('img');
             img.src = item.src;
             img.alt = 'Flying car media';
             img.className = 'img-fluid';
+            img.addEventListener('error', function(){ col.remove(); });
             col.appendChild(img);
         }
 

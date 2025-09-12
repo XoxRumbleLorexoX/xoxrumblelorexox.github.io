@@ -40,6 +40,16 @@ h1,h2,h3 { color: var(--text); letter-spacing: 0.2px; }
 .footer { background: linear-gradient(135deg, #0d0f12 0%, #151a21 100%) !important; color: var(--muted) !important; }
 .footer a { color: var(--text); }
 .footer .small { border-color: rgba(255,255,255,0.08); }
+/* Footer enhancements */
+.footer-social { display:flex; gap:14px; justify-content:center; margin:10px 0 18px; font-size: 20px; }
+.footer-social a { color: var(--text); opacity: 0.8; transition: opacity .15s ease, transform .15s ease; }
+.footer-social a:hover { opacity: 1; transform: translateY(-2px); }
+.footer-grid { display:grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap:14px; margin: 20px auto 10px; max-width: 960px; }
+.footer-grid.cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.fg-card { background: rgba(255,255,255,0.04); border:1px solid var(--border); border-radius: 12px; padding:12px 14px; text-align:left; }
+.fg-title { font-weight: 700; color: var(--text); margin-bottom: 8px; }
+.fg-list { display:flex; gap:8px; flex-wrap:wrap; }
+.fg-list span { background: rgba(0,0,0,0.35); border:1px solid rgba(255,255,255,0.16); border-radius: 999px; padding:4px 8px; color: var(--text); font-size: 12px; }
 
 /* Model viewer container tweaks */
 #model-viewer-section { background: var(--bg-alt) !important; }
@@ -78,20 +88,45 @@ h1,h2,h3 { color: var(--text); letter-spacing: 0.2px; }
 .pdf-page-holder { min-height: 240px; background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; display: grid; place-items: center; box-shadow: 0 18px 36px rgba(0,0,0,0.35); }
 .pdf-page-holder canvas { width: 100%; height: auto; display: block; }
 .pdf-error { text-align:center; color: #f66; }
+.pdf-cta { display:flex; gap:12px; justify-content:center; margin-top: 16px; }
+.pdf-btn { min-width: 160px; }
 
 /* Hero (landing) */
-.hero { padding: 120px 20px 80px; text-align: left; max-width: 1100px; }
+.hero { padding: 120px 20px 80px; text-align: center; max-width: 1100px; margin-left: auto; margin-right: auto; }
 .hero-title { font-size: 48px; font-weight: 800; margin: 0 0 8px; color: var(--text); }
 .hero-sub { font-size: 20px; color: var(--text); opacity: 0.95; margin: 0 0 18px; text-shadow: 0 1px 2px rgba(0,0,0,0.4); }
-.hero-text { max-width: 980px; color: var(--text); opacity: 0.96; margin: 14px 0 10px; line-height: 1.6; text-shadow: 0 1px 2px rgba(0,0,0,0.35); }
-.hero-badges { display: flex; gap: 8px; flex-wrap: wrap; margin: 10px 0 18px; }
-.chip { display: inline-block; padding: 6px 10px; border-radius: 999px; background: rgba(255,255,255,0.08); border: 1px solid var(--border); color: var(--text); font-size: 13px; }
+.hero-text { max-width: 980px; color: var(--text); opacity: 0.96; margin: 14px auto 10px; line-height: 1.6; text-shadow: 0 1px 2px rgba(0,0,0,0.35); }
+.hero-badges { display: flex; gap: 8px; flex-wrap: wrap; margin: 10px auto 18px; justify-content: center; }
+.chip { display: inline-block; padding: 6px 10px; border-radius: 999px; background: rgba(0,0,0,0.35); border: 1px solid rgba(255,255,255,0.16); color: var(--text); font-size: 13px; backdrop-filter: blur(4px); }
 .hero-meta { margin: 10px 0 20px; }
 .meta-label { font-weight: 700; color: var(--text); margin-bottom: 6px; }
-.meta-list { display: flex; gap: 8px; flex-wrap: wrap; }
-.hero-cta { display: flex; gap: 10px; margin-top: 10px; }
+.meta-list { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+.hero-cta { display: flex; gap: 10px; margin-top: 10px; justify-content: center; }
 .hero-quote { margin-top: 20px; color: var(--muted); font-style: italic; }
 
 /* Header readability overlay */
 header.header { position: relative; }
-header.header::before { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(5,7,10,0.35), rgba(5,7,10,0.35)); pointer-events: none; }
+header.header::before { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(5,7,10,0.5), rgba(5,7,10,0.5)); pointer-events: none; }
+
+/* Skills overlay */
+#skills-overlay { position: fixed; inset: 0; display: none; align-items: center; justify-content: center; background: rgba(5,7,10,0.75); backdrop-filter: blur(4px); z-index: 9998; }
+#skills-overlay.active { display: flex; }
+#skills-canvas { width: 100vw; height: 100vh; display: block; }
+#skills-close { position: absolute; top: 18px; right: 22px; background: rgba(255,255,255,0.1); color: #fff; border: 1px solid var(--border); border-radius: 10px; padding: 6px 10px; font-size: 22px; line-height: 1; cursor: pointer; z-index: 9999; }
+#skills-close:hover { background: rgba(255,255,255,0.2); }
+#skills-tooltip { position: absolute; padding: 6px 10px; border-radius: 8px; background: rgba(20,24,28,0.85); color: var(--text); border: 1px solid var(--border); pointer-events: none; transform: translate(-50%, -130%); white-space: nowrap; font-size: 13px; opacity: 0; transition: opacity .12s ease; z-index: 9999; }
+
+/* TinnyLlama (CV assistant) */
+#tinnyllama { position: fixed; right: 16px; bottom: 16px; z-index: 10050; }
+#tl-toggle { background: linear-gradient(135deg, #171b22, #0f1217); color: #e6e9ef; border: 1px solid var(--border); border-radius: 999px; padding: 10px 14px; box-shadow: 0 8px 20px rgba(0,0,0,0.35); }
+#tl-panel { position: fixed; right: 16px; bottom: 72px; width: min(560px, 92vw); max-height: 70vh; display: none; background: rgba(20,24,28,0.92); border: 1px solid var(--border); border-radius: 14px; backdrop-filter: blur(4px); box-shadow: 0 18px 36px rgba(0,0,0,0.45); }
+#tl-panel.active { display: flex; flex-direction: column; }
+.tl-header { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-bottom: 1px solid var(--border); }
+.tl-header .tl-sub { color: var(--muted); font-size: 12px; margin-left: auto; }
+#tl-close { margin-left: 8px; background: transparent; color: #e6e9ef; border: 1px solid var(--border); border-radius: 8px; padding: 4px 8px; }
+.tl-messages { padding: 10px 12px; overflow: auto; flex: 1; display: grid; gap: 8px; }
+.tl-msg { background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-radius: 10px; padding: 8px 10px; color: var(--text); }
+.tl-msg.user { background: rgba(124,92,255,0.12); }
+.tl-input { display: flex; gap: 8px; padding: 10px 12px; border-top: 1px solid var(--border); }
+#tl-q { flex: 1; border-radius: 8px; border: 1px solid var(--border); background: rgba(0,0,0,0.35); color: var(--text); padding: 8px 10px; }
+#tl-send { border-radius: 8px; border: 1px solid var(--border); background: linear-gradient(135deg, #171b22, #0f1217); color: var(--text); padding: 8px 12px; }

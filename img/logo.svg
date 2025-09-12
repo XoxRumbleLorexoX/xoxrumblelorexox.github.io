@@ -1,6 +1,6 @@
 <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
   <title id="title">Site Logo</title>
-  <desc id="desc">Circular crest with twin orbit paths and SL monogram</desc>
+  <desc id="desc">Circular crest with hexagon and circuit traces</desc>
   <defs>
     <linearGradient id="g" x1="8" y1="56" x2="56" y2="8" gradientUnits="userSpaceOnUse">
       <stop stop-color="#7C5CFF"/>
@@ -8,11 +8,12 @@
     </linearGradient>
   </defs>
   <circle cx="32" cy="32" r="30" fill="#0E131A" stroke="url(#g)" stroke-width="2"/>
-  <!-- Lissajous-like orbits -->
-  <path d="M8 32C12 16 20 8 32 8C44 8 52 16 56 32C52 48 44 56 32 56C20 56 12 48 8 32Z" stroke="url(#g)" stroke-width="2" opacity="0.6"/>
-  <path d="M32 8C48 12 56 20 56 32C56 44 48 52 32 56C16 52 8 44 8 32C8 20 16 12 32 8Z" stroke="url(#g)" stroke-width="2" opacity="0.35"/>
-  <circle cx="32" cy="32" r="2.2" fill="#FFFFFF" opacity="0.9"/>
-  <!-- Monogram -->
-  <text x="32" y="38" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial" font-size="16" font-weight="700" fill="#FFFFFF">SL</text>
+  <!-- Hexagon -->
+  <path d="M32 16l12 7v18l-12 7-12-7V23l12-7z" stroke="url(#g)" stroke-width="2" fill="none"/>
+  <!-- Circuit dots -->
+  <circle cx="18" cy="24" r="2" fill="#00D4FF"/>
+  <circle cx="46" cy="24" r="2" fill="#7C5CFF"/>
+  <circle cx="32" cy="46" r="2" fill="#7CDAFF"/>
+  <!-- Circuit lines -->
+  <path d="M18 24h6m16 0h6M32 46v-6" stroke="url(#g)" stroke-width="2" stroke-linecap="round"/>
 </svg>
-

@@ -1,0 +1,148 @@
+PROFESSIONAL SUMMARY
+Multidisciplinary technical professional with a background in cloud architecture, embedded systems, and AI-driven automation. Proven track record delivering production-grade tools spanning automotive diagnostics, real-time trading systems, reverse engineering of mobile apps, and 3D product visualisation pipelines. Passionate about scalable system design, hands-on problem-solving, and building future-facing technology that bridges hardware, cloud, and AI.
+
+KEY SKILLS
+
+Embedded Systems & Reverse Engineering
+
+Hardware Interfaces: CAN Bus, OBD-II, JTAG, SWD, PCB design, ARM Cortex-M
+
+Reverse Engineering Tools: Ghidra, IDA Pro, Frida, Objection, Assembly, memory scanners
+
+Embedded Platforms: Raspberry Pi, NanoPi, Bluetooth (OBDLink MX+), STM32
+
+Cyber-Physical Security: Jailbreak toolchains, SSL pinning bypass, tamper detection
+
+Cloud Architecture & DevOps
+
+Cloud Providers: Google Cloud (Cloud Run, Firestore, Vertex AI), AWS, Azure
+
+Tools & Infra: Docker, Kubernetes, FastAPI, OAuth2, CI/CD, Pyenv, React/Next.js
+
+System Design: End-to-end cloud deployments for ML apps, dashboards, and APIs
+
+AI, ML & Automation
+
+Frameworks & Tools: TensorFlow, PyTorch, HuggingFace, Ollama, LangChain, ChromaDB
+
+Applications: LLM fine-tuning, OCR, NLP, CV (object detection), trading bots
+
+MLOps: Model deployment, REST API integration, automation pipelines
+
+Programming Languages
+
+Core: Python, C, C++, C#, Java, JavaScript, Bash, SQL
+
+Applications: Automation bots, firmware, iOS apps, data pipelines, web scraping, trading systems
+
+Instrumentation & Signal Processing
+
+Real-time bio-signal analysis (EEG), sensor interfacing, and instrumentation workflows
+
+Aerospace/automotive sensor integration (SAW sensors, LIDAR, ultrasonic TOF)
+
+AR/VR & Creative Tech
+
+Meta Quest 3/HoloLens 2 AR/XR/VR/MR app development, Unity, CAD, parametric modelling
+
+CONTACT INFORMATION
+Name: Shivadharshan (Shan) Lingeswaran
+Location: WD5
+Phone: +44 7481 999820
+Email: shan.lingeswaran@outlook.com
+
+PROFESSIONAL EXPERIENCE
+
+HP Tuners – Entry-Level Vehicle Engineer (Oct 2023 – Feb 2025)
+
+Specialised in ECU reverse engineering using Ghidra, IDA Pro, and assembly to extract and modify automotive firmware.
+
+Designed and optimised firmware extraction methodologies, improving module performance by 35%.
+
+Conducted hands-on diagnostics: CAN Bus analysis, ECU disassembly, soldering, JTAG/SWD debugging.
+
+Developed proprietary control module decompilation workflows, reducing debugging cycles by 20%.
+
+Worked cross-functionally to refine vehicle tuning software, reducing calibration errors by 25%.
+
+Syngenta – Junior Technical Specialist (Mar 2022 – Mar 2023)
+
+Built mixed reality apps for HoloLens 2, including QR code tracking and OCR for CAS recognition.
+
+Boosted system accuracy from 70% to 100% by integrating PubChem API.
+
+Developed advanced applications using C#, C++, .NET, Unity, PowerShell, AWS, Azure, CV.
+
+Led full development cycles, reducing deployment time by 30%.
+
+Created AR interfaces for remote diagnostics and mission planning.
+
+Kolytics Ltd. – Junior Data Scientist (Sep 2021 – Dec 2021)
+
+Analysed financial data for REITs using Excel VBA & Power BI, built dynamic models.
+
+Automated data extraction workflows, improving efficiency by 50% and cutting manual effort by 75%.
+
+Delivered actionable insights, improving investment model accuracy by 30%.
+
+Freelance – Chemist, Engineer, Physicist & Programmer (Oct 2020 – Present)
+
+Automated venue lighting & sound systems, improving acoustic precision by 40%.
+
+Built personal e-portfolio showcasing reverse engineering, cybersecurity, AI projects.
+
+Designed 360 Photo Booth automation with real-time video pipelines, reducing processing time by 60%.
+
+Performed PC upgrades, circuit debugging, and hardware optimisation.
+
+Built 3D-printed automotive/robotics components, integrating CAD prototyping.
+
+Authored technical publications reaching 1,500+ readers.
+
+Created AI bots for automated job applications, reducing effort by 80%.
+
+AUTODIDACT
+I dedicate my free time to broaden my skillset, driven by a deep-seated passion for learning and a desire to excel. Driven by insatiable curiosity, I merge technical mastery with creative expression to drive innovation across defence, media, and tech sectors.
+
+REFERENCES
+Available on request.
+
+HOBBIES
+Coding, CAD & Hardware Projects, 3D Printing, Art, Languages, Music, Reading, Writing, Researching, Trading
+
+THESIS & DISSERTATIONS
+
+“Propulsion Systems for Asteroid Mining” – Comprehensive propulsion study for future missions.
+
+“Miniature Surface Acoustic Wave Sensors for Remote Temperature Measurement in Instrumentation” – Design and applications of SAW sensors for instrumentation setups.
+
+CREATIVE EXPRESSION & THOUGHT LEADERSHIP
+
+Blogging on Medium about AI, cybersecurity, reverse engineering, and automation.
+
+Music production using AI-driven sound engineering, blending synthesis and automation.
+
+Link: https://linktr.ee/ShivadharshanLingeswaran
+
+EDUCATION & CERTIFICATIONS
+
+Imperial College London – MRes in Molecular Science & Engineering (2019–2020)
+Modules: Sustainable Molecular Systems, Synthesis for Device Manufacturing, Material Characterisation, Multiscale Modelling, Manufacturing Processes
+
+University of Hertfordshire – BSc in Physics (2015–2018)
+Modules: Mathematical Techniques 2, Programming, Thermal & Condensed Matter Physics, Quantum Physics, Computational Physics, Optical Physics
+
+FLAGSHIP PROJECTS
+
+Real-Time Grid Trading Bot with Web UI: Full-stack system with PnL tracking, TradingView alerts, React dashboard. Tech: FastAPI, React, WebSockets, OANDA API
+
+AI & Automation Bots: Job automation, crypto bots, home automation. Tech: Python, Selenium, Ollama, FastAPI
+
+iOS Brain Training & Music Apps: Two published apps for cognitive training and interactive music. Tech: Swift, UIKit
+
+Smart Home Automation Agents: Python/Bash agents for energy optimisation and automation. Tech: Python, Bash, MQTT
+
+Embedded Flying Vehicle Prototype: Coil gun propulsion, PCB prototyping, embedded C development.
+
+PERSONAL STATEMENT
+I explore the intersection of science, technology, and creativity. Passionate about learning, I dedicate my time to innovative projects, believing in the transformative power of combining technical and creative skills. My mission is to create impactful, interdisciplinary solutions that advance technology and enrich human experience.
