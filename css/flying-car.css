@@ -1,7 +1,12 @@
 .flying-car-section {
-    background: #f0f0f0;
+    background: var(--bg-alt, #0e131a);
+    color: var(--text, #e6e9ef);
     padding: 60px 0;
 }
+
+.flying-car-section h2,
+.flying-car-section p,
+.flying-car-section li { color: var(--text, #e6e9ef); }
 
 .flying-car-section iframe,
 .flying-car-section video {
@@ -14,8 +19,8 @@
     width: 100%;
     border-radius: 8px;
     margin-bottom: 5px;
+    border: 1px solid var(--border, rgba(255,255,255,0.08));
+    box-shadow: 0 8px 24px rgba(0,0,0,0.35);
 }
 
-.flying-car-section .tech-stack {
-    margin-bottom: 20px;
-}
+.flying-car-section .tech-stack { margin-bottom: 20px; }

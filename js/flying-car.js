@@ -3,11 +3,11 @@
 
 document.addEventListener('DOMContentLoaded', function () {
     var items = [
-        // Local videos
-        { type: 'video', src: 'img/LatestFlyingCar/IMG_0536.MOV' },
-        { type: 'video', src: 'img/LatestFlyingCar/IMG_0537.MOV' },
-        { type: 'video', src: 'img/LatestFlyingCar/IMG_2673.MOV' },
-        { type: 'video', src: 'img/LatestFlyingCar/RPReplay_Final1733776361.mov' },
+        // Local video clips converted to lightweight GIFs (see tools/convert-to-gif.sh)
+        { type: 'image', src: 'img/LatestFlyingCar/IMG_0536.gif' },
+        { type: 'image', src: 'img/LatestFlyingCar/IMG_0537.gif' },
+        { type: 'image', src: 'img/LatestFlyingCar/IMG_2673.gif' },
+        { type: 'image', src: 'img/LatestFlyingCar/RPReplay_Final1733776361.gif' },
 
         
         // Local images

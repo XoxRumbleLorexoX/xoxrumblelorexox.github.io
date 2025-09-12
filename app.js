@@ -203,10 +203,9 @@ if (particleCanvas) {
 // ... (Particle Visualizer code) ...
 
 
-// === NEW Canvas Cursor Orbiter (Trails & Rainbow) ===
+// === Subtle Atomic Cursor Orbit (Lissajous, low key) ===
 const orbiterCanvas = document.getElementById('cursor-orbiter-canvas');
 
-// **Important**: Check if the canvas element exists
 if (orbiterCanvas) {
     const orbiterCtx = orbiterCanvas.getContext('2d');
     let canvasWidth = window.innerWidth;
@@ -218,81 +217,64 @@ if (orbiterCanvas) {
     let mouseY = canvasHeight / 2;
     let targetX = mouseX;
     let targetY = mouseY;
-    let angle = 0;
-    let baseHue = 0; // Starting hue for rainbow cycle
 
-    const electrons = [];
-    const numElectrons = 6; // How many electrons (can change to 3, 9, etc.)
-    const trailLength = 0.15; // Lower value = longer/stronger trails (0.1 - 0.3 is typical)
+    // 2-3 orbiters with non-circular (Lissajous) paths
+    const orbiters = [
+        { rx: 22, ry: 12, fx: 1, fy: 2, phase: 0.0, size: 1.8, trail: [] },
+        { rx: 30, ry: 16, fx: 2, fy: 3, phase: Math.PI / 3, size: 1.6, trail: [] },
+        { rx: 38, ry: 20, fx: 3, fy: 5, phase: Math.PI / 2, size: 1.4, trail: [] },
+    ];
+    const maxTrail = 14; // short, subtle trail
+    let t = 0;
 
-    // Initialize electron properties
-    for (let i = 0; i < numElectrons; i++) {
-        electrons.push({
-            radius: 20 + (i * 8),      // Orbit radius (increases for each electron)
-            speedMultiplier: 1 + (i * 0.15), // Orbit speed (increases slightly)
-            size: 4 - (i * 0.2),        // Electron size (decreases slightly)
-            hueOffset: (360 / numElectrons) * i // Distribute hues evenly
-        });
-    }
-
-    // Update mouse position (target for the center)
     document.addEventListener('mousemove', (e) => {
         targetX = e.clientX;
         targetY = e.clientY;
     });
-     document.addEventListener('mouseout', () => {
-        // Optionally fade out or stop when mouse leaves window
-        // For simplicity, we'll just let it orbit the last known target
-    });
 
-
-    function animateOrbiterCanvas() {
-        // --- Trail Effect ---
-        // Fill with semi-transparent black (or another color) to fade previous frames
-        // Inside animateOrbiterCanvas function:
+    function draw() {
+        // Clear fully to avoid heavy trails; keep the effect crisp and subtle
         orbiterCtx.clearRect(0, 0, canvasWidth, canvasHeight);
 
+        // Smooth follow toward mouse
+        mouseX += (targetX - mouseX) * 0.12;
+        mouseY += (targetY - mouseY) * 0.12;
 
-        const trailLength = 0.15; // <--- THIS VALUE CONTROLS FADE SPEED
+        // Common styling
+        orbiterCtx.lineWidth = 1;
 
-        // --- Trail Effect 
+        orbiters.forEach((o, i) => {
+            // Lissajous parametric path around the mouse
+            const x = mouseX + o.rx * Math.cos(t * o.fx + o.phase);
+            const y = mouseY + o.ry * Math.sin(t * o.fy + o.phase);
 
-        // ... rest of the function ...
-        orbiterCtx.fillStyle = `rgba(0, 0, 0, ${trailLength})`; // Adjust alpha for trail length
-        orbiterCtx.fillRect(0, 0, canvasWidth, canvasHeight);
+            // Trail bookkeeping
+            o.trail.push({ x, y });
+            if (o.trail.length > maxTrail) o.trail.shift();
 
-        // --- Smooth Follow ---
-        // Move the center point smoothly towards the target mouse position
-        mouseX += (targetX - mouseX) * 0.08; // Adjust smoothing factor (0.05 - 0.1)
-        mouseY += (targetY - mouseY) * 0.08;
-
-        // --- Update Angles and Colors ---
-        angle += 0.04; // Base rotation speed
-        baseHue = (baseHue + 0.5) % 360; // Slowly cycle base hue for rainbow effect
-
-        // --- Draw Electrons ---
-        electrons.forEach(electron => {
-            // Calculate electron position
-            let currentAngle = angle * electron.speedMultiplier;
-            let x = mouseX + Math.cos(currentAngle) * electron.radius;
-            let y = mouseY + Math.sin(currentAngle) * electron.radius;
-
-            // Calculate electron color
-            let currentHue = (baseHue + electron.hueOffset) % 360;
-            let color = `hsl(${currentHue}, 100%, 60%)`; // HSL: Hue, Saturation (100%), Lightness (60%)
-
-            // Draw the electron
-            orbiterCtx.fillStyle = color;
+            // Faint trail path
             orbiterCtx.beginPath();
-            orbiterCtx.arc(x, y, Math.max(1, electron.size), 0, Math.PI * 2); // Ensure size is at least 1
+            for (let k = 0; k < o.trail.length; k++) {
+                const p = o.trail[k];
+                if (k === 0) orbiterCtx.moveTo(p.x, p.y);
+                else orbiterCtx.lineTo(p.x, p.y);
+            }
+            // Soft, monochrome glow with slight variation per orbiter
+            const alpha = 0.12 + i * 0.03;
+            orbiterCtx.strokeStyle = `rgba(255, 255, 255, ${alpha})`;
+            orbiterCtx.stroke();
+
+            // Small dot
+            orbiterCtx.beginPath();
+            orbiterCtx.fillStyle = 'rgba(255,255,255,0.7)';
+            orbiterCtx.arc(x, y, o.size, 0, Math.PI * 2);
             orbiterCtx.fill();
         });
 
-        // Loop the animation
-        requestAnimationFrame(animateOrbiterCanvas);
+        t += 0.03; // speed
+        requestAnimationFrame(draw);
     }
 
-    // Resize handler
     window.addEventListener('resize', () => {
         canvasWidth = window.innerWidth;
         canvasHeight = window.innerHeight;
@@ -300,9 +282,7 @@ if (orbiterCanvas) {
         orbiterCanvas.height = canvasHeight;
     });
 
-    // Start the animation
-    animateOrbiterCanvas();
-
+    draw();
 } else {
-    console.error("Cursor orbiter canvas element (#cursor-orbiter-canvas) not found!");
+    // No-op if canvas is missing
 }

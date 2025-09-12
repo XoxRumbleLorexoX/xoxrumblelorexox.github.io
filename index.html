@@ -5,12 +5,12 @@
 
 
     <head>
-        
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content>
         <meta name="author" content>
+        <meta name="theme-color" content="#0b0e12">
 
         <title>X0xRumbleLorex0X's Portfolio</title>
 
@@ -19,7 +19,10 @@
 
         <!-- Custom CSS -->
         <link href="./css/stylish-portfolio.css" rel="stylesheet">
+        <link href="./css/theme-modern.css" rel="stylesheet">
         <link href="./css/flying-car.css" rel="stylesheet">
+        <link rel="icon" href="./img/logo.svg" type="image/svg+xml">
+        <link rel="mask-icon" href="./img/mask-icon.svg" color="#7C5CFF">
 
         <!-- Custom Fonts -->
         <link href="./font-awesome/css/font-awesome.min.css" rel="stylesheet"
@@ -37,36 +40,57 @@
 
 
     <body>
-
         <canvas id="cursor-orbiter-canvas"></canvas>
+        <!-- Site Logo -->
+        <a href="#top" class="site-logo" aria-label="Home">
+            <span class="site-logo__badge"><img src="./img/logo.svg" alt="Logo"></span>
+            <span class="site-logo__text">Portfolio</span>
+        </a>
 
-        <canvas id="particle-visualizer"></canvas>
+        
     
         <script src="js/jquery.js"></script>
         <script src="js/bootstrap.min.js"></script>
 
 
-        <!-- Header -->
+        <!-- Header / Modern Hero (no emojis) -->
         <header id="top" class="header">
-            <div class="text-vertical-center">
+            <div class="hero container">
+                <h1 class="hero-title">Shivadharshan Lingeswaran</h1>
+                <p class="hero-sub">Software & Hardware Engineer · Researcher · Entrepreneur · Physicist · Artist</p>
 
-                <h1 class="shaded-text">Shivadharshan Lingeswaran</h1>
-                <h2></h2>
+                <div class="hero-badges">
+                    <span class="chip">Vegan</span>
+                    <span class="chip">Developer</span>
+                    <span class="chip">Musician</span>
+                    <span class="chip">Scientist</span>
+                    <span class="chip">Activist</span>
+                    <span class="chip">Founder</span>
+                    <span class="chip">Software Engineer</span>
+                    <span class="chip">Hardware Engineer</span>
+                </div>
 
-                <h2 class="shaded-text">My Sobriquet - Shan</h2>
-                <h2></h2>
-                <h3
-                    class="shaded-text">💯Vegan🌹Developer👾Musician🎶Entrepreneur📈Scientist🔬Artist🎨Activist🏆Researcher🧪Founder✒️Physicist👨‍🔬
-                    Software Engineer🛠 Hardware Engineer🔧</h3>
-                <h3> </h3>
-                <h3 class="shaded-text"> 🌍 :
-                    🇬🇧 English | 🇱🇰 தமிழ் | 🇺🇦 Українська | 🇮🇳 हिन्दी |
-                    🇸🇪 Svenska | 🇨🇳 中文 :🌍 </h3>
-                <h3></h3>
-                <i class="shaded-text">‘An action is innumerable words.’</i>
-                <br>
-                <br>
-                <a href="#about" class="btn btn-dark btn-lg">Find Out More</a>
+                <p class="hero-text">I’m an easy-going, collaborative problem solver with strong research and communication skills. I organize my time effectively, pursue continuous learning, and enjoy building at the intersection of science, engineering, and art. Driven by curiosity and a respect for truth, I design, tinker, and ship.</p>
+
+                <div class="hero-meta">
+                    <div class="meta-block">
+                        <div class="meta-label">Languages</div>
+                        <div class="meta-list">
+                            <span class="chip">English</span>
+                            <span class="chip">தமிழ் (Tamil)</span>
+                            <span class="chip">Українська (Ukrainian)</span>
+                            <span class="chip">हिन्दी (Hindi)</span>
+                            <span class="chip">中文 (Chinese)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hero-cta">
+                    <a href="#skills" class="btn btn-light">View Skills</a>
+                    <a href="#services" class="btn btn-dark">Explore Links</a>
+                </div>
+
+                <div class="hero-quote">“An action is innumerable words.”</div>
             </div>
         </header>
 
@@ -123,7 +147,6 @@
 
 
         <section>
-        <title>Programming Languages & Skills</title>
         <style>    
                 /* Improved Shaded Bounding Box */
         .content-box {
@@ -132,23 +155,25 @@
             border-radius: 15px;
             color: white; /* White text for contrast */
             max-width: 900px;
-            margin: auto;
+            margin: 2rem auto; /* breathing room */
             backdrop-filter: blur(1px); /* Increased blur effect */
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.7); /* Stronger shadow for better emphasis */
+            position: relative; /* make z-index effective */
             z-index: 10; /* Ensures it's above other elements */
         }
 
         /* Center Section Content */
-        #about {
+        #skills {
             display: flex;
             align-items: center;
             justify-content: center;
-            height: 100vh;
+            min-height: 100vh; /* allow content to grow */
             width: 100vw;
             background-image: url('/img/5unsplash.jpg');
             background-size: cover;
             background-position: center;
             position: relative;
+            padding: 60px 0; /* avoid edge collisions */
         }
 
         /* Improved Progress Bars - More contrast */
@@ -163,10 +188,8 @@
             border-radius: 10px;
         }
                 </style>
-            </head>
-            <body>
-            
-                <section id="about" class="about">
+
+                <section id="skills" class="about">
                     <div class="container">
                         <div class="row">
                             <div class="col-lg-12 text-center">
@@ -240,27 +263,83 @@
                         </div>
                     </div>
                 </section>
-            
-            
-
-    
-                        </div> <!-- End of Shaded Box -->
-    
-                    </div>
-                </div>
-            </div>
-        </section>
     
         <!-- <section>
             <h1 class="shaded-text">Independent Projects</h1>
             <h3 class="shaded-text">I build innovative independent projects blending software and hardware, from smart vehicle security to AI-powered automation, Raspberry Pi builds, and beyond. 🚀</h3>
         </section> -->
 
-        <section>
-            <iframe src="https://gamma.app/embed/vzega0bzgpxx8ik"
-                style="width: 100vw; max-width: 100%; height: 100vh; overflow: auto;"
-                allow="fullscreen"
-                title="AR Functionality - Object Tags"></iframe>
+        <section class="about pdf-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <h1 class="shaded-text">AR Functionality – Object Tags</h1>
+                        <div class="pdf-deck" data-src="./AR-Functionality-Object-Tags.pdf"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3D Model Viewer -->
+        <section id="model-viewer-section" class="about" style="width: 100vw; max-width: 100%; min-height: 70vh; background: #0b0b0b; display:flex; align-items:center;">
+            <div class="container" style="max-width: 1200px; width: 100%;">
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <h1 class="shaded-text">3D Model Viewer</h1>
+                        <p class="shaded-text">Interact with a 3D model. Drag to rotate, scroll to zoom.</p>
+                        <div id="model-viewer" style="width:100%; height:60vh; border-radius: 8px; overflow: hidden; background:#111;"></div>
+                        <div style="margin-top: 10px; display:flex; gap:8px; justify-content:center; flex-wrap:wrap;">
+                            <label for="model-select" class="shaded-text" style="padding:6px 10px; border-radius:8px;">Model:</label>
+                            <select id="model-select" class="btn btn-light" style="min-width:220px;">
+                                <option value="proc:icosahedron" selected>Icosahedron (procedural)</option>
+                                <option value="proc:octahedron">Octahedron (procedural)</option>
+                                <option value="proc:tetrahedron">Tetrahedron (procedural)</option>
+                                <option value="proc:torusKnot">Torus Knot (procedural)</option>
+                                <option value="./model.obj">Original model.obj</option>
+                                <option value="./models/icosahedron.obj">Icosahedron (OBJ)</option>
+                                <option value="./models/octahedron.obj">Octahedron (OBJ)</option>
+                                <option value="./models/tetrahedron.obj">Tetrahedron (OBJ)</option>
+                            </select>
+                            <button id="toggle-wireframe" class="btn btn-light">Toggle Wireframe</button>
+                            <button id="recenter-model" class="btn btn-light">Recenter</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Medium posts (preloaded from local cache) -->
+        <section id="medium" class="about" style="width: 100vw; max-width:100%; background:#0e131a;">
+            <div class="container" id="medium-section" data-username="X0xRumbleLorex0X" style="max-width: 1100px;">
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <h1 class="shaded-text">Writing on Medium</h1>
+                        <p class="shaded-text">Preloaded from a local cache for speed. Click to read on Medium.</p>
+                        <script id="medium-cache" type="application/json">[
+  {
+    "title": "Sample: Building a Minimal Sorting Visualizer",
+    "link": "https://medium.com/@X0xRumbleLorex0X",
+    "pubDate": "2025-01-01T00:00:00Z",
+    "description": "A quick walkthrough of building a sorting visualizer in JS with canvas, focusing on UX and performance."
+  },
+  {
+    "title": "Sample: Rendering OBJ in Three.js",
+    "link": "https://medium.com/@X0xRumbleLorex0X",
+    "pubDate": "2025-01-02T00:00:00Z",
+    "description": "Loading and normalizing OBJ models, adding OrbitControls, lighting, and wireframe toggles."
+  },
+  {
+    "title": "Sample: Subtle Cursor Effects without Distraction",
+    "link": "https://medium.com/@X0xRumbleLorex0X",
+    "pubDate": "2025-01-03T00:00:00Z",
+    "description": "Designing tiny, tasteful cursor trails using Lissajous paths to stay elegant and performant."
+  }
+]</script>
+                        <div id="medium-status" class="shaded-text" style="margin:10px auto; max-width:720px;"></div>
+                        <div id="medium-posts" class="row" style="display:flex; gap:16px; justify-content:center; flex-wrap:wrap;"></div>
+                    </div>
+                </div>
+            </div>
         </section>
 
         <section id="about" class="about"
@@ -294,10 +373,16 @@
             <!-- /.container -->
         </section>
 
-        <iframe src="https://gamma.app/embed/4zbevxh3pfjdx7h"
-            style="width: 100vw; max-width: 100%; height: 100vh; overflow: auto;"
-            allow="fullscreen"
-            title="Revolutionizing Road Building with Sunlight and Plastics"></iframe>
+        <section class="about pdf-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <h1 class="shaded-text">Revolutionizing Road Building with Sunlight and Plastics</h1>
+                        <div class="pdf-deck" data-src="./Revolutionizing-Road-Building-with-Sunlight-and-Plastics.pdf"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
         <section id="about" class="about"
             style="width: 100vw; max-width: 100%; height: 100vh; background-image: url('/img/3unsplash.jpg'); background-size: cover; background-position: center;">
@@ -332,10 +417,16 @@
             <!-- /.container -->
         </section>
 
-        <iframe src="https://gamma.app/embed/tu0y3nwwwx9j9jc"
-            style="width: 100vw; max-width: 100%; height: 100vh"
-            allow="fullscreen"
-            title="Vertical Farming for a Sustainable Future"></iframe>
+        <section class="about pdf-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <h1 class="shaded-text">Vertical Farming for a Sustainable Future</h1>
+                        <div class="pdf-deck" data-src="./Vertical-Farming-for-a-Sustainable-Future.pdf"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
         <section id="about" class="about"
             style="width: 100vw; max-width: 100%; height: 100vh; background-image: url('/img/4unsplash.jpg'); background-size: cover; background-position: center;">
             <div class="container">
@@ -410,10 +501,16 @@
             <!-- /.container -->
         </section>
 
-        <iframe src="https://gamma.app/embed/53i90y6kjp64r33"
-            style="width: 100vw; max-width: 100%; height: 100vh"
-            allow="fullscreen"
-            title="The Future is Here: Interactive Holograms"></iframe>
+        <section class="about pdf-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <h1 class="shaded-text">The Future is Here: Interactive Holograms</h1>
+                        <div class="pdf-deck" data-src="./The-Future-is-Here-Interactive-Holograms.pdf"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
         <section id="flying-car" class="flying-car-section about">
             <div class="container">
@@ -519,15 +616,20 @@
                 </ul>
             </nav>
 
-            <head>
-                <style>
-            .center-text {
-            text-align: center;
-            }
-            </style>
-            </head>
-
             <canvas class="canvas"></canvas>
+
+            <!-- Landing Event Section -->
+            <section id="landing-event" class="about" style="width: 100vw; max-width: 100%;">
+                <canvas id="landing-canvas"></canvas>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12 text-center">
+                            <h1 class="landing-title">I Like Your Landing!</h1>
+                            <p class="landing-sub">Scroll and move your cursor here — the ripple reacts to both.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
             <script
                 src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"
                 integrity="sha512-16esztaSRplJROstbIIdwX3N97V1+pZvV33ABoG1H2OyTttBxEGkTsoIVsiP1iaTtM8b3+hu2kB6pQ4Clr5yug=="
@@ -542,97 +644,26 @@
             <div id="contact" class="footer">
                 <div class="row">
                     <div class="col-lg-10 col-lg-offset-1 text-center">
-                        <h4><strong>By Shivadharshan (Shan)
-                                Lingeswaran</strong></h4>
-                        <h4><strong>By Shivadharshan (Shan)
-                                Lingeswaran</strong></h4>
-                        <h4><strong>By Shivadharshan (Shan)
-                                Lingeswaran</strong></h4>
-                        <h4><strong>By Shivadharshan (Shan)
-                                Lingeswaran</strong></h4>
-                        <h4><strong>By Shivadharshan (Shan)
-                                Lingeswaran</strong></h4>
-                        <h4><strong>By Shivadharshan (Shan)
-                                Lingeswaran</strong></h4>
-                        <h4><strong>By Shivadharshan (Shan)
-                                Lingeswaran</strong></h4>
-                        <h4><strong>By Shivadharshan (Shan)
-                                Lingeswaran</strong></h4>
-                        <h4><strong>By Shivadharshan (Shan)
-                                Lingeswaran</strong></h4>
-                        <h4><strong>By Shivadharshan (Shan)
-                                Lingeswaran</strong></h4>
-                        <h4><strong>By Shivadharshan (Shan)
-                                Lingeswaran</strong></h4>
-                        <h4><strong>By Shivadharshan (Shan)
-                                Lingeswaran</strong></h4>
-                        <h4><strong>By Shivadharshan (Shan)
-                                Lingeswaran</strong></h4>
-                        <h4><strong>By Shivadharshan (Shan)
-                                Lingeswaran</strong></h4>
-                        <h4><strong>By Shivadharshan (Shan)
-                                Lingeswaran</strong></h4>
-                        <h4><strong>By Shivadharshan (Shan)
-                                Lingeswaran</strong></h4>
-                        <h4><strong>By Shivadharshan (Shan)
-                                Lingeswaran</strong></h4>
-                        <h4><strong>By Shivadharshan (Shan)
-                                Lingeswaran</strong></h4>
-                        <h4><strong>By Shivadharshan (Shan)
-                                Lingeswaran</strong></h4>
-                        <h4><strong>By Shivadharshan (Shan)
-                                Lingeswaran</strong></h4>
-                        <h4><strong>By Shivadharshan (Shan)
-                                Lingeswaran</strong></h4>
-                        <h4><strong>By Shivadharshan (Shan)
-                                Lingeswaran</strong></h4>
-                        <h4><strong>By Shivadharshan (Shan)
-                                Lingeswaran</strong></h4>
-                        <h4><strong>By Shivadharshan (Shan)
-                                Lingeswaran</strong></h4>
-                        <h4><strong>By Shivadharshan (Shan)
-                                Lingeswaran</strong></h4>
-                        <h4><strong>By Shivadharshan (Shan)
-                                Lingeswaran</strong></h4>
-                        <h4><strong>By Shivadharshan (Shan)
-                                Lingeswaran</strong></h4>
-                        <h4><strong>By Shivadharshan (Shan)
-                                Lingeswaran</strong></h4>
-                        <h4><strong>By Shivadharshan (Shan)
-                                Lingeswaran</strong></h4>
-                        <h4><strong>By Shivadharshan (Shan)
-                                Lingeswaran</strong></h4>
-                        <h4><strong>By Shivadharshan (Shan)
-                                Lingeswaran</strong></h4>
-                        <h4><strong>By Shivadharshan (Shan)
-                                Lingeswaran</strong></h4>
-                        <h4><strong>By Shivadharshan (Shan)
-                                Lingeswaran</strong></h4>
-                        <h4><strong>By Shivadharshan (Shan)
-                                Lingeswaran</strong></h4>
-                        <h4><strong>By Shivadharshan (Shan)
-                                Lingeswaran</strong></h4>
-                        <h4><strong>By Shivadharshan (Shan)
-                                Lingeswaran</strong></h4>
-                        <h4><strong>By Shivadharshan (Shan)
-                                Lingeswaran</strong></h4>
-                        <h4><strong>By Shivadharshan (Shan)
-                                Lingeswaran</strong></h4>
-                        <h4><strong>By Shivadharshan (Shan)
-                                Lingeswaran</strong></h4>
-                        <h4><strong>By Shivadharshan (Shan)
-                                Lingeswaran</strong></h4>
-                        <h4><strong>By Shivadharshan (Shan)
-                                Lingeswaran</strong></h4>
+                        <h3 class="shaded-text"><strong>Shivadharshan (Shan) Lingeswaran</strong></h3>
+
+
+
+
+
+
+
+
+
+
+
 
                         <ul class="list-unstyled">
                             <li><i class="fa fa-envelope-o fa-fw"></i> <a
                                     href="mailto:shan.lingeswaran@outlook.com">shan.lingeswaran@outlook.com</a>
                             </li>
                         </ul>
-                        <br>
                         <hr class="small">
-                        <p class="text-muted">Copyright &copy;2023</p>
+                        <p class="text-muted">&copy; 2023–2025 All rights reserved.</p>
                     </div>
                 </div>
             </div>
@@ -683,8 +714,16 @@
         </footer>
 
         <script src="js/stylish-portfolio.js"></script>
-        <script src="js/particles.js"></script>
+        
         <script src="js/flying-car.js"></script>
+        <!-- Three.js and loaders for Model Viewer -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r155/three.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r155/examples/js/controls/OrbitControls.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r155/examples/js/loaders/OBJLoader.min.js"></script>
+        <script src="js/model-viewer.js"></script>
+        <script src="js/pdf-deck.js"></script>
+        <script src="js/medium.js"></script>
+        <script src="js/landing-event.js"></script>
         <script src="js/app.js"></script>
         </body>
         </html>
