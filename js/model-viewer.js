@@ -113,11 +113,7 @@
         // loaded
       },
       undefined,
-      (err) => {
-        console.error('Failed to load', path, err);
-        // load fallback procedural
-        loadProcedural('icosahedron');
-      }
+      (err) => { console.error('Failed to load', path, err); loadProcedural('icosahedron'); }
     );
   }
 
@@ -361,12 +357,16 @@
       object.traverse((child)=>{ if (child.isMesh){ if (child.geometry && child.geometry.isBufferGeometry && !child.geometry.attributes.normal){ child.geometry.computeVertexNormals(); }
         if (!child.material || !child.material.isMeshStandardMaterial){ child.material = new THREE.MeshStandardMaterial({ color: 0xb0c4de, metalness: 0.15, roughness: 0.6, side: THREE.DoubleSide }); } else { child.material.side = THREE.DoubleSide; } } });
     }
+  // (No embedded OBJs; external OBJ fallback removed.)
     function setWireframe(enabled){ root.traverse((c)=>{ if (c.isMesh && c.material){ if (Array.isArray(c.material)) c.material.forEach(m=>m.wireframe=enabled); else c.material.wireframe=enabled; } }); }
 
     function render(){ controls.update(); renderer.render(scene,camera); requestAnimationFrame(render); }
     render();
 
-    function loadOBJ(path){ root.clear(); const loader = new THREE.OBJLoader(); loader.load(path, (obj)=>{ applyBasicMaterial(obj); centerAndScale(obj); root.add(obj); }, undefined, ()=>{} ); }
+    function loadOBJ(path){
+      root.clear(); const loader = new THREE.OBJLoader();
+      loader.load(path, (obj)=>{ applyBasicMaterial(obj); centerAndScale(obj); root.add(obj); }, undefined, ()=>{} );
+    }
     function loadProcedural(kind){ root.clear(); let geo; if (kind==='octahedron') geo = new THREE.OctahedronGeometry(0.85,0); else if (kind==='tetrahedron') geo = new THREE.TetrahedronGeometry(0.95,0); else if (kind==='torusKnot') geo = new THREE.TorusKnotGeometry(0.6, 0.22, 220, 20, 2, 3); else geo = new THREE.IcosahedronGeometry(0.8,0); const mat = new THREE.MeshStandardMaterial({ color:0xb0c4de, metalness:0.3, roughness:0.45 }); root.add(new THREE.Mesh(geo,mat)); controls.target.set(0,0,0); }
 
     if (value && !value.startsWith('proc:')) loadOBJ(value); else loadProcedural('icosahedron');
