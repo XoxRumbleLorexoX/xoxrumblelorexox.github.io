@@ -115,18 +115,3 @@ header.header::before { content: ""; position: absolute; inset: 0; background: l
 #skills-close { position: absolute; top: 18px; right: 22px; background: rgba(255,255,255,0.1); color: #fff; border: 1px solid var(--border); border-radius: 10px; padding: 6px 10px; font-size: 22px; line-height: 1; cursor: pointer; z-index: 9999; }
 #skills-close:hover { background: rgba(255,255,255,0.2); }
 #skills-tooltip { position: absolute; padding: 6px 10px; border-radius: 8px; background: rgba(20,24,28,0.85); color: var(--text); border: 1px solid var(--border); pointer-events: none; transform: translate(-50%, -130%); white-space: nowrap; font-size: 13px; opacity: 0; transition: opacity .12s ease; z-index: 9999; }
-
-/* TinnyLlama (CV assistant) */
-#tinnyllama { position: fixed; right: 16px; bottom: 16px; z-index: 10050; }
-#tl-toggle { background: linear-gradient(135deg, #171b22, #0f1217); color: #e6e9ef; border: 1px solid var(--border); border-radius: 999px; padding: 10px 14px; box-shadow: 0 8px 20px rgba(0,0,0,0.35); }
-#tl-panel { position: fixed; right: 16px; bottom: 72px; width: min(560px, 92vw); max-height: 70vh; display: none; background: rgba(20,24,28,0.92); border: 1px solid var(--border); border-radius: 14px; backdrop-filter: blur(4px); box-shadow: 0 18px 36px rgba(0,0,0,0.45); }
-#tl-panel.active { display: flex; flex-direction: column; }
-.tl-header { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-bottom: 1px solid var(--border); }
-.tl-header .tl-sub { color: var(--muted); font-size: 12px; margin-left: auto; }
-#tl-close { margin-left: 8px; background: transparent; color: #e6e9ef; border: 1px solid var(--border); border-radius: 8px; padding: 4px 8px; }
-.tl-messages { padding: 10px 12px; overflow: auto; flex: 1; display: grid; gap: 8px; }
-.tl-msg { background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-radius: 10px; padding: 8px 10px; color: var(--text); }
-.tl-msg.user { background: rgba(124,92,255,0.12); }
-.tl-input { display: flex; gap: 8px; padding: 10px 12px; border-top: 1px solid var(--border); }
-#tl-q { flex: 1; border-radius: 8px; border: 1px solid var(--border); background: rgba(0,0,0,0.35); color: var(--text); padding: 8px 10px; }
-#tl-send { border-radius: 8px; border: 1px solid var(--border); background: linear-gradient(135deg, #171b22, #0f1217); color: var(--text); padding: 8px 12px; }
