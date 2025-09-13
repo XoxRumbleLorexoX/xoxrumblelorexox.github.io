@@ -108,10 +108,12 @@ h1,h2,h3 { color: var(--text); letter-spacing: 0.2px; }
 .hero-badges { display: flex; gap: 8px; flex-wrap: wrap; margin: 10px auto 18px; justify-content: center; }
 .chip { display: inline-block; padding: 6px 10px; border-radius: 999px; background: rgba(0,0,0,0.35); border: 1px solid rgba(255,255,255,0.16); color: var(--text); font-size: 13px; backdrop-filter: blur(4px); }
 .hero-meta { margin: 10px 0 20px; }
-.meta-label { font-weight: 700; color: var(--text); margin-bottom: 6px; }
+.meta-label { font-weight: 800; color: #fff; margin-bottom: 6px; text-shadow: 0 2px 8px rgba(0,0,0,0.55); letter-spacing: 0.2px; }
 .meta-list { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
 .hero-cta { display: flex; gap: 10px; margin-top: 10px; justify-content: center; }
-.hero-quote { margin-top: 20px; color: var(--muted); font-style: italic; }
+.hero-quote { margin-top: 16px; color: #fff; font-style: italic; font-weight: 700; font-size: 18px; line-height: 1.6; text-shadow: 0 3px 12px rgba(0,0,0,0.75), 0 0 1px rgba(255,255,255,0.4); max-width: 1100px; margin-left: auto; margin-right: auto; padding: 0 10px; }
+@media (min-width: 768px){ .hero-quote { font-size: 19px; } }
+@media (min-width: 1200px){ .hero-quote { font-size: 20px; } }
 
 /* Header readability overlay */
 header.header { position: relative; }

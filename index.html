@@ -58,7 +58,7 @@
         <!-- Header / Modern Hero (no emojis) -->
         <header id="top" class="header">
                 <div class="hero container">
-                    <h1 class="hero-title">Shivadharshan Lingeswaran</h1>
+                <h1 class="hero-title">Shivadharshan Shan Lingeswaran</h1>
                     <p class="hero-sub">Software & Hardware Engineer · Researcher · Entrepreneur · Physicist · Artist</p>
 
                 <div class="hero-badges">
@@ -180,8 +180,8 @@
             margin: 2rem auto; /* breathing room */
             backdrop-filter: blur(1px); /* Increased blur effect */
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.7); /* Stronger shadow for better emphasis */
-            position: relative; /* make z-index effective */
-            z-index: 10; /* Ensures it's above other elements */
+            position: relative; /* establish stacking only for its own children */
+            z-index: 1; /* Avoid overlapping into following sections on mobile */
         }
 
         /* Center Section Content */
