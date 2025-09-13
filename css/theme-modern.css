@@ -80,6 +80,15 @@ h1,h2,h3 { color: var(--text); letter-spacing: 0.2px; }
 .site-logo__text { color: var(--text); font-weight: 700; letter-spacing: .2px; display:none; }
 @media (min-width: 992px){ .site-logo__text{ display:inline; } }
 
+/* Hero contact block under quote */
+.hero-contact { display:flex; flex-direction: column; align-items: center; gap: 10px; margin-top: 8px; }
+.hero-contact__email { color: var(--text); opacity: 0.95; text-decoration: none; display: inline-flex; align-items: center; gap: 10px; background: rgba(20,24,28,0.6); border: 1px solid var(--border); padding: 6px 10px; border-radius: 10px; backdrop-filter: blur(6px); }
+.hero-contact__email i { opacity: 0.9; }
+@media (max-width: 767px){
+  .hero-contact__email span { display:none; }
+  .hero-contact__email { padding: 6px; }
+}
+
 /* PDF decks */
 .pdf-section .container { max-width: min(96vw, 1600px); }
 .pdf-deck { position: relative; width: 100%; margin: 20px auto 40px; }

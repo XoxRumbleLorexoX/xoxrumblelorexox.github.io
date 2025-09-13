@@ -65,10 +65,14 @@
           const pageNum = Number(holder.getAttribute('data-page'));
           pdf.getPage(pageNum).then((page) => {
             const viewport = page.getViewport({ scale: 1 });
-            const containerWidth = Math.max(holder.clientWidth, el.clientWidth, el.getBoundingClientRect().width, 960);
-            const maxWidth = Math.min(containerWidth, 1600);
+            // Use actual container width; avoid fixed desktop minimums
+            const rawWidth = Math.floor(
+              el.clientWidth || holder.clientWidth || el.getBoundingClientRect().width || window.innerWidth || viewport.width
+            );
+            // Clamp to reasonable bounds for mobile/desktop
+            const cssWidth = Math.max(280, Math.min(rawWidth, 1600));
             const dpr = Math.min(window.devicePixelRatio || 1, 2); // crisp but not too heavy
-            const scale = (maxWidth * dpr) / viewport.width;
+            const scale = (cssWidth * dpr) / viewport.width;
             const v = page.getViewport({ scale });
 
             const canvas = document.createElement('canvas');
@@ -77,8 +81,8 @@
             holder.appendChild(canvas);
             const ctx = canvas.getContext('2d');
             page.render({ canvasContext: ctx, viewport: v });
-            // Display size independent from render resolution
-            canvas.style.width = maxWidth + 'px';
+            // Let CSS control responsive layout; canvas scales with container
+            canvas.style.width = '100%';
             canvas.style.height = 'auto';
           });
         });
