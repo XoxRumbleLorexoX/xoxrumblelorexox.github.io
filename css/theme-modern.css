@@ -115,6 +115,11 @@ h1,h2,h3 { color: var(--text); letter-spacing: 0.2px; }
 @media (min-width: 768px){ .hero-quote { font-size: 19px; } }
 @media (min-width: 1200px){ .hero-quote { font-size: 20px; } }
 
+/* Extra vertical spacing between sections on smaller screens to avoid visual overlap */
+@media (max-width: 991px){
+  .pdf-section { margin-top: 64px; }
+}
+
 /* Header readability overlay */
 header.header { position: relative; }
 header.header::before { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(5,7,10,0.5), rgba(5,7,10,0.5)); pointer-events: none; }
