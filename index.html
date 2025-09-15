@@ -28,7 +28,7 @@
         <link href="./font-awesome/css/font-awesome.min.css" rel="stylesheet"
             type="text/css">
         <link
-            href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic"
+            href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic"
             rel="stylesheet" type="text/css">
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -158,6 +158,67 @@
                 <!-- /.row -->
             </div>
             <!-- /.container -->
+        </section>
+
+        <!-- Code Samples (Markdown) -->
+        <section id="code-samples" class="about">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <h1 class="shaded-text">Code Samples</h1>
+                        <p class="shaded-text">Written in Markdown and rendered client-side for easy editing.</p>
+                        <div id="samples-output" class="markdown-body content-box text-left"></div>
+                        <!-- Author-editable Markdown source -->
+                        <script type="text/markdown" id="samples-md">
+# Quick Demos
+
+Here are a few small snippets I’ve built or used recently. The section renders standard Markdown with fenced code blocks.
+
+## Python · Fibonacci
+
+```python
+def fib(n: int) -> list[int]:
+    a, b = 0, 1
+    out = []
+    while len(out) < n:
+        out.append(a)
+        a, b = b, a + b
+    return out
+
+print(fib(10))
+```
+
+## Bash · Find large files
+
+```bash
+du -ah . | sort -h | tail -n 20
+```
+
+## JavaScript · Debounce helper
+
+```js
+function debounce(fn, wait = 200){
+  let t;
+  return (...args) => {
+    clearTimeout(t);
+    t = setTimeout(() => fn.apply(null, args), wait);
+  };
+}
+```
+
+## SQL · Top customers by spend
+
+```sql
+SELECT customer_id, SUM(amount) AS total
+FROM payments
+GROUP BY customer_id
+ORDER BY total DESC
+LIMIT 10;
+```
+                        </script>
+                    </div>
+                </div>
+            </div>
         </section>
 
         <!-- Skills Overlay -->
@@ -769,6 +830,16 @@
         </footer>
 
         <script src="js/stylish-portfolio.js"></script>
+        <script src="js/markdown.js"></script>
+        <script>
+            (function(){
+                var src = document.getElementById('samples-md');
+                var out = document.getElementById('samples-output');
+                if(src && out && window.renderMarkdown){
+                    out.innerHTML = window.renderMarkdown(src.textContent || src.innerText || '');
+                }
+            })();
+        </script>
         
         <script src="js/flying-car.js"></script>
         <!-- Three.js and loaders for Model Viewer -->

@@ -120,6 +120,28 @@ h1,h2,h3 { color: var(--text); letter-spacing: 0.2px; }
   .pdf-section { margin-top: 64px; }
 }
 
+/* Mobile-first adjustments */
+img { max-width: 100%; height: auto; }
+@media (max-width: 767px){
+  .hero { padding: 90px 14px 54px; }
+  .hero-title { font-size: 32px; }
+  .hero-sub { font-size: 16px; }
+  .hero-text { font-size: 15px; line-height: 1.5; }
+  section.about { padding: 54px 0; }
+  /* Override inline 100vh sections to prevent clipping on mobile */
+  section.about[style*="height: 100vh"] { height: auto !important; min-height: 100vh; }
+}
+
+/* Markdown rendering styles */
+.markdown-body { color: var(--text); line-height: 1.6; }
+.markdown-body h1, .markdown-body h2, .markdown-body h3 { margin: 0.6em 0 0.4em; }
+.markdown-body p { margin: 0.6em 0; }
+.markdown-body ul { margin: 0.6em 0 0.6em 1.2em; }
+.markdown-body code { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace; background: rgba(255,255,255,0.06); border: 1px solid var(--border); padding: 0.1em 0.35em; border-radius: 6px; }
+.markdown-body pre { background: rgba(0,0,0,0.55); border: 1px solid var(--border); border-radius: 12px; padding: 12px 14px; overflow: auto; box-shadow: 0 10px 24px rgba(0,0,0,0.35); }
+.markdown-body pre code { background: transparent; border: 0; padding: 0; display: block; white-space: pre; font-size: 13px; line-height: 1.45; }
+@media (max-width: 767px){ .markdown-body pre code { font-size: 12px; } }
+
 /* Header readability overlay */
 header.header { position: relative; }
 header.header::before { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(5,7,10,0.5), rgba(5,7,10,0.5)); pointer-events: none; }
