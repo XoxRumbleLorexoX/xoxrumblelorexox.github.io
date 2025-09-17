@@ -12,6 +12,7 @@
 /* ======================================== */
 /* Canvas / Z-index / Blend Mode Styles     */
 /* ======================================== */
+html, body { overflow-x: hidden; }
 
 /* --- Orbiter Canvas (TOPMOST) --- */
 #cursor-orbiter-canvas {
@@ -78,23 +79,70 @@ html, body { position: relative; z-index: 0; }
     position: relative;
     z-index: 3; /* Above text background, below particles */
 }
-#menu-toggle {
-    z-index: 1001; /* Above sidebar */
+
+/* Burger: always top-right, safe-area aware, on top */
+#menu-toggle, .menu-toggle-btn {
+  position: fixed !important;
+  top: max(12px, env(safe-area-inset-top));
+  right: max(12px, env(safe-area-inset-right));
+  left: auto !important; bottom: auto !important;
+
+  width: 48px; height: 48px; min-width: 48px; min-height: 48px;
+  z-index: 2147483600 !important;
+  pointer-events: auto; touch-action: manipulation;
+  mix-blend-mode: normal !important; filter: none !important;
+
+  /* ensure GPU layer without offsetting position on iOS */
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
 }
-#sidebar-wrapper {
-    z-index: 1000; /* Below toggle button */
+:root[dir="rtl"] #menu-toggle,
+:root[dir="rtl"] .menu-toggle-btn {
+  right: auto !important;
+  left: max(12px, env(safe-area-inset-left)) !important;
+}
+@media (max-width: 360px) {
+  #menu-toggle, .menu-toggle-btn {
+    top: max(10px, env(safe-area-inset-top));
+    right: max(10px, env(safe-area-inset-right));
+  }
 }
 
-/* Force hamburger and brand icons above all hero overlays */
-#menu-toggle, .menu-toggle-btn {
-    position: fixed !important;
-    top: 16px;
-    right: 16px;
-    z-index: 2147483000 !important; /* near max */
-    mix-blend-mode: normal !important;
-    filter: none !important;
-    pointer-events: auto;
+/* Overlay & sidebar below burger */
+#nav-overlay { position:fixed; inset:0; background:rgba(0,0,0,.5);
+  opacity:0; pointer-events:none; transition:opacity 180ms ease;
+  z-index:2147482000 !important; }
+body.nav-open #nav-overlay { opacity:1; pointer-events:auto; }
+
+#sidebar-wrapper {
+  position: fixed;
+  top: 0;
+  right: -250px;      /* hidden by default */
+  width: 250px;
+  height: 100vh;
+  overflow-y: auto;
+  background: #111;
+  transition: right .3s ease-in-out;
+  z-index: 2147482000 !important;
 }
+#sidebar-wrapper.active { right: 0; }
+
+
+/* Canvases/UI layering: keep canvases under UI */
+#cursor-orbiter-canvas,
+#particle-visualizer,
+header canvas,
+header [id$="canvas"] {
+  z-index: 1 !important;
+  pointer-events: none;
+}
+
+/* Ensure content establishes stacking context below UI */
+header, section, footer {
+  position: relative;
+  z-index: 1;
+}
+
 header .menu-toggle-btn svg rect { fill: #ffffff; }
 
 /* Left brand/profile icon block: try common selectors */
@@ -108,8 +156,21 @@ header .hero-brand, header .hero-brand *, header .portfolio-icon, header .portfo
 
 /* Keep hero canvases below icons */
 header canvas, header [id$='canvas'] {
-    z-index: 10 !important; /* icons are higher */
+    z-index: 1 !important; /* keep canvases below UI */
 }
+#cursor-orbiter-canvas { z-index: 1 !important; }
+
+/* Increase hit area and resilience */
+.menu-toggle-btn {
+    width: 48px;
+    height: 48px;
+    min-width: 48px;
+    min-height: 48px;
+}
+@media (max-width: 360px) {
+  .menu-toggle-btn { right: max(12px, env(safe-area-inset-right)); top: max(12px, env(safe-area-inset-top)); }
+}
+:root[dir="rtl"] .menu-toggle-btn { left: max(12px, env(safe-area-inset-left)); right: auto; }
 
 /* Center human languages row in hero */
 header .meta-block--languages { display:flex; flex-direction:column; align-items:center; width:100%; }
@@ -117,15 +178,32 @@ header .meta-block--languages .meta-label { width:auto; text-align:center; margi
 header .meta-block--languages .lang-meter { display:flex; justify-content:center; align-items:center; flex-wrap:wrap; gap:10px; margin:0 auto; padding:0; max-width:100%; }
 header .meta-block--languages .lang-meter__item { float: none; }
 
+/* Nav overlay and scroll lock */
+body.nav-open { overflow: hidden; }
+#nav-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 180ms ease;
+    z-index: 2147482000; /* below burger (2147483600) */
+}
+body.nav-open #nav-overlay { opacity: 1; pointer-events: auto; }
+
+
 
 /* ======================================== */
 /* Rest of your stylish-portfolio.css styles */
 /* ======================================== */
 
+:root { --page-max: 1100px; }
+
 html, body {
     width: 100%;
     height: 100%;
     font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background: #0e131a; /* harmonize background to avoid dark gutters */
 }
 
 /* Footer background styling */
@@ -283,23 +361,7 @@ hr.small {
     max-width: 100px;
 }
 
-/* Side Menu */
 
-#sidebar-wrapper {
-    z-index: 1000;
-    position: fixed;
-    right: 0;
-    width: 250px;
-    height: 100%;
-    margin-right: -250px;
-    overflow-y: auto;
-    background: #222;
-    -webkit-transition: all 0.4s ease 0s;
-    -moz-transition: all 0.4s ease 0s;
-    -ms-transition: all 0.4s ease 0s;
-    -o-transition: all 0.4s ease 0s;
-    transition: all 0.4s ease 0s;
-}
 
 .sidebar-nav {
     position: absolute;
@@ -347,35 +409,9 @@ hr.small {
     background: none;
 }
 
-#menu-toggle {
-    z-index: 1;
-    position: fixed;
-    top: 0;
-    right: 0;
-}
-
-/* Default menu state - hidden off screen */
-#sidebar-wrapper {
-    position: fixed;
-    top: 0;
-    right: -250px; /* Moves off-screen */
-    width: 250px;
-    height: 100vh;
-    background-color: #111;
-    transition: right 0.3s ease-in-out; /* Smooth animation */
-    z-index: 1000;
-}
 
 
-#sidebar-wrapper.active {
-    right: 250px;
-    width: 250px;
-    -webkit-transition: all 0.4s ease 0s;
-    -moz-transition: all 0.4s ease 0s;
-    -ms-transition: all 0.4s ease 0s;
-    -o-transition: all 0.4s ease 0s;
-    transition: all 0.4s ease 0s;
-}
+
 
 /* Optional labels and separators in sidebar */
 .sidebar-nav .nav-label { padding: 10px 20px; color: #aaa; text-transform: uppercase; font-size: 11px; letter-spacing: .08em; }

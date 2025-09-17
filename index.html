@@ -40,16 +40,16 @@
 
 
     <body>
-        
+        <a id="menu-toggle" class="btn btn-dark btn-lg menu-toggle-btn" href="#" aria-expanded="false">
+                <i class="fa fa-bars"></i>
+        </a>
 
         
 
         
     
-        <script src="js/jquery.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-        
 
+            
         <!-- Header / Modern Hero (no emojis) -->
         <header id="top" class="header">
                 <div class="hero container">
@@ -59,8 +59,7 @@
                 </div>
                 <canvas id="cursor-orbiter-canvas"></canvas>
                 <!-- Site Navigation -->
-                <a id="menu-toggle" href="#" class="btn btn-dark btn-lg toggle"><i class="fa fa-bars"></i></a>
-                <nav id="sidebar-wrapper" aria-label="Site navigation">
+                <nav id="sidebar-wrapper" aria-label="Site navigation" aria-hidden="true">
                     <a id="menu-close" href="#" class="btn btn-light btn-lg pull-right toggle" aria-label="Close menu"><i class="fa fa-times"></i></a>
                     <ul class="sidebar-nav">
                         <li><a href="#top">Home</a></li>
@@ -78,11 +77,16 @@
                         <li><a href="#contact">Contact</a></li>
                     </ul>
                 </nav>
+                <div id="nav-overlay" aria-hidden="true"></div>
                 <!-- Site Logo -->
                 <a href="#top" class="site-logo" aria-label="Home">
                     <span class="site-logo__badge"><img src="./img/logo.svg" alt="Logo"></span>
                     <span class="site-logo__text">Portfolio</span>
                 </a>
+                <!-- Navigation Button-->
+
+
+                <!-- Hero Content -->
                 <h1 class="hero-title">Shivadharshan Shan Lingeswaran</h1>
                     <p class="hero-sub">Software & Hardware Engineer · Researcher · Entrepreneur · Physicist · Artist</p>
 
@@ -786,16 +790,44 @@ LIMIT 10;
 
         <!-- Custom Theme JavaScript -->
         <script>
+            function setNavState(open) {
+                const $body = $('body');
+                const $sidebar = $('#sidebar-wrapper');
+                const $toggle = $('#menu-toggle');
+                $sidebar.toggleClass('active', open);
+                $body.toggleClass('nav-open', open);
+                $toggle.attr('aria-expanded', open ? 'true' : 'false');
+                $sidebar.attr('aria-hidden', open ? 'false' : 'true');
+                if (open) {
+                    const focusable = $sidebar.find('a, button, [tabindex]:not([tabindex="-1"])').filter(':visible');
+                    (focusable[0] || $sidebar).focus();
+                } else {
+                    $toggle.focus();
+                }
+            }
+
             // Close sidebar
-            $(document).on('click', '#menu-close', function(e){
-                e.preventDefault();
-                $("#sidebar-wrapper").removeClass("active");
-            });
+            $(document).on('click', '#menu-close', function(e){ e.preventDefault(); setNavState(false); });
+            $(document).on('click', '#nav-overlay', function(){ setNavState(false); });
+            $(document).on('keydown', function(e){ if(e.key === 'Escape') setNavState(false); });
 
             // Toggle sidebar
-            $(document).on('click', '#menu-toggle', function(e){
-                e.preventDefault();
-                $("#sidebar-wrapper").toggleClass("active");
+            $(document).on('click', '#menu-toggle', function(e){ e.preventDefault(); setNavState(!$('#sidebar-wrapper').hasClass('active')); });
+
+            // Close when clicking a nav link
+            $(document).on('click', '#sidebar-wrapper .sidebar-nav a', function(){ setNavState(false); });
+
+            // Basic focus trap
+            $(document).on('keydown', function(e){
+                const $sidebar = $('#sidebar-wrapper');
+                if(!$sidebar.hasClass('active')) return;
+                if(e.key !== 'Tab') return;
+                const focusable = $sidebar.find('a, button, [tabindex]:not([tabindex="-1"])').filter(':visible');
+                if(!focusable.length) return;
+                const first = focusable[0];
+                const last = focusable[focusable.length - 1];
+                if(e.shiftKey && document.activeElement === first){ e.preventDefault(); $(last).focus(); }
+                else if(!e.shiftKey && document.activeElement === last){ e.preventDefault(); $(first).focus(); }
             });
 
             // Scrolls to the selected menu item on the page
@@ -816,11 +848,11 @@ LIMIT 10;
             });
             
         </script>
-
+<!-- 
         <footer>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" ...></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" ...></script>
-        </footer>
+        </footer> -->
 
         <script src="js/stylish-portfolio.js"></script>
         <script src="js/markdown.js"></script>
@@ -833,6 +865,7 @@ LIMIT 10;
                 }
             })();
         </script>
+        
         
         <script src="js/flying-car.js"></script>
         <!-- Three.js and loaders for Model Viewer -->
@@ -848,5 +881,5 @@ LIMIT 10;
         <script src="js/quotes.js"></script>
         <script src="js/tiger-holo.js"></script>
 
-        </body>
-        </html>
+    </body>
+    </html>
