@@ -54,6 +54,9 @@ header, section, footer .footer /* Target the inner div for footer BG */ {
     z-index: 1;     /* Base level for content */
 }
 
+/* Ensure root establishes baseline stacking */
+html, body { position: relative; z-index: 0; }
+
 /* --- Text Elements (Above immediate backgrounds) --- */
 .shaded-text, .text-vertical-center h1, .text-vertical-center h2, .text-vertical-center h3, .text-vertical-center i, /* Be specific */
 .content-box h1, .content-box strong, .content-box span, /* Skills box text */
@@ -81,6 +84,38 @@ header, section, footer .footer /* Target the inner div for footer BG */ {
 #sidebar-wrapper {
     z-index: 1000; /* Below toggle button */
 }
+
+/* Force hamburger and brand icons above all hero overlays */
+#menu-toggle, .menu-toggle-btn {
+    position: fixed !important;
+    top: 16px;
+    right: 16px;
+    z-index: 2147483000 !important; /* near max */
+    mix-blend-mode: normal !important;
+    filter: none !important;
+    pointer-events: auto;
+}
+header .menu-toggle-btn svg rect { fill: #ffffff; }
+
+/* Left brand/profile icon block: try common selectors */
+header .hero-brand, header .hero-brand *, header .portfolio-icon, header .portfolio-icon * {
+    position: relative;
+    z-index: 2147483000 !important;
+    mix-blend-mode: normal !important;
+    pointer-events: auto;
+    color: #ffffff;
+}
+
+/* Keep hero canvases below icons */
+header canvas, header [id$='canvas'] {
+    z-index: 10 !important; /* icons are higher */
+}
+
+/* Center human languages row in hero */
+header .meta-block--languages { display:flex; flex-direction:column; align-items:center; width:100%; }
+header .meta-block--languages .meta-label { width:auto; text-align:center; margin-bottom:8px; }
+header .meta-block--languages .lang-meter { display:flex; justify-content:center; align-items:center; flex-wrap:wrap; gap:10px; margin:0 auto; padding:0; max-width:100%; }
+header .meta-block--languages .lang-meter__item { float: none; }
 
 
 /* ======================================== */
@@ -110,6 +145,18 @@ footer {
     position: relative; /* Stacking context */
     z-index: 1; /* Same level as header/section */
 }
+
+/* Human languages row with small fluency rings */
+.meta-block--languages .lang-meter { display:flex; gap:10px; overflow-x:auto; padding:4px 0 6px; margin:0; list-style:none; scrollbar-width:thin; scrollbar-color: rgba(102,179,255,0.8) transparent; }
+.meta-block--languages .lang-meter::-webkit-scrollbar { height: 6px; }
+.meta-block--languages .lang-meter::-webkit-scrollbar-track { background: transparent; }
+.meta-block--languages .lang-meter::-webkit-scrollbar-thumb { background: rgba(102,179,255,0.8); border-radius: 8px; }
+.meta-block--languages .lang-meter__item { flex:0 0 auto; display:inline-flex; align-items:center; gap:8px; height: 42px; padding: 0 14px; border-radius:999px; border:none; background: rgba(255,255,255,0.05); color:#e6f2ff; font-size:1.05rem; }
+.meta-block--languages .lang-meter__name { white-space: nowrap; }
+.meta-block--languages .lang-meter__ring { width: 18px; height: 18px; display:inline-block; position: relative; border-radius: 50%; background:
+    conic-gradient(var(--accent, #66b3ff) calc(var(--level) * 360deg), rgba(255,255,255,0.18) 0);
+}
+.meta-block--languages .lang-meter__ring::after { content:""; position:absolute; inset:3px; background: rgba(0,0,0,0.6); border-radius:50%; }
 
 
 /* ... other styles like .linktreelogo, .text-vertical-center, .btn, hr.small, .sidebar-nav etc. ... */
