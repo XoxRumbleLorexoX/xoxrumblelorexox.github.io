@@ -58,6 +58,26 @@
                   <canvas id="tiger-holo-canvas"></canvas>
                 </div>
                 <canvas id="cursor-orbiter-canvas"></canvas>
+                <!-- Site Navigation -->
+                <a id="menu-toggle" href="#" class="btn btn-dark btn-lg toggle"><i class="fa fa-bars"></i></a>
+                <nav id="sidebar-wrapper" aria-label="Site navigation">
+                    <a id="menu-close" href="#" class="btn btn-light btn-lg pull-right toggle" aria-label="Close menu"><i class="fa fa-times"></i></a>
+                    <ul class="sidebar-nav">
+                        <li><a href="#top">Home</a></li>
+                        <li><a href="#skills">Skills</a></li>
+                        <li><a href="#model-viewer-section">3D Model Viewer</a></li>
+                        <li><a href="#medium">Medium Posts</a></li>
+                        <li class="nav-sep"><hr></li>
+                        <li class="nav-label">PDF Decks</li>
+                        <li><a href="#pdf-ar-tags">AR Functionality – Object Tags</a></li>
+                        <li><a href="#pdf-road-building">Road Building: Sunlight & Plastics</a></li>
+                        <li><a href="#pdf-vertical-farming">Vertical Farming</a></li>
+                        <li><a href="#pdf-holograms">Interactive Holograms</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </nav>
                 <!-- Site Logo -->
                 <a href="#top" class="site-logo" aria-label="Home">
                     <span class="site-logo__badge"><img src="./img/logo.svg" alt="Logo"></span>
@@ -674,52 +694,6 @@ LIMIT 10;
         <footer>
             <!-- LiveReload Script -->
             <!-- <script src="http://localhost:35729/livereload.js"></script> -->
-            <!-- Navigation -->
-            <a id="menu-toggle" href="#" class="btn btn-dark btn-lg toggle"><i
-                    class="fa fa-bars"></i></a>
-            <nav id="sidebar-wrapper">
-                <ul class="sidebar-nav">
-                    <a id="menu-close" href="#"
-                        class="btn btn-light btn-lg pull-right toggle"><i
-                            class="fa fa-times"></i></a>
-
-                    <li>
-                        <a href="#top">Home</a>
-                    </li>
-                    <li>
-                        <a href="#skills">Skills</a>
-                    </li>
-                    <li>
-                        <a href="#model-viewer-section">3D Model Viewer</a>
-                    </li>
-                    <li>
-                        <a href="#medium">Medium Posts</a>
-                    </li>
-                    <li class="nav-sep"><hr></li>
-                    <li class="nav-label">PDF Decks</li>
-                    <li>
-                        <a href="#pdf-ar-tags">AR Functionality – Object Tags</a>
-                    </li>
-                    <li>
-                        <a href="#pdf-road-building">Road Building: Sunlight & Plastics</a>
-                    </li>
-                    <li>
-                        <a href="#pdf-vertical-farming">Vertical Farming</a>
-                    </li>
-                    <li>
-                        <a href="#pdf-holograms">Interactive Holograms</a>
-                    </li>
-                    <li>
-                        <a href="#about">About</a>
-                    </li>
-                    <li>
-                        <a href="#services">Services</a>
-                    </li>
-                    <li>
-                        <a href="#contact">Contact</a>
-                    </li>
-                </ul>
-            </nav>
 
             <!-- Landing Event Section -->
             <section id="landing-event" class="about" style="width: 100vw; max-width: 100%;">
@@ -812,14 +786,14 @@ LIMIT 10;
 
         <!-- Custom Theme JavaScript -->
         <script>
-            // Closes the sidebar menu
-            $("#menu-close").click(function(e) {
+            // Close sidebar
+            $(document).on('click', '#menu-close', function(e){
                 e.preventDefault();
-                $("#sidebar-wrapper").toggleClass("active");
+                $("#sidebar-wrapper").removeClass("active");
             });
 
-            // Opens the sidebar menu
-            $("#menu-toggle").click(function(e) {
+            // Toggle sidebar
+            $(document).on('click', '#menu-toggle', function(e){
                 e.preventDefault();
                 $("#sidebar-wrapper").toggleClass("active");
             });
