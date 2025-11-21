@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>1MW Compact Fusion Reactor - Interactive Model</title>
+    <style>
+        body { margin: 0; overflow: hidden; background-color: #050505; color: white; font-family: sans-serif; }
+        #info { position: absolute; top: 10px; width: 100%; text-align: center; pointer-events: none; z-index: 1; }
+        #controls { position: absolute; top: 50px; right: 10px; background: rgba(0,0,0,0.8); padding: 10px; border-radius: 8px; }
+        h1 { font-size: 1.2rem; margin: 0; color: #00ffff; text-shadow: 0 0 10px #00ffff; }
+        p { font-size: 0.8rem; color: #aaa; }
+    </style>
+</head>
+<body>
+    <div id="info">
+        <h1>1MW Compact FRC Fusion Engine</h1>
+        <p>Field Reversed Configuration | p-B11 Fuel | Direct Energy Conversion</p>
+    </div>
+    
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+                "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+            }
+        }
+    </script>
+
+    <script type="module">
+        import * as THREE from 'three';
+        import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+        import { GUI } from 'three/addons/libs/lil-gui.module.min.js';
+        import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
+        import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+        import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+
+        // --- SCENE SETUP ---
+        const scene = new THREE.Scene();
+        scene.fog = new THREE.FogExp2(0x000000, 0.02);
+
+        const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 100);
+        camera.position.set(2.5, 1.5, 2.5);
+
+        const renderer = new THREE.WebGLRenderer({ antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(window.devicePixelRatio);
+        renderer.toneMapping = THREE.ReinhardToneMapping;
+        document.body.appendChild(renderer.domElement);
+
+        const controls = new OrbitControls(camera, renderer.domElement);
+        controls.enableDamping = true;
+
+        // --- POST-PROCESSING (GLOW EFFECT) ---
+        const renderScene = new RenderPass(scene, camera);
+        const bloomPass = new UnrealBloomPass(new THREE.Vector2(window.innerWidth, window.innerHeight), 1.5, 0.4, 0.85);
+        bloomPass.threshold = 0;
+        bloomPass.strength = 1.2; 
+        bloomPass.radius = 0.5;
+
+        const composer = new EffectComposer(renderer);
+        composer.addPass(renderScene);
+        composer.addPass(bloomPass);
+
+        // --- GEOMETRY GENERATION ---
+
+        // 1. Vacuum Chamber (Quartz/Ceramic)
+        const chamberGeo = new THREE.CylinderGeometry(0.3, 0.3, 1.8, 32, 1, true);
+        const chamberMat = new THREE.MeshPhysicalMaterial({
+            color: 0xffffff, transparent: true, opacity: 0.15, 
+            roughness: 0.1, metalness: 0.1, side: THREE.DoubleSide,
+            transmission: 0.9
+        });
+        const chamber = new THREE.Mesh(chamberGeo, chamberMat);
+        chamber.rotation.x = Math.PI / 2; // Lay flat
+        scene.add(chamber);
+
+        // 2. ReBCO Magnets (Rings)
+        const magnets = [];
+        const magnetGeo = new THREE.CylinderGeometry(0.35, 0.35, 0.1, 32);
+        const magnetMat = new THREE.MeshStandardMaterial({ color: 0x333333, metalness: 0.8, roughness: 0.4 });
+        
+        for(let i = -4; i <= 4; i++) {
+            if (i === 0) continue; // Skip center for view
+            const ring = new THREE.Mesh(magnetGeo, magnetMat);
+            ring.rotation.x = Math.PI / 2;
+            ring.position.z = i * 0.2;
+            
+            // Add glowing rim to represent Superconducting Current
+            const rimGeo = new THREE.TorusGeometry(0.36, 0.01, 16, 100);
+            const rimMat = new THREE.MeshBasicMaterial({ color: 0x00aaff });
+            const rim = new THREE.Mesh(rimGeo, rimMat);
+            ring.add(rim);
+            
+            scene.add(ring);
+            magnets.push(rim); // Store rims to animate
+        }
+
+        // 3. Plasma Core (The FRC Plasmoid)
+        // We use two tapering ellipsoids merging
+        const plasmaGeo = new THREE.CapsuleGeometry(0.15, 0.8, 4, 16);
+        const plasmaMat = new THREE.MeshBasicMaterial({ 
+            color: 0xff00ff, 
+            transparent: true, 
+            opacity: 0.8,
+            blending: THREE.AdditiveBlending
+        });
+        const plasma = new THREE.Mesh(plasmaGeo, plasmaMat);
+        plasma.rotation.x = Math.PI / 2;
+        scene.add(plasma);
+
+        // Internal "Hot Spot"
+        const coreGeo = new THREE.CapsuleGeometry(0.08, 0.4, 4, 16);
+        const coreMat = new THREE.MeshBasicMaterial({ color: 0xffffff });
+        const core = new THREE.Mesh(coreGeo, coreMat);
+        plasma.add(core);
+
+        // 4. DEC Coils (Helical pickup)
+        const coilCurve = new THREE.CatmullRomCurve3([]);
+        for (let t = 0; t < 10 * Math.PI; t += 0.5) {
+            coilCurve.points.push(new THREE.Vector3(
+                0.28 * Math.cos(t), 
+                0.28 * Math.sin(t), 
+                (t / (10 * Math.PI)) * 1.6 - 0.8
+            ));
+        }
+        const coilGeo = new THREE.TubeGeometry(coilCurve, 100, 0.01, 8, false);
+        const coilMat = new THREE.MeshBasicMaterial({ color: 0xffaa00, wireframe: true });
+        const decCoil = new THREE.Mesh(coilGeo, coilMat);
+        decCoil.rotation.z = Math.PI / 2; // Align
+        // Fix orientation hack
+        const decGroup = new THREE.Group();
+        decGroup.add(decCoil);
+        decCoil.rotation.x = Math.PI / 2;
+        scene.add(decGroup);
+
+        // --- LIGHTING ---
+        const ambientLight = new THREE.AmbientLight(0x404040); // Soft white light
+        scene.add(ambientLight);
+        const pointLight = new THREE.PointLight(0xffffff, 1, 100);
+        pointLight.position.set(5, 5, 5);
+        scene.add(pointLight);
+        
+        // Plasma light source
+        const plasmaLight = new THREE.PointLight(0xff00ff, 2, 4);
+        plasma.add(plasmaLight);
+
+        // --- PARAMETERS & GUI ---
+        const params = {
+            plasmaStability: 1.0,
+            reactionRate: 0.5,
+            fieldStrength: 1.0,
+            coreColor: '#ff00ff',
+            rotationSpeed: 1.0
+        };
+
+        const gui = new GUI();
+        const folder = gui.addFolder('Reactor Control');
+        folder.add(params, 'reactionRate', 0.1, 2.0).name('Reaction Rate (Hz)');
+        folder.add(params, 'fieldStrength', 0.5, 3.0).name('Mag Field (Tesla)').onChange(v => {
+            magnets.forEach(m => m.material.color.setScalar(v));
+            bloomPass.strength = v * 0.8;
+        });
+        folder.add(params, 'plasmaStability', 0.1, 5.0).name('Plasma Compression');
+        folder.addColor(params, 'coreColor').name('Fuel Mix Color').onChange(v => {
+            plasma.material.color.set(v);
+            plasmaLight.color.set(v);
+        });
+        folder.add(params, 'rotationSpeed', 0, 5).name('Spin RPM');
+        folder.open();
+
+        // --- ANIMATION LOOP ---
+        let time = 0;
+
+        function animate() {
+            requestAnimationFrame(animate);
+            time += 0.01 * params.reactionRate;
+
+            // Pulse the Plasma (Breathing mode)
+            const scale = 1 + Math.sin(time * 10) * 0.05 * params.reactionRate;
+            plasma.scale.set(scale, 1 /* length fixed */, scale);
+            
+            // Rotate the FRC plasmoid
+            plasma.rotation.z += 0.02 * params.rotationSpeed;
+
+            // Instability Simulation (Wobble)
+            // High stability = low wobble
+            const wobble = (Math.sin(time * 5) * 0.05) / params.plasmaStability;
+            plasma.position.y = wobble;
+            plasma.position.x = wobble;
+
+            controls.update();
+            composer.render();
+        }
+
+        animate();
+        
+        // Handle window resize
+        window.addEventListener('resize', onWindowResize, false);
+        function onWindowResize() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            composer.setSize(window.innerWidth, window.innerHeight);
+        }
+    </script>
+</body>
+</html>

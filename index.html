@@ -23,6 +23,41 @@
         <link href="./css/flying-car.css" rel="stylesheet">
         <link rel="icon" href="./img/logo.svg" type="image/svg+xml">
         <link rel="mask-icon" href="./img/mask-icon.svg" color="#7C5CFF">
+        <style>
+            /* Single-page pane handling; only one pane visible at a time */
+            body.single-page-mode {
+                overflow-x: hidden;
+                background: #0b0e12;
+            }
+            body.single-page-mode [data-pane] {
+                display: none !important;
+                visibility: hidden;
+                opacity: 0;
+                transform: translateY(12px);
+                transition: opacity 0.25s ease, transform 0.25s ease;
+            }
+            body.single-page-mode [data-pane].pane-active {
+                display: block !important;
+                visibility: visible;
+                opacity: 1;
+                transform: translateY(0);
+                min-height: 100vh;
+            }
+            /* Thought list styling */
+            #thought-items li {
+                margin-bottom: 10px;
+                padding: 10px 12px;
+                border-radius: 10px;
+                background: rgba(255, 255, 255, 0.05);
+                color: #e8edf2;
+            }
+            #thought-items .meta {
+                display: block;
+                font-size: 12px;
+                color: rgba(232, 237, 242, 0.7);
+                margin-top: 4px;
+            }
+        </style>
 
         <!-- Custom Fonts -->
         <link href="./font-awesome/css/font-awesome.min.css" rel="stylesheet"
@@ -39,45 +74,46 @@
     <![endif]-->
 
 
-    <body>
+    <body class="single-page-mode">
         <a id="menu-toggle" class="btn btn-dark btn-lg menu-toggle-btn" href="#" aria-expanded="false">
                 <i class="fa fa-bars"></i>
         </a>
-
-        
+        <!-- Global navigation (stays visible across panes) -->
+        <nav id="sidebar-wrapper" aria-label="Site navigation" aria-hidden="true">
+            <a id="menu-close" href="#" class="btn btn-light btn-lg pull-right toggle" aria-label="Close menu"><i class="fa fa-times"></i></a>
+            <ul class="sidebar-nav">
+                <li><a href="#top" data-pane-link="top">Home</a></li>
+                <li><a href="#about-overview" data-pane-link="about-overview">About</a></li>
+                <li><a href="#skills" data-pane-link="skills">Skills</a></li>
+                <li><a href="#model-viewer-section" data-pane-link="model-viewer-section">3D Model Viewer</a></li>
+                <li><a href="#fusion-model" data-pane-link="fusion-model">Fusion Model</a></li>
+                <li><a href="#medium" data-pane-link="medium">Medium Posts</a></li>
+                <li class="nav-sep"><hr></li>
+                <li class="nav-label">PDF Decks</li>
+                <li><a href="#pdf-ar-tags" data-pane-link="pdf-ar-tags">AR Functionality – Object Tags</a></li>
+                <li><a href="#pdf-road-building" data-pane-link="pdf-road-building">Road Building: Sunlight & Plastics</a></li>
+                <li><a href="#pdf-vertical-farming" data-pane-link="pdf-vertical-farming">Vertical Farming</a></li>
+                <li><a href="#pdf-holograms" data-pane-link="pdf-holograms">Interactive Holograms</a></li>
+                <li><a href="#flying-car" data-pane-link="flying-car">Flying Car</a></li>
+                <li><a href="#services" data-pane-link="services">Services</a></li>
+                <li><a href="#thoughts" data-pane-link="thoughts">Leave a Thought</a></li>
+                <li><a href="#contact" data-pane-link="contact">Contact</a></li>
+            </ul>
+        </nav>
+        <div id="nav-overlay" aria-hidden="true"></div>
 
         
     
 
             
         <!-- Header / Modern Hero (no emojis) -->
-        <header id="top" class="header">
+        <header id="top" class="header pane-active" data-pane="top">
                 <div class="hero container">
                 <!-- Tiger Hologram (cursor reactive) -->
                 <div id="tiger-holo-holder" aria-hidden="true">
                   <canvas id="tiger-holo-canvas"></canvas>
                 </div>
                 <canvas id="cursor-orbiter-canvas"></canvas>
-                <!-- Site Navigation -->
-                <nav id="sidebar-wrapper" aria-label="Site navigation" aria-hidden="true">
-                    <a id="menu-close" href="#" class="btn btn-light btn-lg pull-right toggle" aria-label="Close menu"><i class="fa fa-times"></i></a>
-                    <ul class="sidebar-nav">
-                        <li><a href="#top">Home</a></li>
-                        <li><a href="#skills">Skills</a></li>
-                        <li><a href="#model-viewer-section">3D Model Viewer</a></li>
-                        <li><a href="#medium">Medium Posts</a></li>
-                        <li class="nav-sep"><hr></li>
-                        <li class="nav-label">PDF Decks</li>
-                        <li><a href="#pdf-ar-tags">AR Functionality – Object Tags</a></li>
-                        <li><a href="#pdf-road-building">Road Building: Sunlight & Plastics</a></li>
-                        <li><a href="#pdf-vertical-farming">Vertical Farming</a></li>
-                        <li><a href="#pdf-holograms">Interactive Holograms</a></li>
-                        <li><a href="#about">About</a></li>
-                        <li><a href="#services">Services</a></li>
-                        <li><a href="#contact">Contact</a></li>
-                    </ul>
-                </nav>
-                <div id="nav-overlay" aria-hidden="true"></div>
                 <!-- Site Logo -->
                 <a href="#top" class="site-logo" aria-label="Home">
                     <span class="site-logo__badge"><img src="./img/logo.svg" alt="Logo"></span>
@@ -128,11 +164,15 @@
                             </li>
                         </ul>
                     </div>
+                    <div class="meta-block">
+                        <div class="meta-label">Site visits</div>
+                        <div id="site-hit" class="shaded-text">Loading…</div>
+                    </div>
                 </div>
 
                 <div class="hero-cta">
-                    <a href="#skills" id="skills-overlay-toggle" class="btn btn-light">View Skills</a>
-                    <a href="#contact" class="btn btn-dark">Explore Links</a>
+                    <a href="#skills" id="skills-overlay-toggle" data-pane-link="skills" class="btn btn-light">View Skills</a>
+                    <a href="#contact" data-pane-link="contact" class="btn btn-dark">Explore Links</a>
                 </div>
 
                     <div class="hero-quote" id="hero-quote"></div>
@@ -153,7 +193,7 @@
         </header>
 
 
-        <section id="about" class="about"
+        <section id="about-overview" class="about" data-pane="about-overview"
             style="width: 100vw; max-width: 100%; height: 100vh; background-image: url('/img/1unsplash.jpg');background-size: cover; background-position: center;">
             <div class="container">
                 <div class="row">
@@ -204,7 +244,7 @@
         </section>
 
         <!-- Code Samples (Markdown) -->
-        <section id="code-samples" class="about">
+        <section id="code-samples" class="about" data-pane="code-samples">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12 text-center">
@@ -315,7 +355,7 @@ LIMIT 10;
         }
                 </style>
 
-                <section id="skills" class="about">
+                <section id="skills" class="about" data-pane="skills">
                     <div class="container">
                         <div class="row">
                             <div class="col-lg-12 text-center">
@@ -395,7 +435,7 @@ LIMIT 10;
             <h3 class="shaded-text">I build innovative independent projects blending software and hardware, from smart vehicle security to AI-powered automation, Raspberry Pi builds, and beyond. 🚀</h3>
         </section> -->
 
-        <section id="pdf-ar-tags" class="about pdf-section">
+        <section id="pdf-ar-tags" class="about pdf-section" data-pane="pdf-ar-tags">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12 text-center">
@@ -407,7 +447,7 @@ LIMIT 10;
         </section>
 
         <!-- 3D Model Viewer -->
-        <section id="model-viewer-section" class="about" style="width: 100vw; max-width: 100%; min-height: 70vh; background: #0b0b0b; display:flex; align-items:center;">
+        <section id="model-viewer-section" class="about" data-pane="model-viewer-section" style="width: 100vw; max-width: 100%; min-height: 70vh; background: #0b0b0b; display:flex; align-items:center;">
             <div class="container" style="max-width: 1200px; width: 100%;">
                 <div class="row">
                     <div class="col-lg-12 text-center">
@@ -433,8 +473,26 @@ LIMIT 10;
             </div>
         </section>
 
+        <!-- Interactive Fusion Model page embed -->
+        <section id="fusion-model" class="about" data-pane="fusion-model" style="width: 100vw; max-width: 100%; min-height: 80vh; background: radial-gradient(circle at 20% 20%, #142033, #090d14 55%); display:flex; align-items:center;">
+            <div class="container" style="max-width: 1220px;">
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <h1 class="shaded-text">3D Interactive Fusion Model</h1>
+                        <p class="shaded-text">Explore the dedicated interactive fusion model page from within the portfolio. Use the button to pop it out if you want the full experience.</p>
+                        <div style="width:100%; height:70vh; border-radius:12px; overflow:hidden; box-shadow:0 20px 55px rgba(0,0,0,0.45); border:1px solid rgba(255,255,255,0.08); background:#0b0f16;">
+                            <iframe src="./3dInteractiveFusionModel.html" title="3D Interactive Fusion Model" style="width:100%; height:100%; border:0;" loading="lazy"></iframe>
+                        </div>
+                        <div style="margin-top:12px;">
+                            <a class="btn btn-light" href="./3dInteractiveFusionModel.html" target="_blank" rel="noopener">Open in new tab</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Medium posts (preloaded from local cache) -->
-        <section id="medium" class="about" style="width: 100vw; max-width:100%; background:#0e131a;">
+        <section id="medium" class="about" data-pane="medium" style="width: 100vw; max-width:100%; background:#0e131a;">
             <div class="container" id="medium-section" data-username="X0xRumbleLorex0X" style="max-width: 1100px;">
                 <div class="row">
                     <div class="col-lg-12 text-center">
@@ -448,7 +506,7 @@ LIMIT 10;
             </div>
         </section>
 
-        <section id="about" class="about"
+        <section id="think-tank" class="about" data-pane="think-tank"
             style="width: 100vw; max-width: 100%; height: 100vh; background-image: url('/img/2unsplash.jpg');background-size: cover; background-position: center;">
             <div class="container">
                 <div class="row">
@@ -479,7 +537,7 @@ LIMIT 10;
             <!-- /.container -->
         </section>
 
-        <section id="pdf-road-building" class="about pdf-section">
+        <section id="pdf-road-building" class="about pdf-section" data-pane="pdf-road-building">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12 text-center">
@@ -490,7 +548,7 @@ LIMIT 10;
             </div>
         </section>
 
-        <section id="about" class="about"
+        <section id="ai-cad" class="about" data-pane="ai-cad"
             style="width: 100vw; max-width: 100%; height: 100vh; background-image: url('/img/3unsplash.jpg'); background-size: cover; background-position: center;">
             <div class="container">
                 <div class="row">
@@ -523,7 +581,7 @@ LIMIT 10;
             <!-- /.container -->
         </section>
 
-        <section id="pdf-vertical-farming" class="about pdf-section">
+        <section id="pdf-vertical-farming" class="about pdf-section" data-pane="pdf-vertical-farming">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12 text-center">
@@ -533,7 +591,7 @@ LIMIT 10;
                 </div>
             </div>
         </section>
-        <section id="about" class="about"
+        <section id="collab-future" class="about" data-pane="collab-future"
             style="width: 100vw; max-width: 100%; height: 100vh; background-image: url('/img/4unsplash.jpg'); background-size: cover; background-position: center;">
             <div class="container">
                 <div class="row">
@@ -607,7 +665,7 @@ LIMIT 10;
             <!-- /.container -->
         </section>
 
-        <section id="pdf-holograms" class="about pdf-section">
+        <section id="pdf-holograms" class="about pdf-section" data-pane="pdf-holograms">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12 text-center">
@@ -618,7 +676,43 @@ LIMIT 10;
             </div>
         </section>
 
-        <section id="flying-car" class="flying-car-section about">
+        <section id="thoughts" class="about" data-pane="thoughts" style="width: 100vw; max-width:100%; background:#0c1118;">
+            <div class="container" style="max-width: 1100px;">
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <h1 class="shaded-text">Leave a Thought That Makes an Impact</h1>
+                        <p class="shaded-text">Jot down a note that could shape the next build. Entries stay local to your device so you can refine them over time.</p>
+                        <form id="thought-form" style="max-width: 780px; margin: 0 auto; text-align:left;">
+                            <div class="form-group">
+                                <label class="shaded-text" for="thought-name">Name or alias (optional)</label>
+                                <input id="thought-name" type="text" class="form-control" placeholder="How should we remember you?">
+                            </div>
+                            <div class="form-group">
+                                <label class="shaded-text" for="thought-text">Your thought</label>
+                                <textarea id="thought-text" class="form-control" rows="4" placeholder="Leave a thought that you believe will make an impact"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label class="shaded-text" for="thought-theme">Theme</label>
+                                <select id="thought-theme" class="form-control">
+                                    <option value="inspiration">Inspiration</option>
+                                    <option value="build">Build idea</option>
+                                    <option value="research">Research</option>
+                                    <option value="collaboration">Collaboration</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-light">Save locally</button>
+                            <span id="thought-status" class="shaded-text" style="margin-left:10px;"></span>
+                        </form>
+                        <div id="thought-list" class="content-box" style="margin-top:20px; text-align:left;">
+                            <h3 class="text-center">Saved thoughts on this device</h3>
+                            <ul id="thought-items" style="list-style:none; padding-left:0; margin:0;"></ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="flying-car" class="flying-car-section about" data-pane="flying-car">
             <div class="container">
                 <h2 class="text-center"><i class="fa fa-rocket"></i> Flying Car Prototype</h2>
                 <p class="text-center">An experimental build combining a drone frame, 3D-printed wheels, custom-mounted motors and an ESP32 microcontroller. Wiring is completely custom and independent.</p>
@@ -633,7 +727,7 @@ LIMIT 10;
         </section>
         <!-- Services -->
         <!-- The circle icons use Font Awesome's stacked icon classes. For more information, visit http://fontawesome.io/examples/ -->
-        <section id="services" class="services bg-primary">
+        <section id="services" class="services bg-primary" data-pane="services">
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-lg-10 text-center">
@@ -700,7 +794,7 @@ LIMIT 10;
             <!-- <script src="http://localhost:35729/livereload.js"></script> -->
 
             <!-- Landing Event Section -->
-            <section id="landing-event" class="about" style="width: 100vw; max-width: 100%;">
+            <section id="landing-event" class="about" data-pane="contact" style="width: 100vw; max-width: 100%;">
                 <canvas id="landing-canvas"></canvas>
                 <div class="container">
                     <div class="row">
@@ -713,7 +807,7 @@ LIMIT 10;
             </section>
             <script src="./app.js"></script>
 
-            <div id="contact" class="footer">
+            <div id="contact" class="footer" data-pane="contact">
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-10 col-lg-offset-1 text-center">
@@ -782,6 +876,140 @@ LIMIT 10;
             </div>
         </footer>
 
+        <script>
+            (function(){
+                // Global hit counter
+                const hitEl = document.getElementById('site-hit');
+                fetch('https://api.countapi.xyz/hit/x0xrumblelorexox-portfolio/global')
+                    .then((res) => res.json())
+                    .then((data) => {
+                        if (hitEl && data && typeof data.value === 'number') {
+                            hitEl.textContent = `${data.value.toLocaleString()} overall`;
+                        }
+                    })
+                    .catch(() => {
+                        if (hitEl) hitEl.textContent = 'Online counter unavailable';
+                    });
+
+                // Thought capture (local-only)
+                const thoughtForm = document.getElementById('thought-form');
+                const thoughtItems = document.getElementById('thought-items');
+                const thoughtStatus = document.getElementById('thought-status');
+                const thoughtStoreKey = 'portfolio-thoughts';
+
+                function loadThoughts() {
+                    if (!thoughtItems) return;
+                    const saved = JSON.parse(localStorage.getItem(thoughtStoreKey) || '[]');
+                    thoughtItems.innerHTML = '';
+                    if (!saved.length) {
+                        const li = document.createElement('li');
+                        li.textContent = 'No thoughts saved yet.';
+                        thoughtItems.appendChild(li);
+                        return;
+                    }
+                    saved.slice(-5).reverse().forEach((item) => {
+                        const li = document.createElement('li');
+                        const name = item.name ? ` • ${item.name}` : '';
+                        const when = new Date(item.ts).toLocaleString();
+                        li.innerHTML = `<strong>${item.theme}</strong>${name}: ${item.text}<span class="meta">${when}</span>`;
+                        thoughtItems.appendChild(li);
+                    });
+                }
+
+                if (thoughtForm) {
+                    loadThoughts();
+                    thoughtForm.addEventListener('submit', (evt) => {
+                        evt.preventDefault();
+                        const name = (document.getElementById('thought-name').value || '').trim();
+                        const text = (document.getElementById('thought-text').value || '').trim();
+                        const theme = (document.getElementById('thought-theme').value || 'inspiration').trim();
+                        if (!text) {
+                            if (thoughtStatus) thoughtStatus.textContent = 'Please add a thought first.';
+                            return;
+                        }
+                        const saved = JSON.parse(localStorage.getItem(thoughtStoreKey) || '[]');
+                        saved.push({ name, text, theme, ts: Date.now() });
+                        localStorage.setItem(thoughtStoreKey, JSON.stringify(saved.slice(-50)));
+                        if (thoughtStatus) thoughtStatus.textContent = 'Saved locally.';
+                        thoughtForm.reset();
+                        loadThoughts();
+                    });
+                }
+            })();
+        </script>
+
+        <script>
+            (function(){
+                const panes = Array.from(document.querySelectorAll('[data-pane]'));
+                if (!panes.length) return;
+                const paneMap = panes.reduce((acc, pane) => {
+                    const key = pane.dataset.pane;
+                    if (!acc[key]) acc[key] = [];
+                    acc[key].push(pane);
+                    return acc;
+                }, {});
+                const sidebar = document.getElementById('sidebar-wrapper');
+                const overlay = document.getElementById('nav-overlay');
+
+                function closeNav() {
+                    document.body.classList.remove('nav-open');
+                    if (sidebar) sidebar.classList.remove('active');
+                    if (overlay) {
+                        overlay.style.opacity = '0';
+                        overlay.style.pointerEvents = 'none';
+                    }
+                    if (typeof window.setNavState === 'function') {
+                        window.setNavState(false);
+                    }
+                }
+
+                let activePane = null;
+                function setActivePane(id) {
+                    if (!paneMap[id]) return;
+                    activePane = id;
+                    panes.forEach((pane) => {
+                        pane.classList.remove('pane-active');
+                        pane.setAttribute('aria-hidden', 'true');
+                    });
+                    paneMap[id].forEach((pane) => {
+                        pane.classList.add('pane-active');
+                        pane.setAttribute('aria-hidden', 'false');
+                    });
+                    if (history.replaceState) history.replaceState(null, '', `#${id}`);
+                    window.scrollTo(0, 0);
+                    closeNav();
+                    window.dispatchEvent(new Event('resize'));
+                }
+                window.setActivePane = setActivePane;
+                window.getActivePane = () => activePane;
+
+                const navLinks = Array.from(document.querySelectorAll('[data-pane-link]'));
+                navLinks.forEach((link) => {
+                    link.addEventListener('click', (e) => {
+                        const target = link.dataset.paneLink;
+                        if (target) {
+                            e.preventDefault();
+                            setActivePane(target);
+                            closeNav();
+                        }
+                    });
+                });
+
+                const hash = (window.location.hash || '').replace('#', '');
+                const initial = (hash && paneMap[hash]) ? hash : (paneMap.top ? 'top' : Object.keys(paneMap)[0]);
+                setTimeout(() => setActivePane(initial), 0);
+
+                // Keep SPA behavior on manual hash changes
+                window.addEventListener('hashchange', (evt) => {
+                    const h = (window.location.hash || '').replace('#', '');
+                    if (h && paneMap[h]) {
+                        evt.preventDefault();
+                        setActivePane(h);
+                    }
+                });
+            })();
+        </script>
+
         <!-- jQuery -->
         <script src="js/jquery.js"></script>
 
@@ -833,6 +1061,13 @@ LIMIT 10;
             // Scrolls to the selected menu item on the page
             $(function() {
                 $('a[href*=#]:not([href=#])').click(function() {
+                    if (document.body.classList.contains('single-page-mode')) {
+                        var targetId = this.dataset.paneLink || (this.hash || '').replace('#','');
+                        if (targetId && window.setActivePane) {
+                            window.setActivePane(targetId);
+                            return false;
+                        }
+                    }
                     if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') || location.hostname == this.hostname) {
 
                         var target = $(this.hash);
