@@ -28,6 +28,14 @@
             body.single-page-mode {
                 overflow-x: hidden;
                 background: #0b0e12;
+                min-height: auto;
+                display: block;
+                padding: 0;
+                margin: 0;
+            }
+            html.spa-mode, html.spa-mode body {
+                height: auto !important;
+                min-height: 0 !important;
             }
             body.single-page-mode [data-pane] {
                 display: none !important;
@@ -35,13 +43,27 @@
                 opacity: 0;
                 transform: translateY(12px);
                 transition: opacity 0.25s ease, transform 0.25s ease;
+                margin: 0;
+                padding: 0;
+                height: 0;
             }
             body.single-page-mode [data-pane].pane-active {
                 display: block !important;
                 visibility: visible;
                 opacity: 1;
                 transform: translateY(0);
-                min-height: 100vh;
+                min-height: auto !important;
+                height: auto !important;
+                margin: 0;
+                padding: 0;
+            }
+            body.single-page-mode .header {
+                height: auto !important;
+                min-height: auto !important;
+            }
+            body.single-page-mode .hero {
+                padding-bottom: 20px !important;
+                padding-top: 80px !important;
             }
             /* Thought list styling */
             #thought-items li {
@@ -163,10 +185,6 @@
                                 <span class="lang-meter__name">中文 (Chinese)</span>
                             </li>
                         </ul>
-                    </div>
-                    <div class="meta-block">
-                        <div class="meta-label">Site visits</div>
-                        <div id="site-hit" class="shaded-text">Loading…</div>
                     </div>
                 </div>
 
@@ -878,19 +896,6 @@ LIMIT 10;
 
         <script>
             (function(){
-                // Global hit counter
-                const hitEl = document.getElementById('site-hit');
-                fetch('https://api.countapi.xyz/hit/x0xrumblelorexox-portfolio/global')
-                    .then((res) => res.json())
-                    .then((data) => {
-                        if (hitEl && data && typeof data.value === 'number') {
-                            hitEl.textContent = `${data.value.toLocaleString()} overall`;
-                        }
-                    })
-                    .catch(() => {
-                        if (hitEl) hitEl.textContent = 'Online counter unavailable';
-                    });
-
                 // Thought capture (local-only)
                 const thoughtForm = document.getElementById('thought-form');
                 const thoughtItems = document.getElementById('thought-items');
@@ -942,6 +947,7 @@ LIMIT 10;
             (function(){
                 const panes = Array.from(document.querySelectorAll('[data-pane]'));
                 if (!panes.length) return;
+                document.documentElement.classList.add('spa-mode');
                 const paneMap = panes.reduce((acc, pane) => {
                     const key = pane.dataset.pane;
                     if (!acc[key]) acc[key] = [];
@@ -976,7 +982,7 @@ LIMIT 10;
                         pane.setAttribute('aria-hidden', 'false');
                     });
                     if (history.replaceState) history.replaceState(null, '', `#${id}`);
-                    window.scrollTo(0, 0);
+                    window.scrollTo({ top: 0, behavior: 'auto' });
                     closeNav();
                     window.dispatchEvent(new Event('resize'));
                 }
