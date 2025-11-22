@@ -67,20 +67,6 @@
                 padding-bottom: 20px !important;
                 padding-top: 80px !important;
             }
-            /* Thought list styling */
-            #thought-items li {
-                margin-bottom: 10px;
-                padding: 10px 12px;
-                border-radius: 10px;
-                background: rgba(255, 255, 255, 0.05);
-                color: #e8edf2;
-            }
-            #thought-items .meta {
-                display: block;
-                font-size: 12px;
-                color: rgba(232, 237, 242, 0.7);
-                margin-top: 4px;
-            }
         </style>
 
         <!-- Custom Fonts -->
@@ -120,7 +106,6 @@
                 <li><a href="#pdf-holograms" data-pane-link="pdf-holograms">Interactive Holograms</a></li>
                 <li><a href="#flying-car" data-pane-link="flying-car">Flying Car</a></li>
                 <li><a href="#services" data-pane-link="services">Services</a></li>
-                <li><a href="#thoughts" data-pane-link="thoughts">Leave a Thought</a></li>
                 <li><a href="#contact" data-pane-link="contact">Contact</a></li>
             </ul>
         </nav>
@@ -696,42 +681,6 @@ LIMIT 10;
             </div>
         </section>
 
-        <section id="thoughts" class="about" data-pane="thoughts" style="width: 100vw; max-width:100%; background:#0c1118;">
-            <div class="container" style="max-width: 1100px;">
-                <div class="row">
-                    <div class="col-lg-12 text-center">
-                        <h1 class="shaded-text">Leave a Thought That Makes an Impact</h1>
-                        <p class="shaded-text">Jot down a note that could shape the next build. Entries stay local to your device so you can refine them over time.</p>
-                        <form id="thought-form" style="max-width: 780px; margin: 0 auto; text-align:left;">
-                            <div class="form-group">
-                                <label class="shaded-text" for="thought-name">Name or alias (optional)</label>
-                                <input id="thought-name" type="text" class="form-control" placeholder="How should we remember you?">
-                            </div>
-                            <div class="form-group">
-                                <label class="shaded-text" for="thought-text">Your thought</label>
-                                <textarea id="thought-text" class="form-control" rows="4" placeholder="Leave a thought that you believe will make an impact"></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label class="shaded-text" for="thought-theme">Theme</label>
-                                <select id="thought-theme" class="form-control">
-                                    <option value="inspiration">Inspiration</option>
-                                    <option value="build">Build idea</option>
-                                    <option value="research">Research</option>
-                                    <option value="collaboration">Collaboration</option>
-                                </select>
-                            </div>
-                            <button type="submit" class="btn btn-light">Save locally</button>
-                            <span id="thought-status" class="shaded-text" style="margin-left:10px;"></span>
-                        </form>
-                        <div id="thought-list" class="content-box" style="margin-top:20px; text-align:left;">
-                            <h3 class="text-center">Saved thoughts on this device</h3>
-                            <ul id="thought-items" style="list-style:none; padding-left:0; margin:0;"></ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
         <section id="flying-car" class="flying-car-section about" data-pane="flying-car">
             <div class="container">
                 <h2 class="text-center"><i class="fa fa-rocket"></i> Flying Car Prototype</h2>
@@ -895,55 +844,6 @@ LIMIT 10;
                 </div>
             </div>
         </footer>
-
-        <script>
-            (function(){
-                // Thought capture (local-only)
-                const thoughtForm = document.getElementById('thought-form');
-                const thoughtItems = document.getElementById('thought-items');
-                const thoughtStatus = document.getElementById('thought-status');
-                const thoughtStoreKey = 'portfolio-thoughts';
-
-                function loadThoughts() {
-                    if (!thoughtItems) return;
-                    const saved = JSON.parse(localStorage.getItem(thoughtStoreKey) || '[]');
-                    thoughtItems.innerHTML = '';
-                    if (!saved.length) {
-                        const li = document.createElement('li');
-                        li.textContent = 'No thoughts saved yet.';
-                        thoughtItems.appendChild(li);
-                        return;
-                    }
-                    saved.slice(-5).reverse().forEach((item) => {
-                        const li = document.createElement('li');
-                        const name = item.name ? ` • ${item.name}` : '';
-                        const when = new Date(item.ts).toLocaleString();
-                        li.innerHTML = `<strong>${item.theme}</strong>${name}: ${item.text}<span class="meta">${when}</span>`;
-                        thoughtItems.appendChild(li);
-                    });
-                }
-
-                if (thoughtForm) {
-                    loadThoughts();
-                    thoughtForm.addEventListener('submit', (evt) => {
-                        evt.preventDefault();
-                        const name = (document.getElementById('thought-name').value || '').trim();
-                        const text = (document.getElementById('thought-text').value || '').trim();
-                        const theme = (document.getElementById('thought-theme').value || 'inspiration').trim();
-                        if (!text) {
-                            if (thoughtStatus) thoughtStatus.textContent = 'Please add a thought first.';
-                            return;
-                        }
-                        const saved = JSON.parse(localStorage.getItem(thoughtStoreKey) || '[]');
-                        saved.push({ name, text, theme, ts: Date.now() });
-                        localStorage.setItem(thoughtStoreKey, JSON.stringify(saved.slice(-50)));
-                        if (thoughtStatus) thoughtStatus.textContent = 'Saved locally.';
-                        thoughtForm.reset();
-                        loadThoughts();
-                    });
-                }
-            })();
-        </script>
 
         <script>
             (function(){
