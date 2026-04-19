@@ -61,7 +61,7 @@
           const json = JSON.parse(inline.textContent);
           if (Array.isArray(json) && json.length) render(json);
         }
-      } catch {}
+      } catch { /* ignore invalid inline medium cache */ }
       // 2) Local file cache
       fetch('data/medium.json', { cache: 'no-store' })
         .then(r => (r && r.ok ? r.json() : []))

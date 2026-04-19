@@ -8,6 +8,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https:; connect-src 'self' https://api.rss2json.com; frame-src https://www.youtube.com https://www.youtube-nocookie.com; object-src 'none'; base-uri 'self'; form-action 'self' mailto:; upgrade-insecure-requests">
         <meta name="description" content="Portfolio of Shivadharshan Shan Lingeswaran: software and hardware engineering projects, research, writing, and interactive demos.">
         <meta name="author" content="Shivadharshan Shan Lingeswaran">
         <meta name="theme-color" content="#0b0e12">
@@ -33,51 +34,6 @@
         <link href="./css/flying-car.css" rel="stylesheet">
         <link rel="icon" href="./img/logo.svg" type="image/svg+xml">
         <link rel="mask-icon" href="./img/mask-icon.svg" color="#7C5CFF">
-        <style>
-            /* Single-page pane handling; only one pane visible at a time */
-            body.single-page-mode {
-                overflow-x: hidden;
-                background: #0b0e12;
-                min-height: auto;
-                display: block;
-                padding: 0;
-                margin: 0;
-            }
-            html.spa-mode, html.spa-mode body {
-                height: auto !important;
-                min-height: 0 !important;
-            }
-            body.single-page-mode [data-pane] {
-                display: none !important;
-                visibility: hidden;
-                opacity: 0;
-                transform: translateY(12px);
-                transition: opacity 0.25s ease, transform 0.25s ease;
-                margin: 0;
-                padding: 0;
-                height: 0;
-            }
-            body.single-page-mode [data-pane].pane-active {
-                display: block !important;
-                visibility: visible;
-                opacity: 1;
-                transform: translateY(0);
-                width: 100vw;
-                max-width: 100%;
-                min-height: 100vh !important;
-                height: auto !important;
-                margin: 0;
-                padding: 0;
-            }
-            body.single-page-mode .header {
-                height: auto !important;
-                min-height: auto !important;
-            }
-            body.single-page-mode .hero {
-                padding-bottom: 20px !important;
-                padding-top: 80px !important;
-            }
-        </style>
 
         <!-- Custom Fonts -->
         <link href="./font-awesome/css/font-awesome.min.css" rel="stylesheet"
@@ -95,6 +51,7 @@
 
 
     <body class="single-page-mode">
+        <a class="skip-link" href="#top">Skip to main content</a>
         <a id="menu-toggle" class="btn btn-dark btn-lg menu-toggle-btn" href="#" aria-expanded="false">
                 <i class="fa fa-bars"></i>
         </a>
@@ -125,6 +82,7 @@
     
 
             
+        <main id="main-content">
         <!-- Header / Modern Hero (no emojis) -->
         <header id="top" class="header pane-active" data-pane="top">
                 <div class="hero container">
@@ -135,7 +93,7 @@
                 <canvas id="cursor-orbiter-canvas"></canvas>
                 <!-- Site Logo -->
                 <a href="#top" class="site-logo" aria-label="Home">
-                    <span class="site-logo__badge"><img src="./img/logo.svg" alt="Logo"></span>
+                    <span class="site-logo__badge"><img src="./img/logo.svg" alt="Logo" loading="lazy" decoding="async"></span>
                     <span class="site-logo__text">Portfolio</span>
                 </a>
                 <!-- Navigation Button-->
@@ -720,7 +678,7 @@ LIMIT 10;
                                 <div class="service-item">
                                     <img src="./img/medium.png"
                                         class="linktreelogo"
-                                        alt="Medium Logo" />
+                                        alt="Medium Logo" loading="lazy" decoding="async" />
                                     <h4><strong
                                             class="shaded-text">Medium</strong></h4>
                                     <p class="shaded-text">My Original Thinking.
@@ -736,7 +694,7 @@ LIMIT 10;
                                 <div class="service-item">
                                     <img src="./img/linktree.png"
                                         class="linktreelogo"
-                                        alt="Linktree Logo" />
+                                        alt="Linktree Logo" loading="lazy" decoding="async" />
                                     <h4><strong
                                             class="shaded-text">Linktree</strong></h4>
                                     <p class="shaded-text">Showcasing My
@@ -751,7 +709,7 @@ LIMIT 10;
                                 class="col-md-4 col-sm-6 d-flex justify-content-center">
                                 <div class="service-item">
                                     <img src="./img/email.png"
-                                        class="linktreelogo" alt="Email Logo" />
+                                        class="linktreelogo" alt="Email Logo" loading="lazy" decoding="async" />
                                     <h4><strong
                                             class="shaded-text">Email</strong></h4>
                                     <p class="shaded-text">Please Contact Me
@@ -1034,5 +992,6 @@ LIMIT 10;
         <script src="js/quotes.js"></script>
         <script src="js/tiger-holo.js"></script>
 
+        </main>
     </body>
     </html>

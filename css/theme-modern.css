@@ -169,3 +169,78 @@ header.header::before { content: ""; position: absolute; inset: 0; background: l
 @media (max-width: 767px){
   .hero { padding-top: calc(80px + clamp(120px, 42vw, 200px)); }
 }
+
+
+/* Single-page pane handling; extracted from index.html */
+body.single-page-mode {
+  overflow-x: hidden;
+  background: #0b0e12;
+  min-height: auto;
+  display: block;
+  padding: 0;
+  margin: 0;
+}
+html.spa-mode, html.spa-mode body {
+  height: auto !important;
+  min-height: 0 !important;
+}
+body.single-page-mode [data-pane] {
+  display: none !important;
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  margin: 0;
+  padding: 0;
+  height: 0;
+}
+body.single-page-mode [data-pane].pane-active {
+  display: block !important;
+  visibility: visible;
+  opacity: 1;
+  transform: translateY(0);
+  width: 100vw;
+  max-width: 100%;
+  min-height: 100vh !important;
+  height: auto !important;
+  margin: 0;
+  padding: 0;
+}
+body.single-page-mode .header {
+  height: auto !important;
+  min-height: auto !important;
+}
+body.single-page-mode .hero {
+  padding-bottom: 20px !important;
+  padding-top: 80px !important;
+}
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+.skip-link:focus {
+  left: 1rem;
+  top: 1rem;
+  width: auto;
+  height: auto;
+  z-index: 2000;
+  background: #ffffff;
+  color: #111111;
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  #cursor-orbiter-canvas, #tiger-holo-holder, #landing-canvas {
+    display: none !important;
+  }
+}

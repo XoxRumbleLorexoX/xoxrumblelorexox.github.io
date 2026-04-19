@@ -3,8 +3,10 @@
 // #toggle-wireframe and #recenter-model
 
 (function () {
+  const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const container = document.getElementById('model-viewer');
   if (!container || !window.THREE) return;
+  if (prefersReducedMotion) { container.setAttribute('data-reduced-motion', 'true'); return; }
 
   const width = container.clientWidth;
   const height = container.clientHeight;
@@ -186,6 +188,7 @@
 
   // Render loop
   function animate() {
+    if (prefersReducedMotion) return;
     controls.update();
     renderer.render(scene, camera);
     requestAnimationFrame(animate);
@@ -195,6 +198,7 @@
 
 // Fallback minimal viewer when THREE is unavailable (works offline without CDN)
 (function () {
+  const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const container = document.getElementById('model-viewer');
   if (!container || window.THREE) return; // Only run fallback if THREE missing
 

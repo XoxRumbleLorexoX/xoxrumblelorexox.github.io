@@ -1,9 +1,10 @@
 // Low-poly 3D tiger hologram that follows the cursor (Three.js)
 (function(){
+  const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const holder = document.getElementById('tiger-holo-holder');
   const canvas = document.getElementById('tiger-holo-canvas');
   const hero = document.querySelector('.hero') || holder && holder.parentElement;
-  if(!holder || !canvas) return;
+  if(!holder || !canvas || prefersReducedMotion) return;
 
   // Fallback 2D render if Three.js isn't available
   if(typeof window.THREE === 'undefined'){
