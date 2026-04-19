@@ -5,7 +5,7 @@ This backlog captures practical improvements discovered from the current state o
 ## High-priority
 
 - [ ] **Extract inline `<style>` from `index.html` into `css/theme-modern.css`** to improve maintainability and reduce HTML size.
-- [ ] **Fix empty meta tags** (`description`, `author`) and add Open Graph/Twitter cards for better SEO and sharing previews.
+- [x] **Fix empty meta tags** (`description`, `author`) and add Open Graph/Twitter cards for better SEO and sharing previews.
 - [ ] **Add a Content Security Policy (CSP)** and audit inline scripts/styles that block stronger CSP settings.
 - [ ] **Create a proper build/minification step** (HTML/CSS/JS/image optimization) for production deployment.
 - [ ] **Audit JavaScript error handling** (especially image/frame preloading paths) and add graceful fallbacks for missing assets.
