@@ -30,3 +30,7 @@ The gallery is configured to use these GIF filenames:
 - `RPReplay_Final1733776361.gif`
 
 Place them in `img/LatestFlyingCar/` and the site will display them automatically.
+
+### Improvement backlog
+
+See [`TODO.md`](./TODO.md) for a prioritized list of actionable site improvements.
