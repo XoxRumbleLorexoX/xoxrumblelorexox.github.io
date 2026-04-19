@@ -49,6 +49,7 @@ document.addEventListener('DOMContentLoaded', function () {
             video.setAttribute('playsinline', '');
             video.setAttribute('muted', '');
             video.className = 'clip-video';
+            video.preload = 'metadata';
 
             // Build sources: MP4 -> WebM -> MOV (original) -> GIF fallback
             var mp4 = document.createElement('source'); mp4.src = item.base + '.mp4'; mp4.type = 'video/mp4';
@@ -66,6 +67,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 img.src = item.base + '.gif';
                 img.alt = 'Flying car media';
                 img.className = 'img-fluid';
+                img.loading = 'lazy';
+                img.decoding = 'async';
                 col.innerHTML = '';
                 col.appendChild(img);
             }, { once: true });
@@ -76,6 +79,8 @@ document.addEventListener('DOMContentLoaded', function () {
             img.src = item.src;
             img.alt = 'Flying car media';
             img.className = 'img-fluid';
+            img.loading = 'lazy';
+            img.decoding = 'async';
             img.addEventListener('error', function(){ col.remove(); });
             col.appendChild(img);
         }

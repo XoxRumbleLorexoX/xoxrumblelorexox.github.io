@@ -1,8 +1,9 @@
 // Landing Event: a cursor + scroll reactive ripple in the landing section
 (function () {
+  const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const section = document.getElementById('landing-event');
   const canvas = document.getElementById('landing-canvas');
-  if (!section || !canvas) return;
+  if (!section || !canvas || prefersReducedMotion) return;
 
   const ctx = canvas.getContext('2d');
   let w = 0, h = 0;

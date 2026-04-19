@@ -1,11 +1,13 @@
 // Simplified Skills Overlay: static radial nodes with fill proportional to skill level
 (function(){
+  const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const btn = document.getElementById('skills-overlay-toggle');
   const overlay = document.getElementById('skills-overlay');
   const canvas = document.getElementById('skills-canvas');
   const closeBtn = document.getElementById('skills-close');
   const tooltip = document.getElementById('skills-tooltip');
   if (!btn || !overlay || !canvas) return;
+  if (prefersReducedMotion) { overlay.classList.add('reduced-motion'); }
 
   const ctx = canvas.getContext('2d');
   let w = 0, h = 0, dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -35,7 +37,7 @@
       if (isNaN(pct)) pct = 60; // default
       const level = Math.max(0, Math.min(1, pct/100));
       // split combined labels like C/C++/C# or Java/JavaScript/TypeScript
-      labelText.split(/[\/]/).map(s=>s.trim()).filter(Boolean).forEach(part => {
+      labelText.split(/[/]/).map(s=>s.trim()).filter(Boolean).forEach(part => {
         // prefer short names for JS/TS
         const short = part.replace('JavaScript','JS').replace('TypeScript','TS');
         items.push({ label: short, level });
