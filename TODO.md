@@ -2,6 +2,9 @@
 
 ## Completed in this pass
 
+- [x] Added resilient PDF.js CDN loading with explicit error handling and safer external-link rel attributes.
+- [x] Reduced landing animation CPU usage by pausing the render loop when section/tab is not visible.
+- [x] Improved PDF failure messaging so visitors get a clear retry action when document render fails.
 - [x] Extracted inline `<style>` from `index.html` into `css/theme-modern.css`.
 - [x] Added Content Security Policy and documented current inline/script constraints.
 - [x] Added build/minification workflow (`tools/build.mjs`, npm scripts).
