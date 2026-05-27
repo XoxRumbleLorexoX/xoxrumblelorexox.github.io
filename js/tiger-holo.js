@@ -16,7 +16,7 @@
     }
     const ro = new ResizeObserver(resize2D); ro.observe(holder); resize2D();
     let t0 = performance.now();
-    let rx = 0, ry = 0, hx = 0, hy = 0, tx = 0, ty = 0;
+    let rx = 0, ry = 0, hx = 0, hy = 0, tx = 0, ty = 0, spin = 0, spinV = 0;
     function onMove(e){
       const R = (hero || document.body).getBoundingClientRect();
       const mx = e.clientX != null ? e.clientX : (e.touches && e.touches[0].clientX) || 0;
@@ -24,17 +24,24 @@
       const nx = ((mx - R.left) / Math.max(1,R.width)) * 2 - 1;
       const ny = ((my - R.top) / Math.max(1,R.height)) * 2 - 1;
       const clamp=(v,l,h)=>Math.max(l,Math.min(h,v));
-      ry = clamp(nx*14,-16,16); rx = clamp(-ny*10,-12,12);
-      tx = clamp(nx*Math.min(140,R.width*0.18),-160,160);
-      ty = clamp(ny*Math.min(80,R.height*0.12),-100,100);
-    }
+    ry = clamp(nx*14,-16,16); rx = clamp(-ny*10,-12,12);
+    tx = clamp(nx*Math.min(120,R.width*0.15),-140,140);
+    ty = clamp(ny*Math.min(70,R.height*0.10),-90,90);
+  }
+  function onPress(){ holder.classList.add('is-grabbing'); spinV = 0.5; }
+  function onRelease(){ holder.classList.remove('is-grabbing'); }
     window.addEventListener('mousemove', onMove, {passive:true});
     window.addEventListener('touchmove', onMove, {passive:true});
+    holder.addEventListener('mousedown', onPress);
+    window.addEventListener('mouseup', onRelease);
+    holder.addEventListener('touchstart', onPress, {passive:true});
+    window.addEventListener('touchend', onRelease, {passive:true});
     (function loop(now){
       requestAnimationFrame(loop);
       const t = (now - t0) * 0.001;
       hx += (tx - hx)*0.08; hy += (ty - hy)*0.08;
-      holder.style.transform = 'translate(-50%,0) translate3d('+hx.toFixed(2)+'px,'+hy.toFixed(2)+'px,0) rotateX(' + (rx+Math.sin(t*1.1)*1.2).toFixed(2) + 'deg) rotateY(' + (ry+Math.cos(t*1.3)*1.2).toFixed(2) + 'deg)';
+      spin += spinV; spinV *= 0.94;
+      holder.style.transform = 'translate(-50%,0) translate3d('+hx.toFixed(2)+'px,'+hy.toFixed(2)+'px,0) rotateX(' + (rx+Math.sin(t*1.1)*1.2).toFixed(2) + 'deg) rotateY(' + (ry+Math.cos(t*1.3)*1.2 + (spin * 360)).toFixed(2) + 'deg)';
       const w=canvas.width,h=canvas.height; ctx.clearRect(0,0,w,h); ctx.save(); ctx.translate(w/2,h/2);
       const s=Math.min(w,h)/3;
       // glow
@@ -211,13 +218,28 @@
     targetRot.x = clamp(-ny * 0.9, -0.9, 0.9);
     targetPos.x = clamp(nx * 0.35, -0.35, 0.35);
     targetPos.y = clamp(-ny * 0.28, -0.28, 0.28);
-    const rangeX = Math.min(140, R.width * 0.18);
-    const rangeY = Math.min(80, R.height * 0.12);
+    const rangeX = Math.min(120, R.width * 0.15);
+    const rangeY = Math.min(70, R.height * 0.10);
     targetHX = clamp(nx * rangeX, -rangeX, rangeX);
     targetHY = clamp(ny * rangeY, -rangeY, rangeY);
   }
+
+  function onPointerDown() {
+    holder.classList.add('is-grabbing');
+    spinV3 = 0.5;
+    group.scale.set(0.95, 0.95, 0.95);
+  }
+  function onPointerUp() {
+    holder.classList.remove('is-grabbing');
+    group.scale.set(1, 1, 1);
+  }
+
   window.addEventListener('mousemove', onPointerMove, { passive: true });
   window.addEventListener('touchmove', onPointerMove, { passive: true });
+  holder.addEventListener('mousedown', onPointerDown);
+  window.addEventListener('mouseup', onPointerUp);
+  holder.addEventListener('touchstart', onPointerDown, { passive: true });
+  window.addEventListener('touchend', onPointerUp, { passive: true });
 
   // Resize
   function resize(){
@@ -235,7 +257,7 @@
   io.observe(holder);
 
   // Animate
-  let t0 = performance.now();
+  let t0 = performance.now(), spin3 = 0, spinV3 = 0;
   function animate(now){
     requestAnimationFrame(animate);
     if(!inView) return;
@@ -250,7 +272,8 @@
     // holder parallax and subtle tilt
     currHX += (targetHX - currHX) * 0.08;
     currHY += (targetHY - currHY) * 0.08;
-    holder.style.transform = 'translate(-50%,0) translate3d(' + currHX.toFixed(2) + 'px,' + currHY.toFixed(2) + 'px,0) rotateX(' + (currentRot.x*10).toFixed(2) + 'deg) rotateY(' + (currentRot.y*14).toFixed(2) + 'deg)';
+    spin3 += spinV3; spinV3 *= 0.94;
+    holder.style.transform = 'translate(-50%,0) translate3d(' + currHX.toFixed(2) + 'px,' + currHY.toFixed(2) + 'px,0) rotateX(' + (currentRot.x*10).toFixed(2) + 'deg) rotateY(' + (currentRot.y*14 + (spin3 * 360)).toFixed(2) + 'deg)';
     renderer.render(scene, camera);
   }
   requestAnimationFrame(animate);

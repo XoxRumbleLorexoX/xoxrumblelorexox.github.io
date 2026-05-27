@@ -157,17 +157,20 @@ header.header::before { content: ""; position: absolute; inset: 0; background: l
 #skills-close:hover { background: rgba(255,255,255,0.2); }
 #skills-tooltip { position: absolute; padding: 6px 10px; border-radius: 8px; background: rgba(20,24,28,0.85); color: var(--text); border: 1px solid var(--border); pointer-events: none; transform: translate(-50%, -130%); white-space: nowrap; font-size: 13px; opacity: 0; transition: opacity .12s ease; z-index: 9999; }
 
-/* Tiger hologram */
+/* Tiger hologram (smaller + interactive) */
 .hero { position: relative; }
-#tiger-holo-holder { position: absolute; left: 50%; transform: translateX(-50%); top: 48px; width: clamp(240px, 38vw, 460px); height: clamp(180px, 28vw, 320px); z-index: 10001; pointer-events: none; perspective: 800px; }
+#tiger-holo-holder { position: absolute; left: 50%; transform: translateX(-50%); top: 28px; width: clamp(120px, 14vw, 200px); height: clamp(96px, 11vw, 160px); z-index: 5; pointer-events: auto; cursor: grab; perspective: 800px; transition: transform 220ms ease; }
+#tiger-holo-holder.is-grabbing { cursor: grabbing; }
+#tiger-holo-holder.is-spinning { animation: tiger-spin 700ms ease-in-out; }
+@keyframes tiger-spin { 0% { transform: translateX(-50%) rotateY(0deg) scale(1); } 50% { transform: translateX(-50%) rotateY(360deg) scale(1.08); } 100% { transform: translateX(-50%) rotateY(720deg) scale(1); } }
 #tiger-holo-holder::after { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(to bottom, rgba(124,92,255,0.08) 0, rgba(124,92,255,0.08) 1px, transparent 3px, transparent 6px); mix-blend-mode: screen; animation: tiger-scan 4s linear infinite; border-radius: 14px; pointer-events: none; }
-#tiger-holo-canvas { position: absolute; inset: 0; width: 100%; height: 100%; border-radius: 14px; display: block; }
+#tiger-holo-canvas { position: absolute; inset: 0; width: 100%; height: 100%; border-radius: 14px; display: block; pointer-events: none; }
 @keyframes tiger-scan { 0% { background-position: 0 0; } 100% { background-position: 0 100%; } }
 
 /* Ensure hero leaves space for hologram */
-.hero { padding-top: calc(90px + clamp(120px, 24vw, 240px)); }
+.hero { padding-top: calc(50px + clamp(96px, 11vw, 160px)); }
 @media (max-width: 767px){
-  .hero { padding-top: calc(80px + clamp(120px, 42vw, 200px)); }
+  .hero { padding-top: calc(50px + clamp(90px, 24vw, 150px)); }
 }
 
 
@@ -244,3 +247,11 @@ body.single-page-mode .hero {
     display: none !important;
   }
 }
+
+/* Hero CTAs sit above the cat */
+.hero-cta { position: relative; z-index: 20; }
+.hero-cta .btn { padding: 10px 18px; font-weight: 700; letter-spacing: 0.3px; }
+.hero-cta .btn.btn-light { background: #eef2f7; color: #0d1117; border-color: rgba(255,255,255,0.4); }
+.hero-cta .btn.btn-light:hover { background: #fff; transform: translateY(-1px); box-shadow: 0 8px 22px rgba(0,0,0,0.35); }
+.hero-cta .btn.btn-dark { background: linear-gradient(135deg, #1f2a44, #0f1620); color: #eaf1ff; border-color: rgba(102,179,255,0.45); }
+.hero-cta .btn.btn-dark:hover { transform: translateY(-1px); box-shadow: 0 8px 22px rgba(0,0,0,0.45); border-color: rgba(102,179,255,0.8); }
